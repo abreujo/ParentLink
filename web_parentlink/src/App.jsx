@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./componets/FooterFrame";
+import Body from "./components/body";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,14 +26,9 @@ function App() {
         <div>
           <Menu />
           <h1>WELCOME TO PARENT LINK</h1>
-          <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
         </div>
-        <h1>Vite + React</h1>
+        <Body />
+
         <div className="card">
           <button onClick={() => setCount((count) => count + 1)}>
             count is {count}
