@@ -9,9 +9,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import FooterFrame from "./componets/FooterFrame";
+import FooterFrame from "./components/FooterFrame";
 import Contact from "./pages/Contact";
-import ScrollToTop from "./componets/ScrollToTop";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,7 +23,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/AboutPage" element={<AboutPage />} />
-          <Route path="/Contact" element={<Contact />} />
         </Routes>
         <div>
           <ul>
@@ -45,6 +44,9 @@ function App() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
         </div>
+        <Routes>
+          <Route path="/Contact" element={<Contact />} />
+        </Routes>
         <h1>Vite + React</h1>
         <div className="card">
           <button onClick={() => setCount((count) => count + 1)}>
