@@ -1,7 +1,7 @@
 // Menu.jsx
 import React from "react";
 import "../styles/Menu.css";
-import logo from "../assets/images/logo.jpeg";
+import logo from "../assets/images/Logo.png";
 const Menu = () => {
   return (
     <nav className="menu">
@@ -15,9 +15,12 @@ const Menu = () => {
         <a href="#como-funciona" className="menu-link">
           ¿Cómo Funciona?
         </a>
-        <a href="#espanol" className="menu-link">
-          Español
-        </a>
+        <li className="menu-language">
+          <select>
+            <option value="es">Español</option>
+            <option value="en">English</option>
+          </select>
+        </li>
       </div>
       <div className="menu-buttons">
         <button className="btn-register">Registrarse</button>

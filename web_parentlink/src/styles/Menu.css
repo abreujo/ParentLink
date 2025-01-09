@@ -9,7 +9,8 @@
 
 /* Logo */
 .menu-logo img {
-  height: 40px; /* Ajusta el tamaño del logo */
+  height: auto; /* Ajusta el tamaño del logo */
+  width: 100px;
   margin-right: 300px;
 }
 
@@ -26,17 +27,23 @@
   font-size: 16px;
   font-weight: 500;
   transition: color 0.3s ease;
-  margin-right: 100px;
+  margin-right: 60px;
 }
 
 .menu-link:hover {
   color: #555;
+}
+.menu-language {
+  list-style-type: none; /* Elimina el punto en el <li> */
+  padding: 0; /* Elimina el espaciado predeterminado */
+  margin: 0; /* Elimina el margen predeterminado */
 }
 
 /* Botones */
 .menu-buttons {
   display: flex;
   gap: 30px; /* Espaciado entre los botones */
+  margin-left: 60px;
 }
 
 .btn-register,
