@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Menu from "./components/Menu";
 /*
 Los de arriba son los imports por defecto
 */
@@ -22,14 +23,7 @@ function App() {
           <Route path="/AboutPage" element={<AboutPage />} />
         </Routes>
         <div>
-          <ul>
-            <li>
-              <Link to="/">HomePage</Link>
-            </li>
-            <li>
-              <Link to="/AboutPage">AboutPage</Link>
-            </li>
-          </ul>
+          <Menu />
           <h1>WELCOME TO PARENT LINK</h1>
           <a href="https://vite.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />

@@ -1,0 +1,71 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.menu-logo img {
+  height: 40px; /* Ajusta el tamaño del logo */
+  margin-right: 300px;
+}
+
+/* Enlaces del menú */
+.menu-links {
+  display: flex;
+  gap: 30px; /* Espaciado entre los enlaces */
+}
+
+.menu-link {
+  text-decoration: none;
+  color: black; /* Texto en negro */
+  list-style: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  margin-right: 100px;
+}
+
+.menu-link:hover {
+  color: #555;
+}
+
+/* Botones */
+.menu-buttons {
+  display: flex;
+  gap: 30px; /* Espaciado entre los botones */
+}
+
+.btn-register,
+.btn-login {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Botón Registrarse */
+.btn-register {
+  background-color: #b3a0d6; /* Lila */
+  color: white;
+}
+
+.btn-register:hover {
+  background-color: #9e8ac1; /* Lila más oscuro al pasar el ratón */
+}
+
+/* Botón Acceder */
+.btn-login {
+  background-color: #b3a0d6; /* Lila */
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: #9e8ac1; /* Lila más oscuro al pasar el ratón */
+}

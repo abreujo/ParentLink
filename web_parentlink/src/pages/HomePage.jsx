@@ -1,8 +1,9 @@
 // HomePage.js
 import React from "react";
+import Menu from "../components/Menu";
 
 function HomePage() {
-  return <h1>Welcome to Parentlink</h1>;
+  return "Hola Mundo";
 }
 
 export default HomePage;
