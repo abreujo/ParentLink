@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./componets/FooterFrame";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./componets/ScrollToTop";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <Router>
+        <ScrollToTop></ScrollToTop>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/AboutPage" element={<AboutPage />} />
