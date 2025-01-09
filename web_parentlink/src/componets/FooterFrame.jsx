@@ -13,7 +13,7 @@ const FooterFrame = () => {
           <h4>Enlaces Útiles</h4>
           <ul>
             <li>
-              <a href="/about">Quiénes Somos</a>
+              <a href="/AboutPage">Quiénes Somos</a>
             </li>
             <li>
               <a href="/services">Servicios</a>
