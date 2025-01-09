@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./componets/FooterFrame";
+import Contact from "./pages/Contact";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/AboutPage" element={<AboutPage />} />
+          <Route path="/Contact" element={<Contact />} />
         </Routes>
         <div>
           <ul>
@@ -28,6 +30,9 @@ function App() {
             </li>
             <li>
               <Link to="/AboutPage">AboutPage</Link>
+            </li>
+            <li>
+              <Link to="/Contact">Contact</Link>
             </li>
           </ul>
           <h1>WELCOME TO PARENT LINK</h1>
