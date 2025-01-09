@@ -10,7 +10,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import FooterFrame from "./componets/FooterFrame";
+import FooterFrame from "./components/FooterFrame";
+import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
 import Body from "./components/body";
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
   return (
     <>
       <Router>
+        <ScrollToTop></ScrollToTop>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/AboutPage" element={<AboutPage />} />
@@ -27,6 +30,9 @@ function App() {
           <Menu />
           <h1>WELCOME TO PARENT LINK</h1>
         </div>
+        <Routes>
+          <Route path="/Contact" element={<Contact />} />
+        </Routes>
         <Body />
 
         <div className="card">

@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/FooterFrame.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const FooterFrame = () => {
   return (
@@ -19,7 +20,7 @@ const FooterFrame = () => {
               <a href="/services">Servicios</a>
             </li>
             <li>
-              <a href="/contact">Contacto</a>
+              <Link to="/Contact">Contact</Link>
             </li>
             <li>
               <a href="/privacy">Política de Privacidad</a>
