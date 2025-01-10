@@ -1,7 +1,9 @@
 // Menu.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/Menu.css";
 import logo from "../assets/images/Logo.png";
+
 const Menu = () => {
   return (
     <nav className="menu">
@@ -9,12 +11,12 @@ const Menu = () => {
         <img src={logo} alt="Logo" className="logo" />
       </div>
       <div className="menu-links">
-        <a href="#sobre-nosotros" className="menu-link">
+        <Link to="/" className="menu-link">
           Sobre Nosotros
-        </a>
-        <a href="#como-funciona" className="menu-link">
+        </Link>
+        <Link to="/ComoFunciona" className="menu-link">
           ¿Cómo Funciona?
-        </a>
+        </Link>
         <li className="menu-language">
           <select>
             <option value="es">Español</option>
