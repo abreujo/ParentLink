@@ -18,13 +18,13 @@ const FooterFrame = () => {
               <Link to="/">Quiénes Somos</Link>
             </li>
             <li>
-              <a href="/services">Servicios</a>
+              <Link to="/services">Servicios</Link>
             </li>
             <li>
               <Link to="/Contact">Contactos</Link>
             </li>
             <li>
-              <a href="/Ods">Objetivos de Desarollo Sostenible</a>
+              <Link to="/Ods">Objetivos de Desarollo Sostenible</Link>
             </li>
           </ul>
         </div>
