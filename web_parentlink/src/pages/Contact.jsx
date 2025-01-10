@@ -5,6 +5,7 @@ import pacco from "../assets/images/Pacco.png";
 import myroslav from "../assets/images/myroslav.png";
 import david from "../assets/images/david.png";
 import johel from "../assets/images/johel.jpg";
+import milagros from "../assets/images/milagros.jpg";
 
 function Contact() {
   const cardsData = [
@@ -35,6 +36,13 @@ function Contact() {
       email: "johel.abreu@gmail.com",
       phone: "+34 613 290 849",
       photo: johel,
+    },
+    {
+      name: "Milagos Ferreia",
+      title: "Publicidad y Mercadeo",
+      email: "milagros.ferreira@gmail.com",
+      phone: "+34 613 599 340",
+      photo: milagros,
     },
   ];
 
