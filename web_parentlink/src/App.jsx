@@ -25,7 +25,8 @@ function App() {
       <Router>
         <ScrollToTop></ScrollToTop>
         <div>
-          <Menu></Menu>
+          {" "}
+          <Menu></Menu>{" "}
         </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
