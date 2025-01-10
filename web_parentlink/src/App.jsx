@@ -8,12 +8,14 @@ Los de arriba son los imports por defecto
 */
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/QuienesSomos";
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./components/FooterFrame";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
-import Body from "./components/body";
+import Services from "./components/Services";
+import Ods from "./components/Ods";
+import ComoFunciona from "./components/ComoFunciona";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,30 +24,17 @@ function App() {
     <>
       <Router>
         <ScrollToTop></ScrollToTop>
+        <div>
+          <Menu></Menu>
+        </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/AboutPage" element={<AboutPage />} />
-        </Routes>
-        <div>
-          <Menu />
-          <h1>WELCOME TO PARENT LINK</h1>
-        </div>
-        <Routes>
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/Services" element={<Services />} />
+          <Route path="/Ods" element={<Ods />} />
+          <Route path="/ComoFunciona" element={<ComoFunciona />} />
         </Routes>
-        <Body />
-
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
         <FooterFrame></FooterFrame>
       </Router>
     </>

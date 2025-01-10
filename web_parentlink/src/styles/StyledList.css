@@ -1,0 +1,56 @@
+/* Contenedor principal de la lista */
+.styled-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Elementos de la lista */
+.styled-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin: 5px 0;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Ícono al lado del texto */
+.list-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: #4caf50; /* Verde para representar éxito o algo positivo */
+}
+
+/* Texto del elemento */
+.list-text {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Efecto hover */
+.styled-list-item:hover {
+  transform: translateY(-2px);
+  background-color: #e0f7fa;
+}
+
+.image-service-container {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 100vh;
+  height: auto;
+}
+
+.service-image {
+  width: 50%;
+  height: auto;
+  padding: 10px;
+}
+
+.container-Services {
+  display: flex;
+}

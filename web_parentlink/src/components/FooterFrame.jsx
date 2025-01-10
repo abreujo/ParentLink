@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/FooterFrame.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import esplai from "../assets/images/esplai.png";
 
 const FooterFrame = () => {
   return (
@@ -14,16 +15,16 @@ const FooterFrame = () => {
           <h4>Enlaces Útiles</h4>
           <ul>
             <li>
-              <a href="/AboutPage">Quiénes Somos</a>
+              <Link to="/">Quiénes Somos</Link>
             </li>
             <li>
               <a href="/services">Servicios</a>
             </li>
             <li>
-              <Link to="/Contact">Contact</Link>
+              <Link to="/Contact">Contactos</Link>
             </li>
             <li>
-              <a href="/privacy">Política de Privacidad</a>
+              <a href="/Ods">Objetivos de Desarollo Sostenible</a>
             </li>
           </ul>
         </div>
@@ -60,7 +61,12 @@ const FooterFrame = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
+        <div className="footer-logo">
+          <img src={esplai} alt="Fundacion Esplai" className="footer-esplai" />
+        </div>
+        <div className="footer-derechos">
+          <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
+        </div>
       </div>
     </footer>
   );
