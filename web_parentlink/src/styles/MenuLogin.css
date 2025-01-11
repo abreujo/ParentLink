@@ -1,0 +1,58 @@
+.menu {
+  display: flex;
+  justify-content: space-between; /* Espacio entre logo y botones */
+  align-items: center; /* Centrar verticalmente */
+  padding: 15px 30px; /* Espaciado interno */
+  background-color: #f5efff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de los logos */
+.menu-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacio entre los logos */
+}
+
+.logo,
+.letras-logo {
+  max-height: 50px; /* Tamaño de los logos */
+  height: auto;
+}
+
+/* Botones en el lado derecho */
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre los botones */
+}
+
+.menu-button {
+  padding: 10px 20px; /* Espaciado interno */
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7d2181; /* Color principal */
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-button:hover {
+  background-color: #4b0081; /* Color al pasar el mouse */
+  transform: scale(1.05);
+}
+
+.logout {
+  background-color: #7d2181;
+}
+
+.logout:hover {
+  background-color: #4b0081;
+}
