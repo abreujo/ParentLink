@@ -1,14 +1,20 @@
 /* Estilos generales */
-.container {
+.container-quienessomos {
   display: flex;
-  justify-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 20;
+  margin: 2%;
   /*height: 100vh; /* Establece que el contenedor ocupe toda la altura de la ventana */
 }
 
+.text-container {
+  background-color: #f0f8ff;
+  border-radius: 20%;
+}
 .image-container {
   flex: 1;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,12 +24,16 @@
 .large-image {
   width: 80%; /* Ajusta el tamaño de la imagen, 80% del contenedor */
   height: auto;
+  border-radius: 10px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
 }
 
 .text-container {
   flex: 1;
   padding: 20px;
-  text-align: left;
+  text-align: justify;
+  font-size: 1.3rem;
 }
 
 h1 {

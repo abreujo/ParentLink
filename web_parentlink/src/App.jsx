@@ -16,6 +16,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
+import Eventos from "./pages/Eventos";
+import ParentLink from "./pages/ParentLink";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,7 +28,8 @@ function App() {
         <ScrollToTop></ScrollToTop>
         <div>
           {" "}
-          <Menu></Menu>{" "}
+          {/* <Menu></Menu> */}
+          <ParentLink></ParentLink>
         </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -36,6 +39,7 @@ function App() {
           <Route path="/Ods" element={<Ods />} />
           <Route path="/ComoFunciona" element={<ComoFunciona />} />
         </Routes>
+        <Eventos></Eventos>
         <FooterFrame></FooterFrame>
       </Router>
     </>
