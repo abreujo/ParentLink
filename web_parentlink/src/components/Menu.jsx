@@ -10,8 +10,8 @@ const Menu = () => {
     <nav className="menu">
       {/* Contenedor del logo y letras al extremo izquierdo */}
       <div className="menu-logo-container">
-        <div className="menu-logo">
-          <img src={logo} alt="Logo" className="logo" />
+        <div className="logo-menu">
+          <img src={logo} alt="Logo" className="menu-logo" />
         </div>
         <div className="letras-logo">
           <img src={letras} alt="Letras" className="letras" />

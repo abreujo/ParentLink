@@ -4,6 +4,8 @@ import Menu from "../components/Menu";
 import HeroSection from "../components/HeroSection";
 import DescriptionSection from "../components/DescriptionSection";
 import EventSection from "../components/EventSection";
+import CarruselSection from "../components/Carrusel";
+import PublicidadSection from "../components/Publicidad";
 
 const HomePage = () => {
   return (
@@ -19,6 +21,11 @@ const HomePage = () => {
 
       {/* Event Section */}
       <EventSection />
+
+      {/* carrusel Section */}
+      <CarruselSection />
+
+      <PublicidadSection />
     </div>
   );
 };

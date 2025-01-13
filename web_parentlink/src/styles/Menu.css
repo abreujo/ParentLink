@@ -6,25 +6,28 @@
   justify-content: space-between; /* Separar logo y letras a la izquierda, y resto a la derecha */
   align-items: center;
   padding: 20px;
-  background-color: #f5efff;
+  background-color: #fcf8f8;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Contenedor de logo y letras */
 .menu-logo-container {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* Espacio entre logo y letras */
+  .logo-menu {
+    width: 60px; /* Cambia a tu preferencia */
+    height: 60px; /* O usa auto si prefieres */
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+  }
 }
 
 /* Estilo para los logos */
-.logo-menu {
-  max-height: 90px; /* Ajustar la altura máxima del logo */
+.menu-logo {
+  width: 60px;
   height: auto;
+  object-fit: contain;
 }
 
 .letras {
-  max-height: 50px; /* Ajustar la altura máxima de las letras */
+  max-height: 44px; /* Ajustar la altura máxima de las letras */
   height: auto;
 }
 

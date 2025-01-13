@@ -3,6 +3,7 @@ import "../styles/EventSection.css";
 import playaimg from "../assets/images/niñosbarca.jpg";
 import plantasimg from "../assets/images/plantandoarboles.jpg";
 import senderismoimg from "../assets/images/senderismoniños.avif";
+import nieveimg from "../assets/images/nieveniños.jpg";
 
 const EventSection = () => {
   const [selectedOption, setSelectedOption] = useState("parent");
@@ -31,7 +32,7 @@ const EventSection = () => {
           }`}
           onClick={() => setSelectedOption("caregiver")}
         >
-          Soy canguro/niñera
+          Quiero ser papá/mamá
         </button>
       </div>
       <div className="tags">
@@ -78,9 +79,9 @@ const EventSection = () => {
           </div>
         </div>
         <div className="event-card">
-          <img src={plantasimg} alt="Evento 2" />
+          <img src={nieveimg} alt="Evento 2" />
           <div className="event-description">
-            <h3>Jornada en el campo</h3>
+            <h3>Día en la nieve!</h3>
             <ul>
               <li>Juegos al aire libre</li>
               <li>Picnic padres/madres</li>

@@ -8,8 +8,8 @@ const MenuLoggedIn = () => {
       {/* Logo en el lado izquierdo */}
       <div className="menu-left">
         <div className="menu-logo-container">
-          <img src={logo} alt="Logo" className="logo" />
-          <img src={letras} alt="Logo Texto" className="letras-logo" />
+          <img src={logo} alt="Logo" className="menu-logo" />
+          <img src={letras} alt="Logo Texto" className="letras" />
         </div>
       </div>
       <div className="menu-links">

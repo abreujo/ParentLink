@@ -10,7 +10,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
-import Carrusel from "./components/arrusel"; // Importa Carrusel
 
 function App() {
   return (
@@ -38,9 +37,6 @@ function App() {
             }
           />
         </Routes>
-
-        {/* Agregar el carrusel directamente a la página de inicio */}
-        <Carrusel />
 
         <FooterFrame />
       </Router>
