@@ -14,12 +14,12 @@
 .menu-logo-container {
   display: flex;
   align-items: center;
-  gap: 10px; /* Espacio entre logo y letras */
+  gap: 15px; /* Espacio entre logo y letras */
 }
 
 /* Estilo para los logos */
-.logo {
-  max-height: 50px; /* Ajustar la altura máxima del logo */
+.logo-menu {
+  max-height: 90px; /* Ajustar la altura máxima del logo */
   height: auto;
 }
 

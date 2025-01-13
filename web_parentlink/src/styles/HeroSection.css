@@ -1,0 +1,54 @@
+/* src/styles/HeroSection.css */
+.hero-section {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  height: 60vh; /* Hace que la sección ocupe toda la altura de la ventana */
+  padding: 20px;
+  background-color: #f0f0f0; /* Color de fondo general */
+}
+
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100px; /* Esto limitará el ancho máximo de la sección */
+}
+
+.text-container {
+  flex: 1; /* El texto ocupa 1 parte del espacio */
+  display: flex;
+  justify-content: flex-start; /* Alinea el texto a la izquierda */
+  text-align: left; /* Alinea el texto dentro de este contenedor */
+  margin-right: auto;
+}
+
+.text-content {
+  background-color: #a294f9; /* El color de fondo para el contenedor del texto */
+  padding: 20px; /* Agrega un poco de espacio alrededor del texto */
+  border-radius: 20px; /* Esquinas redondeadas para el fondo */
+  color: white; /* Color del texto */
+  height: 100%; /* Asegura que el contenedor de texto ocupe toda la altura */
+}
+
+.logo-container {
+  flex: 1; /* El logo ocupará el 50% del contenedor */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 40%; /* Puedes ajustar este valor para hacer el contenedor más pequeño */
+}
+
+/* Ajustamos el logo para hacerlo más pequeño */
+.logo {
+  width: 30px; /* Ajusta el tamaño deseado aquí */
+  height: auto;
+  /* Eliminamos max-width para evitar que se limite el tamaño */
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+}
+
+.text-content h1 {
+  font-size: 2rem; /* Ajusta el tamaño del texto */
+  color: white; /* Asegura que el texto dentro del contenedor sea blanco */
+}
