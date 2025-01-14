@@ -1,0 +1,33 @@
+/* Estilos generales */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20;
+  /*height: 100vh; /* Establece que el contenedor ocupe toda la altura de la ventana */
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+}
+
+.large-image {
+  width: 80%; /* Ajusta el tamaño de la imagen, 80% del contenedor */
+  height: auto;
+}
+
+.text-container {
+  flex: 1;
+  padding: 20px;
+  text-align: left;
+}
+
+h1 {
+  font-size: 48px; /* Establece un tamaño grande para el texto */
+  font-weight: bold;
+  color: #333; /* Cambia el color del texto si es necesario */
+}

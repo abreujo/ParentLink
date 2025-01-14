@@ -1,0 +1,62 @@
+/* Contenedor principal */
+.publicidad-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+/* Bloques izquierdo y derecho */
+.publicidad-bloque {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Bloque izquierdo (color lila) */
+.publicidad-bloque.izquierdo {
+  background-color: #a294f9;
+}
+
+/* Bloque derecho */
+.publicidad-bloque.derecho {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+/* Título en el bloque derecho */
+.publicidad-bloque.derecho h2 {
+  color: #7d2181;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Lista de puntos */
+.publicidad-bloque.derecho ul {
+  list-style: disc inside;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Elementos de la lista */
+.publicidad-bloque.derecho ul li {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Imagen en el bloque derecho */
+.publicidad-bloque.derecho .oferta-imagen {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}

@@ -1,7 +1,9 @@
-// AboutPage.js
+// HomePage.js
 import React from "react";
+import "../styles/QuienesSomos.css";
+import evento from "../assets/images/imagenevento.jpg";
 
-function AboutPage() {
+function HomePage() {
   return (
     <div className="container">
       <div className="image-container">
@@ -14,4 +16,4 @@ function AboutPage() {
   );
 }
 
-export default AboutPage;
+export default HomePage;

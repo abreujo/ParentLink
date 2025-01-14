@@ -1,0 +1,84 @@
+/* Menu.css */
+
+/* Contenedor principal */
+.menu {
+  display: flex;
+  justify-content: space-between; /* Separar logo y letras a la izquierda, y resto a la derecha */
+  align-items: center;
+  padding: 20px;
+  background-color: #fcf8f8;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de logo y letras */
+.menu-logo-container {
+  .logo-menu {
+    width: 60px; /* Cambia a tu preferencia */
+    height: 60px; /* O usa auto si prefieres */
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+  }
+}
+
+/* Estilo para los logos */
+.menu-logo {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+.letras {
+  max-height: 44px; /* Ajustar la altura máxima de las letras */
+  height: auto;
+}
+
+/* Contenedor de enlaces y botones a la derecha */
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacio entre los elementos a la derecha */
+}
+
+/* Estilo de los enlaces */
+.menu-links {
+  display: flex;
+  gap: 30px;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.menu-link:hover {
+  transform: scale(1.1);
+  text-decoration: underline;
+  color: #4b0081;
+}
+
+/* Estilo para los botones */
+.menu-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-register,
+.btn-login {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7d2181;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-register:hover,
+.btn-login:hover {
+  background-color: #4b0081;
+  transform: scale(1.05);
+}

@@ -1,54 +1,45 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-/*
-Los de arriba son los imports por defecto
-*/
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import Menu from "./components/Menu"; // Menú inicial
+import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
+import HomePage from "./pages/HomePage"; // Asegúrate de que el path sea correcto
 import AboutPage from "./pages/AboutPage";
+import FooterFrame from "./components/FooterFrame";
+import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
+import Services from "./components/Services";
+import Ods from "./components/Ods";
+import ComoFunciona from "./components/ComoFunciona";
+
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Router>
+        <ScrollToTop />
+
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/AboutPage" element={<AboutPage />} />
+          {/* Rutas principales */}
+          <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/ods" element={<Ods />} />
+          <Route path="/comofunciona" element={<ComoFunciona />} />
+          <Route path="/menu-login" element={<MenuLogin />} />
+          {/* Ruta para el menú de usuarios registrados */}
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <MenuLogin />
+                <div>Contenido del Dashboard</div>
+              </>
+            }
+          />
         </Routes>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">HomePage</Link>
-            </li>
-            <li>
-              <Link to="/AboutPage">AboutPage</Link>
-            </li>
-          </ul>
-          <h1>WELCOME TO PARENT LINK</h1>
-          <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
+
+        <FooterFrame />
       </Router>
     </>
   );
