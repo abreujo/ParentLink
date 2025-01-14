@@ -16,6 +16,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
+import Recompensas from "./components/Recompensas";
 
 function App() {
   const [count, setCount] = useState(0);

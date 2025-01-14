@@ -17,7 +17,7 @@ function Contact() {
       photo: pacco,
     },
     {
-      name: "Myroslav Palco",
+      name: "Myroslav Palko",
       title: "Diseñador Gráfico",
       email: "Myroslav@example.com",
       phone: "+34 987 654 321",
