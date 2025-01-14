@@ -21,9 +21,9 @@ const Menu = () => {
       {/* Contenedor de enlaces y botones al extremo derecho */}
       <div className="menu-right">
         <div className="menu-links">
-          <a href="#sobre-nosotros" className="menu-link">
+          <Link className="menu-link" to="/">
             Sobre Nosotros
-          </a>
+          </Link>
           <a href="#como-funciona" className="menu-link">
             ¿Cómo Funciona?
           </a>

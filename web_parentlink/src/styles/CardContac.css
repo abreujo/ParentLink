@@ -1,4 +1,4 @@
-.card {
+.card-contact {
   border: 1px solid #d2cece6f;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -10,18 +10,18 @@
   background-color: rgb(227, 229, 225);
 }
 
-.card h2 {
+.card-contact h2 {
   font-size: 1.5rem;
   color: #333;
 }
 
-.card .title {
+.card-contact .title {
   font-size: 1.2rem;
   color: #555;
   margin-bottom: 10px;
 }
 
-.card p {
+.card-contact p {
   margin: 5px 0;
   color: #777;
 }
