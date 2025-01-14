@@ -1,6 +1,7 @@
 package com.parentlink.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -9,8 +10,10 @@ public class Location {
     @Id
     private String postalCode;
 
+    @NotNull(message = "Name is required")  // Asegura que el nombre no sea null
     private String name;
 
+    @NotNull(message = "Country is required")  // Asegura que el país no sea null
     private String country = "Spain";  // Valor por defecto para el país
 
     @OneToMany(mappedBy = "location")
@@ -70,5 +73,3 @@ public class Location {
         this.events = events;
     }
 }
-
-

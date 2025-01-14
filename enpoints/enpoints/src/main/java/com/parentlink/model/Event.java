@@ -63,7 +63,6 @@ public class Event {
     }
 
     // Getters y setters
-
     public Long getId() {
         return id;
     }

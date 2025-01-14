@@ -7,6 +7,7 @@ import com.parentlink.repository.UserRepository;
 import com.parentlink.repository.ChildRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -26,17 +27,46 @@ public class UserService {
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+
     public User createUser(User user) {
-        // Si el usuario tiene hijos, guardamos también a los hijos.
-        if (user.isChildren()) {
+        // Validación antes de guardar
+        validateUser(user);
+
+        // Guardamos el usuario primero
+        user = userRepository.save(user);
+
+        // Si el usuario tiene hijos, asociamos y guardamos los hijos
+        if (Boolean.TRUE.equals(user.isChildren())) {
             for (Child child : user.getChildrenList()) {
-                child.setUser(user); // Asociamos el hijo con el usuario
+                child.setUser(user);  // Asociamos el hijo con el usuario
                 childRepository.save(child);  // Guardamos cada hijo
             }
         }
+        return user;
+    }
 
-        // Finalmente guardamos al usuario
-        return userRepository.save(user);
+    public void validateUser(User user) {
+        if (user.isChildren() == null) {
+            throw new IllegalArgumentException("The 'children' field cannot be null.");
+        }
+        if (user.isChildren()) {
+            if (user.getNumberOfChildren() == null || user.getNumberOfChildren() < 1) {
+                throw new IllegalArgumentException("Number of children must be greater than 0 for family users.");
+            }
+            if (user.getChildrenList() == null || user.getChildrenList().isEmpty()) {
+                throw new IllegalArgumentException("Family users must provide a list of children.");
+            }
+        } else {
+            if (user.getNumberOfChildren() != null) {
+                throw new IllegalArgumentException("Number of children should be null for individual users.");
+            }
+            if (user.getChildrenList() != null && !user.getChildrenList().isEmpty()) {
+                throw new IllegalArgumentException("Individual users cannot have a list of children.");
+            }
+        }
+        if (user.getEmail() != null && !StringUtils.hasText(user.getEmail())) {
+            throw new IllegalArgumentException("The email field cannot be empty.");
+        }
     }
 
     public User getUserByEmail(String email) {
@@ -46,14 +76,17 @@ public class UserService {
     public boolean deleteUser(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
-            return true; // El usuario fue eliminado exitosamente
+            return true;
         } else {
-            return false; // El usuario no existía
+            return false;
         }
     }
 
-    //REVISAR BIEN Y PROBAR ESTE MÉTODO
     public User updateUser(Long id, User userDetails) {
+        if (userDetails == null) {
+            throw new IllegalArgumentException("User details cannot be null");
+        }
+
         return userRepository.findById(id).map(user -> {
             // Actualización de los datos del usuario
             user.setSurname(userDetails.getSurname());
@@ -66,38 +99,28 @@ public class UserService {
             user.setNumberOfChildren(userDetails.getNumberOfChildren());
             user.setLocation(userDetails.getLocation());
 
-            // Llamamos a updateChildren para manejar la actualización de los hijos
+            // Actualizamos los hijos si es necesario
             updateChildren(user, userDetails);
 
-            // Guardamos el usuario con sus hijos actualizados
             return userRepository.save(user);
         }).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public void updateChildren(User user, User userDetails) {
-        // Si el usuario tiene hijos, actualizamos la relación de hijos
         if (userDetails.isChildren()) {
-            // Cambiar el tipo de usuario a "FAMILIA" si tiene hijos
             user.setUserType(UserType.FAMILIA);
-
-            // Recorremos la lista de hijos proporcionados en userDetails
             for (Child child : userDetails.getChildrenList()) {
-                // Si el hijo no está ya asociado al usuario, lo agregamos
                 if (!user.getChildrenList().contains(child)) {
-                    child.setUser(user);  // Asociamos el nuevo hijo con el usuario
-                    childRepository.save(child);  // Guardamos el hijo
+                    child.setUser(user);
+                    childRepository.save(child);
                 }
             }
-            // Eliminamos los hijos que ya no están en la nueva lista proporcionada
-            // Se eliminan los hijos que están en la lista actual de user pero ya no están en la lista de userDetails
             user.getChildrenList().removeIf(existingChild -> !userDetails.getChildrenList().contains(existingChild));
+            childRepository.saveAll(user.getChildrenList());  // Guardar cambios en los hijos
         } else {
-            // Si el usuario no tiene hijos, cambiamos el tipo de usuario a "INDIVIDUO"
             user.setUserType(UserType.INDIVIDUO);
-
-            // Eliminamos la relación con los hijos (desasociamos todos los hijos)
             user.getChildrenList().forEach(child -> child.setUser(null));
-            childRepository.saveAll(user.getChildrenList());  // Guardamos los cambios en los hijos
+            childRepository.saveAll(user.getChildrenList());
         }
     }
 
@@ -106,4 +129,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return user.getChildrenList();
     }
+
+
+
 }

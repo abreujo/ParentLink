@@ -48,8 +48,8 @@ public class User {
     @NotNull(message = "Children flag is required")
     private Boolean children;
 
-    @Min(value = 0, message = "Number of children must be non-negative")
-    private Integer numberOfChildren;
+    @Min(value = 1, message = "Number of children must be greater than 0 for family users")
+    private Integer numberOfChildren;  // Número de hijos
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Child> childrenList;
@@ -156,6 +156,14 @@ public class User {
 
     public void setChildren(Boolean children) {
         this.children = children;
+
+        // Establecer automáticamente el UserType basado en children
+        if (Boolean.TRUE.equals(children)) {
+            this.userType = UserType.FAMILIA;  // Usuario con hijos
+        } else {
+            this.userType = UserType.INDIVIDUO;  // Usuario sin hijos
+            this.numberOfChildren = null; // Asegurar que numberOfChildren esté en estado válido
+        }
     }
 
     public Integer getNumberOfChildren() {
@@ -183,7 +191,10 @@ public class User {
     }
 
     public Integer getAge() {
-        return dateOfBirth != null ? Period.between(this.dateOfBirth, LocalDate.now()).getYears() : null;
+        if (this.dateOfBirth == null) {
+            return null; // O puedes devolver 0 o algún valor predeterminado si lo prefieres
+        }
+        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
     public UserType getUserType() {

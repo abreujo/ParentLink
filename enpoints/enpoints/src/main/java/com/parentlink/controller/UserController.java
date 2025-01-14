@@ -4,9 +4,11 @@ import com.parentlink.model.Child;
 import com.parentlink.model.User;
 import com.parentlink.model.UserType;
 import com.parentlink.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,17 +25,28 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.getAllUsers();
+
         if (users.isEmpty()) {
             return ResponseEntity.noContent().build();  // Devuelve 204 No Content
         }
+
         return ResponseEntity.ok(users);  // Devuelve los usuarios con 200 OK
     }
 
     // Crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);  // Devuelve el usuario creado con 201 Created
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult bindingResult) {
+        // Si hay errores de validación, devolvemos los errores al cliente
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
+        try {
+            User createdUser = userService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error when creating user.");
+        }
     }
 
     // Obtener un usuario por su ID
@@ -69,7 +82,12 @@ public class UserController {
     // Actualizar un usuario
     // Actualizar un usuario
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails, BindingResult bindingResult) {
+        // Si hay errores de validación, devolvemos los errores al cliente
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
+
         try {
             // Verificamos si el usuario tiene hijos en el objeto userDetails
             if (userDetails.isChildren()) {
@@ -83,14 +101,15 @@ public class UserController {
             // Actualizamos los detalles del usuario (tipo de usuario y otros datos)
             User updatedUser = userService.updateUser(id, userDetails);
 
-            // Actualizamos los hijos del usuario si es necesario
+            // Si el usuario tiene hijos, actualizamos los hijos
             if (userDetails.isChildren()) {
                 userService.updateChildren(updatedUser, userDetails);
             }
 
             return ResponseEntity.ok(updatedUser);  // Devuelve el usuario actualizado con 200 OK
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Si no se encuentra el usuario, devuelve un 404 NOT FOUND
+            // Si no se encuentra el usuario, devolvemos un 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 

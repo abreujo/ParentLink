@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ParticipateService {
@@ -61,4 +62,29 @@ public class ParticipateService {
             throw new NoSuchElementException("Cannot add remark before the event finishes");
         }
     }
+
+    // Obtener todos los remarks de un evento
+    public List<Remark> getRemarksByEvent(Long eventId) {
+        // Buscar todas las participaciones para el evento
+        List<Participate> participations = participateRepository.findByEventId(eventId);
+
+        // Extraer las remarks de las participaciones
+        List<Remark> remarks = participations.stream()
+                .map(Participate::getRemark)  // Extraer la Remark de cada Participación
+                .filter(remark -> remark != null)  // Filtrar solo las participaciones que tengan Remark
+                .collect(Collectors.toList());  // Convertir el stream a lista
+
+        return remarks;
+    }
+
+    // Obtener todos los remarks de un usuario
+    public List<Remark> getRemarksByUser(Long userId) {
+        return participateRepository.findByUserId(userId)
+                .stream()
+                .map(Participate::getRemark)  // Obtener la Remark de cada Participación
+                .filter(remark -> remark != null) // Asegurarse de que la Remark no sea nula
+                .collect(Collectors.toList());
+    }
+
+
 }
