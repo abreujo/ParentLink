@@ -1,0 +1,45 @@
+/* src/styles/HeroSection.css */
+.hero-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; /* Centra los elementos verticalmente */
+  height: 60vh; /* Altura del Hero Section */
+  padding: 15px;
+  background-color: #f0f0f0; /* Fondo de la sección */
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna (uno encima del otro) */
+  justify-content: flex-start; /* Alinea los elementos al principio */
+  width: 60%; /* Controla el ancho del contenedor izquierdo */
+  gap: 20px; /* Espacio entre los elementos de la columna */
+}
+
+.text-container {
+  margin-bottom: 20px; /* Espacio entre el texto y la imagen */
+}
+
+.text-content {
+  background-color: #a294f9; /* Fondo del contenedor de texto */
+  padding: 10px; /* Espaciado interior */
+  border-radius: 40px; /* Esquinas redondeadas */
+  color: white; /* Color de texto */
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.right-container {
+  display: flex;
+  justify-content: center; /* Centra el logo horizontalmente */
+  align-items: center; /* Centra el logo verticalmente */
+  width: 30%; /* Ancho del contenedor derecho */
+}
+
+.hero-logo {
+  max-width: 400px; /* Ajusta el tamaño del logo */
+  max-height: 600px;
+  object-fit: contain; /* Mantiene la proporción del logo */
+}
+.h2 {
+  color: rgb(255, 255, 255);
+}

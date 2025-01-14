@@ -1,0 +1,42 @@
+.description-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #a294f9; /* Azul celeste */
+  color: black;
+}
+
+.text-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.text-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.register-button {
+  background-color: #7d2181; /* Lila oscuro (botones) */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.register-button:hover {
+  background-color: #5c1861;
+}
+
+.image-content {
+  flex: 1;
+  text-align: center;
+}
+
+.image-content img {
+  max-width: 100%;
+  border-radius: 10px;
+}

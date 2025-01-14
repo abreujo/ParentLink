@@ -1,0 +1,66 @@
+.menu {
+  display: flex;
+  justify-content: space-between; /* Espacio entre logo y botones */
+  align-items: center; /* Centrar verticalmente */
+  padding: 15px 30px; /* Espaciado interno */
+  background-color: #f5efff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de los logos */
+.menu-left {
+  width: 60px; /* Cambia a tu preferencia */
+  height: 60px; /* O usa auto si prefieres */
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+}
+
+.menu-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacio entre los logos */
+}
+
+/* Estilo para el logo */
+.logo {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Estilo para las letras */
+.letras-logo {
+  max-height: 50px; /* Ajustar la altura máxima de las letras */
+  height: auto;
+}
+
+/* Botones en el lado derecho */
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre los botones */
+}
+
+.menu-button {
+  padding: 10px 20px; /* Espaciado interno */
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7d2181; /* Color principal */
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-button:hover {
+  background-color: #4b0081; /* Color al pasar el mouse */
+  transform: scale(1.05);
+}
+
+.logout {
+  background-color: #7d2181;
+}
+
+.logout:hover {
+  background-color: #4b0081;
+}

@@ -1,49 +1,67 @@
+/* Menu.css */
+
+/* Contenedor principal */
 .menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Separar logo y letras a la izquierda, y resto a la derecha */
   align-items: center;
   padding: 20px;
-  background-color: white;
+  background-color: #fcf8f8;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo */
-.menu-logo img {
-  height: auto; /* Ajusta el tamaño del logo */
-  width: 100px;
-  margin-right: 300px;
+/* Contenedor de logo y letras */
+.menu-logo-container {
+  .logo-menu {
+    width: 60px; /* Cambia a tu preferencia */
+    height: 60px; /* O usa auto si prefieres */
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+  }
 }
 
-/* Enlaces del menú */
+/* Estilo para los logos */
+.menu-logo {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+.letras {
+  max-height: 44px; /* Ajustar la altura máxima de las letras */
+  height: auto;
+}
+
+/* Contenedor de enlaces y botones a la derecha */
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacio entre los elementos a la derecha */
+}
+
+/* Estilo de los enlaces */
 .menu-links {
   display: flex;
-  gap: 30px; /* Espaciado entre los enlaces */
+  gap: 30px;
 }
 
 .menu-link {
   text-decoration: none;
-  color: black; /* Texto en negro */
-  list-style: none;
+  color: black;
   font-size: 16px;
   font-weight: 500;
-  transition: color 0.3s ease;
-  margin-right: 60px;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .menu-link:hover {
-  color: #555;
-}
-.menu-language {
-  list-style-type: none; /* Elimina el punto en el <li> */
-  padding: 0; /* Elimina el espaciado predeterminado */
-  margin: 0; /* Elimina el margen predeterminado */
+  transform: scale(1.1);
+  text-decoration: underline;
+  color: #4b0081;
 }
 
-/* Botones */
+/* Estilo para los botones */
 .menu-buttons {
   display: flex;
-  gap: 30px; /* Espaciado entre los botones */
-  margin-left: 60px;
+  gap: 15px;
 }
 
 .btn-register,
@@ -54,25 +72,13 @@
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/* Botón Registrarse */
-.btn-register {
-  background-color: #b3a0d6; /* Lila */
+  background-color: #7d2181;
   color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn-register:hover {
-  background-color: #9e8ac1; /* Lila más oscuro al pasar el ratón */
-}
-
-/* Botón Acceder */
-.btn-login {
-  background-color: #b3a0d6; /* Lila */
-  color: white;
-}
-
+.btn-register:hover,
 .btn-login:hover {
-  background-color: #9e8ac1; /* Lila más oscuro al pasar el ratón */
+  background-color: #4b0081;
+  transform: scale(1.05);
 }

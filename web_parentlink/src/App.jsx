@@ -1,14 +1,8 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Menu from "./components/Menu";
-/*
-Los de arriba son los imports por defecto
-*/
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import HomePage from "./pages/QuienesSomos";
+import Menu from "./components/Menu"; // Menú inicial
+import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
+import HomePage from "./pages/HomePage"; // Asegúrate de que el path sea correcto
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./components/FooterFrame";
 import Contact from "./pages/Contact";
@@ -19,25 +13,33 @@ import ComoFunciona from "./components/ComoFunciona";
 import Recompensas from "./components/Recompensas";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Router>
-        <ScrollToTop></ScrollToTop>
-        <div>
-          {" "}
-          <Menu></Menu>{" "}
-        </div>
+        <ScrollToTop />
+
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/AboutPage" element={<AboutPage />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Services" element={<Services />} />
-          <Route path="/Ods" element={<Ods />} />
-          <Route path="/ComoFunciona" element={<ComoFunciona />} />
+          {/* Rutas principales */}
+          <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/ods" element={<Ods />} />
+          <Route path="/comofunciona" element={<ComoFunciona />} />
+          <Route path="/menu-login" element={<MenuLogin />} />
+          {/* Ruta para el menú de usuarios registrados */}
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <MenuLogin />
+                <div>Contenido del Dashboard</div>
+              </>
+            }
+          />
         </Routes>
-        <FooterFrame></FooterFrame>
+
+        <FooterFrame />
       </Router>
     </>
   );
