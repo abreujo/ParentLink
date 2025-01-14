@@ -1,19 +1,19 @@
 import React from "react";
 import "../styles/ParentLink.css"; // Archivo CSS para estilos personalizados
 
-import cocrianza from "../assets/images/cocrianza.jpg";
+import cocrianza from "../assets/images/imagenevento.jpg";
 
 function ParentLink() {
   return (
     <div className="banner">
       <div className="banner__left">
-        <div className="banner-text">
+        {/* <div className="banner-text">
           <p>
-            ¡En España <b>uno</b> de cada <b>cuatro</b> niños forman parte de
-            una familia monoparental. La mitad de esas familias afirman
-            necesitar ayuda parar criar a sus hijos.!
+            <b>¡</b>En España <b>uno</b> de cada <b>cuatro</b> niños forman
+            parte de una familia monoparental. La mitad de esas familias afirman
+            necesitar ayuda parar criar a sus hijos.<b>!</b>
           </p>
-        </div>
+        </div> */}
         <div className="banner-text1">
           <p>...¿Alguna vez has pensado en la co - crianza?</p>
         </div>

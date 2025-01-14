@@ -37,41 +37,6 @@ function Contact() {
       phone: "+34 613 290 849",
       photo: johel,
     },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
   ];
 
   return (

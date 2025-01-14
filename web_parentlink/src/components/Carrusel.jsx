@@ -66,12 +66,8 @@ const Carrusel = () => {
         ))}
       </div>
       {/* Botones de navegación */}
-      <button onClick={prevTestimonio} className="carrusel-nav prev">
-        ❮
-      </button>
-      <button onClick={nextTestimonio} className="carrusel-nav next">
-        ❯
-      </button>
+      <button onClick={prevTestimonio} className="carrusel-nav prev"></button>
+      <button onClick={nextTestimonio} className="carrusel-nav next"></button>
     </div>
   );
 };

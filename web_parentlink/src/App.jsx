@@ -17,6 +17,7 @@ function App() {
   return (
     <>
       <Router>
+        <Menu />
         <ScrollToTop />
         <Routes>
           {/* Rutas principales */}
