@@ -1,0 +1,52 @@
+/*ParentLin.css*/
+
+.banner {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  /* overflow: hidden; Oculta contenido fuera del banner */
+}
+
+.banner-text {
+  z-index: 2; /* Asegura que el texto esté encima de otros elementos */
+  text-align: justify;
+  margin-right: 3rem;
+  margin-left: 3rem;
+}
+
+.banner-text1 {
+  text-align: end;
+}
+
+.banner-text1 p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.banner-text p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.banner-image {
+  max-width: 25%;
+  height: auto;
+  z-index: 1; /* Asegura que la imagen esté detrás del texto */
+}
+
+.banner-image img {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 50%;
+  border-top-right-radius: 50%;
+  transform: translate(5px, 30px); /* Combina ambas transformaciones */
+}
