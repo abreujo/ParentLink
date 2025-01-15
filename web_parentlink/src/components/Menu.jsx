@@ -31,7 +31,7 @@ const Menu = () => {
         <div className="menu-buttons">
           <button className="btn-register">Registrarse</button>
           {/* Botón de Acceder, envuelto en Link para redirigir a /menu-login */}
-          <Link to="/menu-login">
+          <Link to="/home-login">
             <button className="btn-login">Acceder</button>
           </Link>
         </div>
