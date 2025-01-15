@@ -1,0 +1,22 @@
+[
+  {
+    "img": "niñosbarca.jpg",
+    "title": "Jornada en kayak",
+    "details": ["Kayak, remando juntos!", "Para padres y los más pequeños"]
+  },
+  {
+    "img": "nieveniños.jpg",
+    "title": "Día en la nieve!",
+    "details": ["Juegos al aire libre", "Picnic padres/madres"]
+  },
+  {
+    "img": "plantandoarboles.jpg",
+    "title": "Jornada en el campo",
+    "details": ["Plantación de árboles", "Conexión con la naturaleza"]
+  },
+  {
+    "img": "senderismoniños.avif",
+    "title": "Exploración natural",
+    "details": ["nombre", "description", "image", "date", "location"]
+  }
+]
