@@ -10,14 +10,16 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
+import Eventos from "./pages/Eventos";
+import ParentLink from "./pages/ParentLink";
 
 
 function App() {
   return (
     <>
       <Router>
+        <Menu />
         <ScrollToTop />
-
         <Routes>
           {/* Rutas principales */}
           <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
@@ -38,7 +40,6 @@ function App() {
             }
           />
         </Routes>
-
         <FooterFrame />
       </Router>
     </>
