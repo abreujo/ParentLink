@@ -2,11 +2,12 @@ package com.parentlink.service;
 
 import com.parentlink.model.UserSystem;
 import com.parentlink.repository.UserSystemRepository;
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UserSystemService {

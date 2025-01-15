@@ -1,7 +1,7 @@
 package com.parentlink.controller;
 
 
-import com.parentlink.dto.ErrorResponse;
+import com.parentlink.dto.ErrorResponseDto;
 import com.parentlink.model.UserSystem;
 import com.parentlink.service.UserSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usersystem")
@@ -19,9 +20,15 @@ public class UserSystemController {
     private UserSystemService userSystemService;
 
     @GetMapping("/")
-    public ResponseEntity<List<UserSystem>> getAllUsers() {
-        List<UserSystem> users = userSystemService.getAllUsers();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            // Llama al servicio para obtener todos los usuarios
+            List<UserSystem> users = userSystemService.getAllUsers();
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            // Devuelve un error en caso de que algo falle
+            return ResponseEntity.status(500).body(new ErrorResponseDto("Error al obtener los usuarios: " + e.getMessage()));
+        }
     }
 
     @PostMapping("/register")
@@ -31,7 +38,7 @@ public class UserSystemController {
             UserSystem registeredUser = userSystemService.register(user);
             return ResponseEntity.ok(registeredUser);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorResponseDto(e.getMessage()));
         }
 
     }
