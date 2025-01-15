@@ -1,12 +1,5 @@
 package com.parentlink.service;
 
-/*
-import com.example.demo.model.UserSystem;
-import com.example.demo.repository.UserSystemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-*/
-
 import com.parentlink.model.UserSystem;
 import com.parentlink.repository.UserSystemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +30,3 @@ public class UserSystemService {
         return Optional.empty();
     }
 }
-
-
-
-/*
-
-
-public class UserSystemService {
-}*/
