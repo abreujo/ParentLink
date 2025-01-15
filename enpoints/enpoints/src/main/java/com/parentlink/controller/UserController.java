@@ -120,7 +120,7 @@ public class UserController {
         List<Child> children = userService.getChildrenByUserId(userId);
         return ResponseEntity.ok(children);  // Devuelve los hijos del usuario
     }
-
+}
     /*
     JSON USER
 
@@ -148,10 +148,3 @@ public class UserController {
   ]
 }
     * */
-
-
-
-
-
-
-}
