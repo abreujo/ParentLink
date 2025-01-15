@@ -66,6 +66,12 @@ public class EventController {
 /*
 JSON EVENT
 
+http://localhost:8081/api/events
+
+METODO POST PARA CREAR UN EVENTO
+
+  DEBE ESTAR CREADA LA UBICACION EN LA BD
+
 {
   "name": "Tech for children",
   "description": "Introducing children in the TechWorld.",

@@ -123,6 +123,9 @@ public class UserController {
 
     /*
     JSON USER
+
+    http://localhost:8081/api/users
+
 {
   "surname": "García",
   "name": "Pepa",
