@@ -37,10 +37,16 @@ const Menu = () => {
           </a>
         </div>
         <div className="menu-buttons">
+<<<<<<< HEAD
           <button className="btn-register" onClick={handleOpenRegisterForm}>
             Registrarse
           </button>
           <Link to="/menu-login">
+=======
+          <button className="btn-register">Registrarse</button>
+          {/* Botón de Acceder, envuelto en Link para redirigir a /menu-login */}
+          <Link to="/home-login">
+>>>>>>> funcionalidadEventos
             <button className="btn-login">Acceder</button>
           </Link>
         </div>

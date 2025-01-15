@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Menu from "./components/Menu"; // Menú inicial
-import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
-import HomePage from "./pages/HomePage"; // Asegúrate de que el path sea correcto
+import Menu from "./components/Menu";
+import MenuLogin from "./components/MenuLogin";
+import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./components/FooterFrame";
 import Contact from "./pages/Contact";
@@ -10,9 +10,13 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
+<<<<<<< HEAD
 import Eventos from "./pages/Eventos";
 import ParentLink from "./pages/ParentLink";
 
+=======
+import HomeLogIn from "./pages/HomeLogIn";
+>>>>>>> funcionalidadEventos
 
 function App() {
   return (
@@ -43,7 +47,8 @@ function App() {
           <Route path="/ods" element={<Ods />} />
           <Route path="/comofunciona" element={<ComoFunciona />} />
           <Route path="/menu-login" element={<MenuLogin />} />
-          {/* Ruta para el menú de usuarios registrados */}
+          <Route path="/home-login" element={<HomeLogIn />} />{" "}
+          {/* Ruta para HomeLogIn */}
           <Route
             path="/dashboard"
             element={
