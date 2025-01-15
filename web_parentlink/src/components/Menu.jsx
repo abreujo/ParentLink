@@ -40,7 +40,7 @@ const Menu = () => {
           <button className="btn-register" onClick={handleOpenRegisterForm}>
             Registrarse
           </button>
-          <Link to="/menu-login">
+          <Link to="/home-login">
             <button className="btn-login">Acceder</button>
           </Link>
         </div>
