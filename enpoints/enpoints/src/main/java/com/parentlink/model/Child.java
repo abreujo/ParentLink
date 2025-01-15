@@ -1,5 +1,6 @@
 package com.parentlink.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -16,14 +17,19 @@ public class Child {
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = false)
     @NotNull(message = "User is required")
+    @JsonIgnore
     private User user;
 
+    /*
     @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be a past date")
+     */
     private LocalDate dateOfBirth;
 
+    /*
     @NotNull(message = "Gender is required")
     @Enumerated(EnumType.STRING)
+     */
     private Gender gender;
 
     @NotBlank(message = "Name is required and cannot be blank")

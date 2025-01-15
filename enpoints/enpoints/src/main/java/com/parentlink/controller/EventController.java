@@ -63,10 +63,25 @@ public class EventController {
         }
     }
 
-    /*
-    @PostMapping("/filter")
-    public List<Event> filterEvents(@RequestBody EventFilterRequest filterRequest) {
-        return eventService.filterEvents(filterRequest);
-    }
-    */
+/*
+JSON EVENT
+
+http://localhost:8081/api/events
+
+METODO POST PARA CREAR UN EVENTO
+
+  DEBE ESTAR CREADA LA UBICACION EN LA BD
+
+{
+  "name": "Tech for children",
+  "description": "Introducing children in the TechWorld.",
+  "ageBracket": "6-8",
+  "date": "2025-05-10T10:00:00",
+  "location": {
+    "postalCode": "28001"
+  }
+}
+*
+* */
+
 }

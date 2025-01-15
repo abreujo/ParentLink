@@ -18,6 +18,12 @@ public class UserSystemController {
     @Autowired
     private UserSystemService userSystemService;
 
+    @GetMapping("/")
+    public ResponseEntity<List<UserSystem>> getAllUsers() {
+        List<UserSystem> users = userSystemService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserSystem user) {
         //return ResponseEntity.ok(userService.register(user));

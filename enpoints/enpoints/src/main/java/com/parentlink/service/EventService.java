@@ -46,12 +46,8 @@ public class EventService {
             event.setImage(eventDetails.getImage());
         }
 
-        if (eventDetails.getMinAge() != null) {
-            event.setMinAge(eventDetails.getMinAge());
-        }
-
-        if (eventDetails.getMaxAge() != null) {
-            event.setMaxAge(eventDetails.getMaxAge());
+        if (eventDetails.getAgeBracket() != null) {
+            event.setAgeBracket(eventDetails.getAgeBracket());
         }
 
         if (eventDetails.getDate() != null) {

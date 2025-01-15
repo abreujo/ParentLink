@@ -1,5 +1,6 @@
 package com.parentlink.controller;
 
+import com.parentlink.dto.UserCreateDto;
 import com.parentlink.model.Child;
 import com.parentlink.model.User;
 import com.parentlink.model.UserType;
@@ -35,7 +36,7 @@ public class UserController {
 
     // Crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult bindingResult) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserCreateDto user, BindingResult bindingResult) {
         // Si hay errores de validación, devolvemos los errores al cliente
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
@@ -115,8 +116,42 @@ public class UserController {
 
     // Obtener los hijos de un usuario
     @GetMapping("/{userId}/children")
-    public ResponseEntity<Set<Child>> getChildrenByUserId(@PathVariable Long userId) {
-        Set<Child> children = userService.getChildrenByUserId(userId);
+    public ResponseEntity<List<Child>> getChildrenByUserId(@PathVariable Long userId) {
+        List<Child> children = userService.getChildrenByUserId(userId);
         return ResponseEntity.ok(children);  // Devuelve los hijos del usuario
     }
+
+    /*
+    JSON USER
+
+    http://localhost:8081/api/users
+
+{
+  "surname": "García",
+  "name": "Pepa",
+  "password": "password890",
+  "email": "pepa.garcia@gmail.com",
+  "phone": "+34987654321",
+  "dateOfBirth": "1978-04-09",
+  "gender": "FEMALE",
+  "location": {
+    "postalCode": "28001"
+  },
+  "children": true,
+  "numberOfChildren": 1,
+  "childrenList": [
+    {
+      "name": "Pepe",
+      "gender": "MALE",
+      "dateOfBirth": "2018-06-15"
+    }
+  ]
+}
+    * */
+
+
+
+
+
+
 }

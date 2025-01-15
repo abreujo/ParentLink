@@ -1,5 +1,6 @@
 package com.parentlink.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
@@ -17,9 +18,11 @@ public class Location {
     private String country = "Spain";  // Valor por defecto para el país
 
     @OneToMany(mappedBy = "location")
+    @JsonIgnore
     private Set<User> users;
 
     @OneToMany(mappedBy = "location")
+    @JsonIgnore
     private Set<Event> events;
 
     // Constructor vacío
@@ -73,3 +76,14 @@ public class Location {
         this.events = events;
     }
 }
+/*
+AGREGAR POR METODO POS A LOCATION
+
+http://localhost:8081/api/locations
+
+{
+  "postalCode": "29014",
+  "name": "Malaga"
+}
+
+* */

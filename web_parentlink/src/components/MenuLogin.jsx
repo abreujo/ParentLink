@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
-const MenuLoggedIn = () => {
+const MenuLogin = () => {
   return (
     <nav className="menu">
       {/* Logo en el lado izquierdo */}
@@ -12,14 +12,7 @@ const MenuLoggedIn = () => {
           <img src={letras} alt="Logo Texto" className="letras" />
         </div>
       </div>
-      <div className="menu-links">
-        <a href="#sobre-nosotros" className="menu-link">
-          Sobre Nosotros
-        </a>
-        <a href="#como-funciona" className="menu-link">
-          ¿Cómo Funciona?
-        </a>
-      </div>
+
       {/* Botones a la derecha */}
       <div className="menu-right">
         <button className="menu-button">Mi Perfil</button>
@@ -29,4 +22,4 @@ const MenuLoggedIn = () => {
   );
 };
 
-export default MenuLoggedIn;
+export default MenuLogin;

@@ -1,111 +1,146 @@
-/* Contenedor principal de los filtros */
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
-  padding: 5px;
-  background-color: rgba(240, 240, 240, 0.5);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 50%;
-  margin: 0 auto;
-}
-
-/* Botones de los filtros */
-.filter-button {
-  flex: 1;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  background-color: #e0e0e0;
-  color: #000;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Efecto hover para los botones */
-.filter-button:hover {
-  background-color: #4b0081;
-  color: white;
-}
-
-/* Estilo para los tags */
-.tag {
-  padding: 5px 25px;
-  border: 1px solid #4b0081;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #4b0081;
-  font-size: 14px;
-  font-weight: normal;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 5px;
-}
-
-/* Efecto hover para los tags */
-.tag:hover {
-  background-color: #4b0081;
-  color: white;
-}
-
-/* Estilo para la tag seleccionada */
-.selected {
-  background-color: #4b0081;
-  color: white;
-  font-weight: bold;
-}
-
-/* Contenedor de las tarjetas */
-.event-cards-container {
-  display: flex;
-  gap: 20px; /* Espaciado entre las tarjetas */
-  overflow-x: auto; /* Permite el desplazamiento horizontal si hay muchas tarjetas */
+.event-section {
   padding: 20px;
-  justify-content: flex-start;
-}
-
-/* Estilo para cada tarjeta */
-.event-card {
-  width: 250px; /* Ancho fijo para las tarjetas */
-  border: 1px solid #ddd; /* Borde de las tarjetas */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Asegura que la imagen no sobresalga */
-  background-color: #fff;
-}
-
-/* Estilo para la imagen de las tarjetas */
-.event-card img {
-  width: 100%; /* La imagen ocupa el 100% del ancho de la tarjeta */
-  height: 150px; /* Establece una altura fija para la imagen */
-  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsión */
-  object-position: center; /* Alinea la imagen al centro si se recorta */
-}
-
-/* Descripción de la tarjeta */
-.event-description {
-  padding: 10px;
   text-align: center;
 }
 
-/* Título de la tarjeta */
-.event-description h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
+.filters,
+.tags {
+  margin: 20px 0;
+}
+
+.filter-button,
+.tag {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-button.selected-parent,
+.filter-button.selected-caregiver,
+.tag.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.event-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.event-card {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-card.flipped {
+  transform: scale(1.2);
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.event-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card-front {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+.card-back {
+  background-color: #f0f0f0;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Estilo para el contenedor del dropdown */
+.tag-container {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+/* Estilo de los botones de tag */
+.tag {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f8f9fa;
   color: #333;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
-/* Lista dentro de la tarjeta */
-.event-description ul {
-  list-style-type: none;
-  padding-left: 0;
+/* Cuando el tag está seleccionado */
+.tag.selected {
+  background-color: #007bff;
+  color: white;
 }
 
-.event-description li {
+/* Estilo del dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Lo coloca justo debajo del botón */
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  border-radius: 5px;
+  width: 100%;
+  display: block; /* Asegura que el dropdown sea visible */
+  z-index: 10;
+}
+
+/* Estilo para cada opción dentro del dropdown */
+.dropdown-option {
+  padding: 8px 15px;
+  cursor: pointer;
   font-size: 14px;
-  color: #777;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover sobre las opciones */
+.dropdown-option:hover {
+  background-color: #007bff;
+  color: white;
 }

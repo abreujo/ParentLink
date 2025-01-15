@@ -1,5 +1,7 @@
 package com.parentlink.service;
 
+import com.parentlink.dto.ChildCreateDto;
+import com.parentlink.dto.UserCreateDto;
 import com.parentlink.model.User;
 import com.parentlink.model.Child;
 import com.parentlink.model.UserType;
@@ -9,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -28,7 +33,30 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User createUser(User user) {
+    public User createUser(UserCreateDto userCreateDto) {
+        User user = new User();
+        user.setSurname(userCreateDto.getSurname());
+        user.setName(userCreateDto.getName());
+        user.setPassword(userCreateDto.getPassword());
+        user.setEmail(userCreateDto.getEmail());
+        user.setPhone(userCreateDto.getPhone());
+        user.setDateOfBirth(userCreateDto.getDateOfBirth());
+        user.setGender(userCreateDto.getGender());
+        user.setLocation(userCreateDto.getLocation());
+        user.setChildren(userCreateDto.getChildren());
+        user.setNumberOfChildren(userCreateDto.getNumberOfChildren());
+
+        List<Child> children = new ArrayList<>();
+        for (ChildCreateDto childCreateDto : userCreateDto.getChildrenList()) {
+            Child child = new Child();
+            child.setName(childCreateDto.getName());
+            child.setGender(childCreateDto.getGender());
+            child.setDateOfBirth(LocalDate.now());;
+            child.setUser(user);  // Vincular al usuario
+            children.add(child);
+        }
+        user.setChildrenList(children);
+
         // Validación antes de guardar
         validateUser(user);
 
@@ -124,7 +152,7 @@ public class UserService {
         }
     }
 
-    public Set<Child> getChildrenByUserId(Long userId) {
+    public List<Child> getChildrenByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return user.getChildrenList();
