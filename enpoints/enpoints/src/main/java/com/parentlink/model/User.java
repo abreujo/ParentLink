@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -51,8 +53,8 @@ public class User {
     @Min(value = 1, message = "Number of children must be greater than 0 for family users")
     private Integer numberOfChildren;  // Número de hijos
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Child> childrenList;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Child> childrenList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Participate> participations;
@@ -174,11 +176,11 @@ public class User {
         this.numberOfChildren = numberOfChildren;
     }
 
-    public Set<Child> getChildrenList() {
+    public List<Child> getChildrenList() {
         return childrenList;
     }
 
-    public void setChildrenList(Set<Child> childrenList) {
+    public void setChildrenList(List<Child> childrenList) {
         this.childrenList = childrenList;
     }
 

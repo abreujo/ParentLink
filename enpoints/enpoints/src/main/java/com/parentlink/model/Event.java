@@ -3,7 +3,7 @@ package com.parentlink.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Event {
@@ -20,21 +20,11 @@ public class Event {
     @Size(max = 500, message = "The event description must not exceed 500 characters")
     private String description;
 
-    @NotBlank(message = "The event image URL cannot be blank")
-    @Pattern(regexp = "^(https?://.*|)$", message = "The image URL must be valid")
+    //@NotBlank(message = "The event image URL cannot be blank")
     private String image;
 
-    @NotNull(message = "Minimum age is required")
-    @Min(value = 0, message = "Minimum age must be 0 or greater")
-    private Integer minAge;
-
-    @NotNull(message = "Maximum age is required")
-    @Min(value = 0, message = "Maximum age must be 0 or greater")
-    @AssertTrue(message = "Maximum age must be greater than or equal to minimum age")
-    private boolean isValidAgeRange() {
-        return maxAge == null || minAge == null || maxAge >= minAge;
-    }
-    private Integer maxAge;
+    @NotNull(message = "Age is required")
+    private String ageBracket;
 
     @NotNull(message = "The event date is required")
     @FutureOrPresent(message = "The event date must be in the present or future")
@@ -46,18 +36,17 @@ public class Event {
     private Location location;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Participate> participations;
+    private List<Participate> participations;
 
     // Constructor vacío
     public Event() {}
 
     // Constructor completo
-    public Event(String name, String description, String image, Integer minAge, Integer maxAge, LocalDateTime date, Location location) {
+    public Event(String name, String description, String image, String age, LocalDateTime date, Location location) {
         this.name = name;
         this.description = description;
         this.image = image;
-        this.minAge = minAge;
-        this.maxAge = maxAge;
+        this.ageBracket = age;
         this.date = date;
         this.location = location;
     }
@@ -95,20 +84,12 @@ public class Event {
         this.image = image;
     }
 
-    public Integer getMinAge() {
-        return minAge;
+    public String getAgeBracket() {
+        return ageBracket;
     }
 
-    public void setMinAge(Integer minAge) {
-        this.minAge = minAge;
-    }
-
-    public Integer getMaxAge() {
-        return maxAge;
-    }
-
-    public void setMaxAge(Integer maxAge) {
-        this.maxAge = maxAge;
+    public void setAgeBracket(String ageBracket) {
+        this.ageBracket = ageBracket;
     }
 
     public LocalDateTime getDate() {
@@ -127,11 +108,11 @@ public class Event {
         this.location = location;
     }
 
-    public Set<Participate> getParticipations() {
+    public List<Participate> getParticipations() {
         return participations;
     }
 
-    public void setParticipations(Set<Participate> participations) {
+    public void setParticipations(List<Participate> participations) {
         this.participations = participations;
     }
 }

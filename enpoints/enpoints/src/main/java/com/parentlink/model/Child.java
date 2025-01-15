@@ -18,12 +18,16 @@ public class Child {
     @NotNull(message = "User is required")
     private User user;
 
+    /*
     @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be a past date")
+     */
     private LocalDate dateOfBirth;
 
+    /*
     @NotNull(message = "Gender is required")
     @Enumerated(EnumType.STRING)
+     */
     private Gender gender;
 
     @NotBlank(message = "Name is required and cannot be blank")

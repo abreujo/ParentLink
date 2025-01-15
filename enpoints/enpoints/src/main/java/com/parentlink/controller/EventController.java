@@ -63,10 +63,19 @@ public class EventController {
         }
     }
 
-    /*
-    @PostMapping("/filter")
-    public List<Event> filterEvents(@RequestBody EventFilterRequest filterRequest) {
-        return eventService.filterEvents(filterRequest);
-    }
-    */
+/*
+JSON EVENT
+
+{
+  "name": "Tech for children",
+  "description": "Introducing children in the TechWorld.",
+  "ageBracket": "6-8",
+  "date": "2025-05-10T10:00:00",
+  "location": {
+    "postalCode": "28001"
+  }
+}
+*
+* */
+
 }
