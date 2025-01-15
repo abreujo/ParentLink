@@ -10,14 +10,34 @@ import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
+<<<<<<< HEAD
+import Eventos from "./pages/Eventos";
+import ParentLink from "./pages/ParentLink";
+
+=======
 import HomeLogIn from "./pages/HomeLogIn";
+>>>>>>> funcionalidadEventos
 
 function App() {
   return (
     <>
       <Router>
+<<<<<<< HEAD
+<<<<<<< HEAD
         <ScrollToTop />
 
+=======
+        <ScrollToTop></ScrollToTop>
+        <div>
+          {" "}
+          {/* <Menu></Menu> */}
+          <ParentLink></ParentLink>
+        </div>
+>>>>>>> frametarjetasdeeventos
+=======
+        <Menu />
+        <ScrollToTop />
+>>>>>>> 585a92047e8823b87e19a480faf37b0d902d0d93
         <Routes>
           {/* Rutas principales */}
           <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
@@ -39,8 +59,17 @@ function App() {
             }
           />
         </Routes>
+<<<<<<< HEAD
+<<<<<<< HEAD
 
         <FooterFrame />
+=======
+        <Eventos></Eventos>
+        <FooterFrame></FooterFrame>
+>>>>>>> frametarjetasdeeventos
+=======
+        <FooterFrame />
+>>>>>>> 585a92047e8823b87e19a480faf37b0d902d0d93
       </Router>
     </>
   );

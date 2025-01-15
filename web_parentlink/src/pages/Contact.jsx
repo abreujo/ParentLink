@@ -17,7 +17,7 @@ function Contact() {
       photo: pacco,
     },
     {
-      name: "Myroslav Palco",
+      name: "Myroslav Palko",
       title: "Diseñador Gráfico",
       email: "Myroslav@example.com",
       phone: "+34 987 654 321",
@@ -36,41 +36,6 @@ function Contact() {
       email: "johel.abreu@gmail.com",
       phone: "+34 613 290 849",
       photo: johel,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
-    },
-    {
-      name: "Milagos Ferreia",
-      title: "Publicidad y Mercadeo",
-      email: "milagros.ferreira@gmail.com",
-      phone: "+34 613 599 340",
-      photo: milagros,
     },
   ];
 

@@ -15,16 +15,12 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <HeroSection />
-
       {/* Description Section */}
       <DescriptionSection />
-
       {/* Event Section */}
       <EventSection />
-
       {/* carrusel Section */}
       <CarruselSection />
-
       <PublicidadSection />
     </div>
   );

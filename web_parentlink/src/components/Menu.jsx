@@ -1,14 +1,23 @@
-// Menu.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Menu.css";
+import RegistrationForm from "../components/RegistrationForm";
 import logo from "../assets/images/Logoparentlinkdefinitivo.png";
 import letras from "../assets/images/letrasparentlink.png";
 
 const Menu = () => {
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const handleOpenRegisterForm = () => {
+    setShowRegisterForm(true);
+  };
+
+  const handleCloseRegisterForm = () => {
+    setShowRegisterForm(false);
+  };
+
   return (
     <nav className="menu">
-      {/* Contenedor del logo y letras al extremo izquierdo */}
       <div className="menu-logo-container">
         <div className="logo-menu">
           <img src={logo} alt="Logo" className="menu-logo" />
@@ -18,24 +27,32 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* Contenedor de enlaces y botones al extremo derecho */}
       <div className="menu-right">
         <div className="menu-links">
-          <a href="#sobre-nosotros" className="menu-link">
+          <Link className="menu-link" to="/">
             Sobre Nosotros
-          </a>
+          </Link>
           <a href="#como-funciona" className="menu-link">
             ¿Cómo Funciona?
           </a>
         </div>
         <div className="menu-buttons">
-          <button className="btn-register">Registrarse</button>
-          {/* Botón de Acceder, envuelto en Link para redirigir a /menu-login */}
-          <Link to="/home-login">
+          <button className="btn-register" onClick={handleOpenRegisterForm}>
+            Registrarse
+          </button>
+          <Link to="/menu-login">
             <button className="btn-login">Acceder</button>
           </Link>
         </div>
       </div>
+
+      {showRegisterForm && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <RegistrationForm onClose={handleCloseRegisterForm} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
