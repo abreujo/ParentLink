@@ -13,10 +13,12 @@ import ComoFunciona from "./components/ComoFunciona";
 import Eventos from "./pages/Eventos";
 import ParentLink from "./pages/ParentLink";
 
+
 function App() {
   return (
     <>
       <Router>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <ScrollToTop />
 
@@ -28,6 +30,10 @@ function App() {
           <ParentLink></ParentLink>
         </div>
 >>>>>>> frametarjetasdeeventos
+=======
+        <Menu />
+        <ScrollToTop />
+>>>>>>> 585a92047e8823b87e19a480faf37b0d902d0d93
         <Routes>
           {/* Rutas principales */}
           <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
@@ -49,12 +55,16 @@ function App() {
           />
         </Routes>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         <FooterFrame />
 =======
         <Eventos></Eventos>
         <FooterFrame></FooterFrame>
 >>>>>>> frametarjetasdeeventos
+=======
+        <FooterFrame />
+>>>>>>> 585a92047e8823b87e19a480faf37b0d902d0d93
       </Router>
     </>
   );

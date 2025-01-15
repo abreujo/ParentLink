@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/QuienesSomos.css";
 import evento from "../assets/images/imagenevento.jpg";
 
-function HomePage() {
+function QuienesSomos() {
   return (
     <div className="container-quienessomos">
       <div className="image-container">
@@ -24,4 +24,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default QuienesSomos;

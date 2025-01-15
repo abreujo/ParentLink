@@ -3,7 +3,7 @@ import "../styles/CardContac.css"; // Archivo CSS para estilos personalizados
 
 const CardContac = ({ name, title, email, phone, photo }) => {
   return (
-    <div className="card">
+    <div className="card-contact">
       <img src={photo} alt={`${name}'s photo`} className="card-photo" />
       <h2>{name}</h2>
       <p className="title">{title}</p>
