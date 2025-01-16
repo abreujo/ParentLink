@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Menu.css";
 import RegistrationForm from "../components/RegistrationForm";
-import logo from "../assets/images/Logoparentlinkdefinitivo.png";
+import logo from "../assets/images/logoparentlinkdefinitivo.png";
 import letras from "../assets/images/letrasparentlink.png";
 
 const Menu = () => {

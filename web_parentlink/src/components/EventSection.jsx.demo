@@ -1,7 +1,8 @@
+//COMPONENTE EVENTO PARA REALIZAR LA LECTURA DE LOS EVENTOS DE LA API RES Y PINTAR LAS TARJETAS DE EVENTOS.
+
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
 import events from "../data/events.json";
-import CreateEventForm from "./EventCreationForm";
 
 const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
@@ -9,8 +10,8 @@ const EventSection = ({ isHomeLogin }) => {
   const [flippedCards, setFlippedCards] = useState({});
   const [activeTag, setActiveTag] = useState(""); // Track which tag is clicked
   const tagRefs = useRef({}); // Refs to detect clicks outside
-  const [showModal, setShowModal] = useState(false); // Estado para controlar el pop-up modal
 
+  // Opciones para cada tag
   const tagOptions = {
     Ubicación: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
@@ -23,9 +24,41 @@ const EventSection = ({ isHomeLogin }) => {
     ],
   };
 
-  // Maneja la apertura y cierre del modal
-  const toggleModal = () => {
-    setShowModal((prev) => !prev);
+  // Maneja el clic en las tags
+  const handleTagClick = (tag) => {
+    setActiveTag((prevTag) => (prevTag === tag ? "" : tag)); // Alterna la visibilidad del dropdown
+  };
+
+  // Maneja la selección de una opción dentro de un dropdown
+  const handleOptionSelect = (tag, option) => {
+    setSelectedTag(option); // Selecciona la opción
+    setActiveTag(""); // Cierra el dropdown después de la selección
+  };
+
+  // Detectar clics fuera de los dropdowns
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        !Object.values(tagRefs.current).some(
+          (ref) => ref && ref.contains(e.target)
+        )
+      ) {
+        setActiveTag(""); // Cierra el dropdown si se hace clic fuera
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  // Maneja el clic en una tarjeta para girarla
+  const handleCardClick = (index) => {
+    setFlippedCards((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
   };
 
   return (
@@ -34,7 +67,12 @@ const EventSection = ({ isHomeLogin }) => {
       <div className="filters">
         {isHomeLogin ? (
           <>
-            <button className="filter-button" onClick={toggleModal}>
+            <button
+              className={`filter-button ${
+                selectedOption === "create" ? "selected-create" : ""
+              }`}
+              onClick={() => setSelectedOption("create")}
+            >
               Crea tu evento
             </button>
             <button
@@ -68,33 +106,42 @@ const EventSection = ({ isHomeLogin }) => {
         )}
       </div>
 
-      {/* Mostrar modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={toggleModal}>
+      <div className="tags">
+        {["Ubicación", "Edad", "Tipo de evento"].map((tag) => (
           <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()} // Evitar cerrar al hacer clic dentro del modal
+            key={tag}
+            className="tag-container"
+            ref={(el) => (tagRefs.current[tag] = el)}
           >
-            <button className="modal-close" onClick={toggleModal}>
-              ✖
+            <button
+              className={`tag ${activeTag === tag ? "selected" : ""}`}
+              onClick={() => handleTagClick(tag)}
+            >
+              {tag}
             </button>
-            <CreateEventForm />
+            {activeTag === tag && (
+              <ul className="dropdown-menu">
+                {tagOptions[tag].map((option) => (
+                  <li
+                    key={option}
+                    className="dropdown-option"
+                    onClick={() => handleOptionSelect(tag, option)}
+                  >
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-        </div>
-      )}
+        ))}
+      </div>
 
-      {/* Tarjetas de eventos */}
       <div className="event-cards-container">
         {events.map((event, index) => (
           <div
             key={index}
             className={`event-card ${flippedCards[index] ? "flipped" : ""}`}
-            onClick={() =>
-              setFlippedCards((prev) => ({
-                ...prev,
-                [index]: !prev[index],
-              }))
-            }
+            onClick={() => handleCardClick(index)}
           >
             <div className="card-inner">
               <div className="card-front">

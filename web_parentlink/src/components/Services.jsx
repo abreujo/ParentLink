@@ -1,6 +1,6 @@
 import React from "react";
-import evento from "../assets/images/eventos.jpg";
-import evento2 from "../assets/images/eventos2.jpg";
+import evento from "../assets/images/Eventos.jpg";
+import evento2 from "../assets/images/Eventos2.jpg";
 import StyledList from "./StyledList";
 
 const Services = () => {

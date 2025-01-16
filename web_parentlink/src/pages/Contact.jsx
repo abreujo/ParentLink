@@ -2,9 +2,9 @@
 import React from "react";
 import CardContac from "../components/CardContac";
 import pacco from "../assets/images/Pacco.png";
-import myroslav from "../assets/images/myroslav.png";
-import david from "../assets/images/david.png";
-import johel from "../assets/images/johel.jpg";
+import myroslav from "../assets/images/Myroslav.png";
+import david from "../assets/images/David.png";
+import johel from "../assets/images/Johel.jpg";
 import milagros from "../assets/images/milagros.jpg";
 
 function Contact() {
