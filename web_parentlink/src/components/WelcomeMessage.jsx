@@ -6,10 +6,6 @@ const WelcomeMessage = ({ username }) => {
   return (
     <div className="welcome-message">
       <h1>Hola, {username}!</h1>
-      <p>
-        ¡Gracias por registrarte en nuestra página! Estamos encantados de
-        tenerte aquí.
-      </p>
     </div>
   );
 };
