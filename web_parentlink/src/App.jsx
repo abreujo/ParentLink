@@ -11,6 +11,8 @@ import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./components/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
+import UserSystemList from "./components/UserSystemList";
+import EventList from "./components/EventsList";
 
 function App() {
   return (
@@ -42,7 +44,21 @@ function App() {
           {/* Nueva ruta para HomeLogIn */}
         </Routes>
 
+        {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
         <FooterFrame />
+
+        {/* COMPONENTE USERSSYSTEM LIST QUE SOLICITA A LA APIREST LISTADO DE USUARIOS DE SISTEMA 
+        Y LOS COLCA EN UN LISTA
+        ESTO SE DEBE AJUSTAR..
+        */}
+        <UserSystemList />
+
+        {/* COMPONENTE EVENT LIST PARA LEER LA LISTA DE EVENTOS DE LA APIREST Y USAR EL COMPONENTE CAREVENTOS
+        PARA MOSTRARTAR..
+
+        ESTO SE DEBE AJUSTAR AL COMPOENENTE TARJETA QUE DISEÑO DAVID EN EL NUEVO DISEÑO
+        */}
+        <EventList />
       </Router>
     </>
   );

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @GetMapping("/")
     String  getHome() {
-        return "Welcome to the Home";
+        return "API RES de Parent Link";
     }
 }

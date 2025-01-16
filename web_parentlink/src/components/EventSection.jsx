@@ -1,3 +1,5 @@
+//COMPONENTE EVENTO PARA REALIZAR LA LECTURA DE LOS EVENTOS DE LA API RES Y PINTAR LAS TARJETAS DE EVENTOS.
+
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
 import events from "../data/events.json";
