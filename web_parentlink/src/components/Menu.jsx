@@ -29,9 +29,9 @@ const Menu = () => {
 
       <div className="menu-right">
         <div className="menu-links">
-          <a href="#sobre-nosotros" className="menu-link">
+          <Link className="menu-link" to="/">
             Sobre Nosotros
-          </a>
+          </Link>
           <a href="#como-funciona" className="menu-link">
             ¿Cómo Funciona?
           </a>
@@ -40,7 +40,7 @@ const Menu = () => {
           <button className="btn-register" onClick={handleOpenRegisterForm}>
             Registrarse
           </button>
-          <Link to="/menu-login">
+          <Link to="/home-login">
             <button className="btn-login">Acceder</button>
           </Link>
         </div>
