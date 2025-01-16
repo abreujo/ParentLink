@@ -76,3 +76,14 @@ public class Location {
         this.events = events;
     }
 }
+/*
+AGREGAR POR METODO POS A LOCATION
+
+http://localhost:8081/api/locations
+
+{
+  "postalCode": "29014",
+  "name": "Malaga"
+}
+
+* */

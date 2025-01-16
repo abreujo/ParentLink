@@ -62,20 +62,24 @@ public class EventController {
             return ResponseEntity.notFound().build();  // Evento no encontrado
         }
     }
-
+}
 /*
 JSON EVENT
+
+http://localhost:8081/api/events
+
+METODO POST PARA CREAR UN EVENTO
+
+  DEBE ESTAR CREADA LA UBICACION EN LA BD
 
 {
   "name": "Tech for children",
   "description": "Introducing children in the TechWorld.",
+  "image": "Imagen",
   "ageBracket": "6-8",
   "date": "2025-05-10T10:00:00",
   "location": {
-    "postalCode": "28001"
+    "postalCode": "29014"
   }
 }
-*
-* */
-
-}
+*/
