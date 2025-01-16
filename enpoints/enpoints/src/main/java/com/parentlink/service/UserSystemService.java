@@ -1,5 +1,6 @@
 package com.parentlink.service;
 
+import com.parentlink.dto.UserSystemDto;
 import com.parentlink.model.UserSystem;
 import com.parentlink.repository.UserSystemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserSystemService {
@@ -36,8 +38,12 @@ public class UserSystemService {
         return Optional.empty();
     }
 
-    //Implementacion para leer los usuarios registrados
-    public List<UserSystem> getAllUsers() {
-        return userSystemRepository.findAll();
+    //Implementacion para leer los usuarios registrados con un DTO para resguardar el Password
+    public List<UserSystemDto> getAllUsers() {
+        // Obtiene todos los usuarios de la base de datos
+        return userSystemRepository.findAll()
+                .stream()
+                .map(user -> new UserSystemDto(user.getId(), user.getUsername())) // Mapea al DTO incluyendo el ID
+                .collect(Collectors.toList());
     }
 }
