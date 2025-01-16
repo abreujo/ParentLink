@@ -34,3 +34,5 @@ build/
 
 ### Configuration ###
 application.properties
+
+*.class
