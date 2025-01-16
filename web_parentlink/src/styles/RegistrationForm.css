@@ -32,12 +32,14 @@ h2 {
     font-size: 1.5rem;
     color: #7D2181;
     cursor: pointer;
+    transition:
+        transform 0.5s ease-in-out,
+        color 0.8s ease-in-out;
 }
 
 .close-button:hover {
     color: #4b0081;
-    transform: scale(1.2);
-    transition: 0.2s ease-in-out;
+    transform: scale(1.3);
 }
 
 .form-group {
@@ -81,6 +83,7 @@ input:focus {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+    transform-origin: center;
     background-color: #7D2181;
     color: #FFF;
     border: none;
@@ -88,14 +91,16 @@ input:focus {
     border-radius: 8px;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: background-color 0.3s ease,
-        transform 0.2s ease;
+    transition:
+        transform 0.5s ease,
+        background-color 0.8s ease,
+        color 0.5s ease;
 }
 
 .show-password-button:hover {
-    background-color: #4b0081;;
+    background-color: #4b0081;
+    transform: translateY(-50%) scale(1.1);
 }
-
 .error-message {
     color: red;
     font-size: 0.9rem;
@@ -113,11 +118,12 @@ input:focus {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
 .submit-button:hover {
     background-color: #4b0081;
+    transform: scale(1.05);
 }
 
 .submit-button:disabled {

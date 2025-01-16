@@ -1,16 +1,16 @@
 import React, { useState } from 'react'; 
 import '../styles/RegistrationForm.css'; 
 
-function RegistrationForm({ onClose }) {  // Додаємо проп для закриття модального вікна
+function RegistrationForm({ onClose }) {  // Prop for closing the modal
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
         password: '',
         confirmPassword: '',
     });
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // Стан для відображення пароля
+    const [successMessage, setSuccessMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // State for password visibility
 
     const handleChange = (e) => {
         setFormData({
@@ -19,23 +19,40 @@ function RegistrationForm({ onClose }) {  // Додаємо проп для за
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Перевірка правильності email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(formData.email)) {
-            setErrorMessage('El formato del correo electrónico no es válido');
-            return;
-        }
 
         if (formData.password !== formData.confirmPassword) {
             setErrorMessage('Las contraseñas no coinciden');
             return;
         }
 
-        console.log('Form Data Submitted:', formData);
-        setErrorMessage('');
+        try {
+            const response = await fetch('http://localhost:8081/api/usersystem/register', {  // Replace with your endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,
+                }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('User successfully registered:', result);
+                setSuccessMessage('Usuario registrado con éxito');
+                setErrorMessage('');
+                setFormData({ username: '', password: '', confirmPassword: '' }); // Reset the form
+            } else {
+                const errorData = await response.json();
+                setErrorMessage(errorData.message || 'Error al registrar usuario');
+            }
+        } catch (error) {
+            console.error('Error while sending data:', error);
+            setErrorMessage('Error en el servidor');
+        }
     };
 
     const togglePasswordVisibility = () => {
@@ -45,7 +62,7 @@ function RegistrationForm({ onClose }) {  // Додаємо проп для за
     return (
         <div className="registration-form-container">
             <form className="registration-form" onSubmit={handleSubmit}>
-                {/* Кнопка закриття */}
+                {/* Close button */}
                 <button className="close-button" type="button" onClick={onClose}>
                     ✖
                 </button>
@@ -57,18 +74,6 @@ function RegistrationForm({ onClose }) {  // Додаємо проп для за
                         id="username"
                         name="username"
                         value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
                         onChange={handleChange}
                         required
                     />
@@ -108,6 +113,7 @@ function RegistrationForm({ onClose }) {  // Додаємо проп для за
                 </div>
 
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {successMessage && <p className="success-message">{successMessage}</p>}
 
                 <button className="submit-button" type="submit">Registrarse</button>
             </form>
