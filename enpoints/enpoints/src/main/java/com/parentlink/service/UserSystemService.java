@@ -40,8 +40,10 @@ public class UserSystemService {
 
     //Implementacion para leer los usuarios registrados con un DTO para resguardar el Password
     public List<UserSystemDto> getAllUsers() {
-        return userSystemRepository.findAll().stream()
-                .map(user -> new UserSystemDto(user.getUsername()))
+        // Obtiene todos los usuarios de la base de datos
+        return userSystemRepository.findAll()
+                .stream()
+                .map(user -> new UserSystemDto(user.getId(), user.getUsername())) // Mapea al DTO incluyendo el ID
                 .collect(Collectors.toList());
     }
 }
