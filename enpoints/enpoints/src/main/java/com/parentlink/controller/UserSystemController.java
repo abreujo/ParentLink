@@ -2,6 +2,7 @@ package com.parentlink.controller;
 
 
 import com.parentlink.dto.ErrorResponseDto;
+import com.parentlink.dto.UserSystemDto;
 import com.parentlink.model.UserSystem;
 import com.parentlink.service.UserSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserSystemController {
     public ResponseEntity<?> getAllUsers() {
         try {
             // Llama al servicio para obtener todos los usuarios
-            List<UserSystem> users = userSystemService.getAllUsers();
+            List<UserSystemDto> users = userSystemService.getAllUsers();
             return ResponseEntity.ok(users);
         } catch (Exception e) {
             // Devuelve un error en caso de que algo falle

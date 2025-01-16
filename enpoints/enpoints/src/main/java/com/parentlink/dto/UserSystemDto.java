@@ -3,6 +3,7 @@ package com.parentlink.dto;
 public class UserSystemDto {
     private String username;
 
+
     // Constructor
     public UserSystemDto(String username) {
         this.username = username;
