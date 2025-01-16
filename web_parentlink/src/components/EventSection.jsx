@@ -1,41 +1,44 @@
-//COMPONENTE EVENTO PARA REALIZAR LA LECTURA DE LOS EVENTOS DE LA API RES Y PINTAR LAS TARJETAS DE EVENTOS.
-
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
-import events from "../data/events.json";
+import EventList from "./EventsList";
 
 const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
-  const [activeTag, setActiveTag] = useState(""); // Track which tag is clicked
-  const tagRefs = useRef({}); // Refs to detect clicks outside
+  const [activeTag, setActiveTag] = useState(""); // Controla qué dropdown está activo
+  const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
 
-  // Opciones para cada tag
+  // Opciones para los menús desplegables
   const tagOptions = {
-    Ubicación: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
     "Tipo de evento": [
       "Naturaleza",
       "Deporte",
       "Aventura",
       "Fiesta",
-      "Convivencia",
+      "Cultura",
+      "Tecnología",
+    ],
+    Ubicación: [
+      "Madrid",
+      "Barcelona",
+      "Sevilla",
+      "Valencia",
+      "Granada",
+      "Bilbao",
     ],
   };
 
-  // Maneja el clic en las tags
   const handleTagClick = (tag) => {
-    setActiveTag((prevTag) => (prevTag === tag ? "" : tag)); // Alterna la visibilidad del dropdown
+    setActiveTag((prevTag) => (prevTag === tag ? "" : tag));
   };
 
-  // Maneja la selección de una opción dentro de un dropdown
   const handleOptionSelect = (tag, option) => {
-    setSelectedTag(option); // Selecciona la opción
-    setActiveTag(""); // Cierra el dropdown después de la selección
+    setSelectedTag(option); // Guarda la opción seleccionada
+    setActiveTag(""); // Cierra el dropdown
   };
 
-  // Detectar clics fuera de los dropdowns
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -43,7 +46,7 @@ const EventSection = ({ isHomeLogin }) => {
           (ref) => ref && ref.contains(e.target)
         )
       ) {
-        setActiveTag(""); // Cierra el dropdown si se hace clic fuera
+        setActiveTag(""); // Cierra cualquier dropdown abierto
       }
     };
 
@@ -52,14 +55,6 @@ const EventSection = ({ isHomeLogin }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  // Maneja el clic en una tarjeta para girarla
-  const handleCardClick = (index) => {
-    setFlippedCards((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
 
   return (
     <section className="event-section">
@@ -104,64 +99,40 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
           </>
         )}
-      </div>
 
-      <div className="tags">
-        {["Ubicación", "Edad", "Tipo de evento"].map((tag) => (
-          <div
-            key={tag}
-            className="tag-container"
-            ref={(el) => (tagRefs.current[tag] = el)}
-          >
-            <button
-              className={`tag ${activeTag === tag ? "selected" : ""}`}
-              onClick={() => handleTagClick(tag)}
+        {/* Menús desplegables para filtros */}
+        <div className="dropdown-filters">
+          {["Edad", "Tipo de evento", "Ubicación"].map((tag) => (
+            <div
+              key={tag}
+              className="tag-container"
+              ref={(el) => (tagRefs.current[tag] = el)}
             >
-              {tag}
-            </button>
-            {activeTag === tag && (
-              <ul className="dropdown-menu">
-                {tagOptions[tag].map((option) => (
-                  <li
-                    key={option}
-                    className="dropdown-option"
-                    onClick={() => handleOptionSelect(tag, option)}
-                  >
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className="event-cards-container">
-        {events.map((event, index) => (
-          <div
-            key={index}
-            className={`event-card ${flippedCards[index] ? "flipped" : ""}`}
-            onClick={() => handleCardClick(index)}
-          >
-            <div className="card-inner">
-              <div className="card-front">
-                <img src={"/" + event.img} alt={event.title} />
-                <div className="event-description">
-                  <h3>{event.title}</h3>
-                  <p>Haga clic para ver más</p>
-                </div>
-              </div>
-              <div className="card-back">
-                <h3>{event.title}</h3>
-                <ul>
-                  {event.details.map((detail, idx) => (
-                    <li key={idx}>{detail}</li>
+              <button
+                className={`tag ${activeTag === tag ? "selected" : ""}`}
+                onClick={() => handleTagClick(tag)}
+              >
+                {tag}
+              </button>
+              {activeTag === tag && (
+                <ul className="dropdown-menu">
+                  {tagOptions[tag].map((option) => (
+                    <li
+                      key={option}
+                      className="dropdown-option"
+                      onClick={() => handleOptionSelect(tag, option)}
+                    >
+                      {option}
+                    </li>
                   ))}
                 </ul>
-              </div>
+              )}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* Aquí añadimos el componente Eventlist que renderiza las tarjetas*/}
+
+        <EventList></EventList>
       </div>
     </section>
   );
