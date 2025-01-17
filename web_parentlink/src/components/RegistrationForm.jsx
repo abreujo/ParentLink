@@ -22,8 +22,16 @@ function RegistrationForm({ onClose }) {  // Prop for closing the modal
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Local validation
+        if (!formData.username.trim()) {
+            setErrorMessage('El nombre de usuario es obligatorio');
+            setSuccessMessage('');
+            return;
+        }
+
         if (formData.password !== formData.confirmPassword) {
             setErrorMessage('Las contraseñas no coinciden');
+            setSuccessMessage('');
             return;
         }
 
@@ -43,15 +51,17 @@ function RegistrationForm({ onClose }) {  // Prop for closing the modal
                 const result = await response.json();
                 console.log('User successfully registered:', result);
                 setSuccessMessage('Usuario registrado con éxito');
-                setErrorMessage('');
+                setErrorMessage(''); // Clear error message
                 setFormData({ username: '', password: '', confirmPassword: '' }); // Reset the form
             } else {
                 const errorData = await response.json();
                 setErrorMessage(errorData.message || 'Error al registrar usuario');
+                setSuccessMessage('');
             }
         } catch (error) {
             console.error('Error while sending data:', error);
             setErrorMessage('Error en el servidor');
+            setSuccessMessage('');
         }
     };
 
@@ -88,7 +98,6 @@ function RegistrationForm({ onClose }) {  // Prop for closing the modal
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            required
                         />
                         <button
                             type="button"
@@ -108,7 +117,6 @@ function RegistrationForm({ onClose }) {  // Prop for closing the modal
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
-                        required
                     />
                 </div>
 
