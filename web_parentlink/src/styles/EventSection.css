@@ -16,12 +16,22 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.filter-button {
+  background-color: #a294f9; /* Color predeterminado */
+  color: white; /* Color del texto */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave para cambios */
+}
 
-.filter-button.selected-parent,
-.filter-button.selected-caregiver,
-.tag.selected {
-  background-color: #007bff;
-  color: white;
+.filter-button:hover {
+  background-color: #7d2181; /* Color al pasar el ratón */
+}
+
+.filter-button:active {
+  background-color: #4b0081; /* Color al hacer clic */
 }
 
 .event-cards-container {
@@ -131,7 +141,7 @@
   position: absolute;
   top: 100%; /* Lo coloca justo debajo del botón */
   left: 0;
-  background-color: white;
+  background-color: #f0f0f0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   list-style: none;
   padding: 5px 0;

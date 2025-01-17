@@ -64,7 +64,7 @@ const EventSection = ({ isHomeLogin }) => {
           <>
             <button
               className={`filter-button ${
-                selectedOption === "create" ? "selected-create" : ""
+                selectedOption === "create" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("create")}
             >
@@ -72,7 +72,7 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
             <button
               className={`filter-button ${
-                selectedOption === "join" ? "selected-join" : ""
+                selectedOption === "join" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("join")}
             >
@@ -83,7 +83,7 @@ const EventSection = ({ isHomeLogin }) => {
           <>
             <button
               className={`filter-button ${
-                selectedOption === "parent" ? "selected-parent" : ""
+                selectedOption === "parent" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("parent")}
             >
@@ -91,7 +91,7 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
             <button
               className={`filter-button ${
-                selectedOption === "caregiver" ? "selected-caregiver" : ""
+                selectedOption === "caregiver" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("caregiver")}
             >
