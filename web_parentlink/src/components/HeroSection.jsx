@@ -1,7 +1,7 @@
 // src/components/HeroSection.jsx
 import React from "react";
 import "../styles/HeroSection.css";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/Logo.png";
 
 const HeroSection = () => {
   return (

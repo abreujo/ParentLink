@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
+
 import EventList from "./EventsList";
+import events from "../data/events.json";
+import CreateEventForm from "./EventCreationForm";
 
 const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
@@ -10,6 +13,10 @@ const EventSection = ({ isHomeLogin }) => {
   const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
 
   // Opciones para los menús desplegables
+  const [activeTag, setActiveTag] = useState(""); // Track which tag is clicked
+  const tagRefs = useRef({}); // Refs to detect clicks outside
+  const [showModal, setShowModal] = useState(false); // Estado para controlar el pop-up modal
+
   const tagOptions = {
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
     "Tipo de evento": [
@@ -56,18 +63,18 @@ const EventSection = ({ isHomeLogin }) => {
     };
   }, []);
 
+  // Maneja la apertura y cierre del modal
+  const toggleModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   return (
     <section className="event-section">
       <h2>{isHomeLogin ? "Eventos" : "Encuentra tu evento"}</h2>
       <div className="filters">
         {isHomeLogin ? (
           <>
-            <button
-              className={`filter-button ${
-                selectedOption === "create" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("create")}
-            >
+            <button className="filter-button" onClick={toggleModal}>
               Crea tu evento
             </button>
             <button
