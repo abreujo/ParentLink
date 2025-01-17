@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import CardEvento from "./CarEventos";
+import "../styles/EventSection.css"; // Asegúrate de que este archivo tenga los estilos para las tarjetas.
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
+  const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
 
   useEffect(() => {
     // Realizar la solicitud GET a la API
@@ -22,63 +23,51 @@ const EventList = () => {
       });
   }, []); // El array vacío asegura que la solicitud se haga solo una vez
 
+  const handleCardClick = (index) => {
+    setFlippedCards((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
+
   return (
-    // LUEGO DE TENER LA INFORMACION DE TODOS LOS EVENTOS LOS PINTAMOS EN LA TARJETA
     <div>
-      <h1 className="titulo-eventos">Proximos Eventos</h1>
       {error && <p>Error: {error}</p>}
-      <div className="div-eventos">
-        {events.map((event) => (
-          <CardEvento
-            key={event.id}
-            name={event.name}
-            descripcion={event.description}
-            /* CAMBIAR CUANDO SE TENGA LA IMAGEN CARGADA DE LOS EVENTOS */
-            photo={`https://picsum.photos/id/${event.id + 10}/300/200`}
-            /* photo={card.photo} */
-            rango={event.ageBracket}
-            ciudad={`${event.location.name},  ${event.location.country} (Postal Code: `}
-            postalcode={`${event.location.postalCode}`}
-          />
+      <div className="event-cards-container">
+        {events.map((event, index) => (
+          <div
+            key={index}
+            className={`event-card ${flippedCards[index] ? "flipped" : ""}`}
+            onClick={() => handleCardClick(index)}
+          >
+            <div className="card-inner">
+              <div className="card-front">
+                <img
+                  src={`https://picsum.photos/id/${event.id + 10}/300/200`}
+                  alt={event.name}
+                />
+                <div className="event-description">
+                  <h3>{event.name}</h3>
+                  <p>Haga clic para ver más</p>
+                </div>
+              </div>
+              <div className="card-back">
+                <h3>{event.name}</h3>
+                <p>{event.description}</p>
+                <ul>
+                  <li>
+                    Ubicación: {event.location.name}, {event.location.country}
+                  </li>
+                  <li>Código Postal: {event.location.postalCode}</li>
+                  <li>Rango de Edad: {event.ageBracket}</li>
+                  <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </div>
-
-    //VERIFICAR CODIGO Y LUEGO ELIMINAR, GARANTIZAR EL USO DE TODOS LOS CAMPOS
-
-    /*   <div>
-      <h1>Lista de Eventos</h1>
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            <h3>
-              {event.id}
-              {event.name}
-            </h3>
-            <p>
-              <strong>Description:</strong> {event.description}
-            </p>
-            <p>
-              <strong>Age Bracket:</strong> {event.ageBracket}
-            </p>
-            <p>
-              <strong>Date:</strong> {new Date(event.date).toLocaleString()}
-            </p>
-            <p>
-              <strong>Location:</strong> {event.location.name},{" "}
-              {event.location.country} (Postal Code: {event.location.postalCode}
-              )
-            </p>
-            <img
-              src={`https://picsum.photos/id/${event.id + 10}/300/200`}
-              alt={event.name}
-              width="200"
-            />
-          </li>
-        ))}
-      </ul>
-    </div> */
   );
 };
 
