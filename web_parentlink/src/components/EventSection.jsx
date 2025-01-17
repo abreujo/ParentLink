@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
+
+import EventList from "./EventsList";
 import events from "../data/events.json";
 import CreateEventForm from "./EventCreationForm";
 
@@ -7,21 +9,57 @@ const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
-  const [activeTag, setActiveTag] = useState(""); // Track which tag is clicked
-  const tagRefs = useRef({}); // Refs to detect clicks outside
+  const [activeTag, setActiveTag] = useState(""); // Controla qué dropdown está activo
+  const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
+
+  // Opciones para los menús desplegables
   const [showModal, setShowModal] = useState(false); // Estado para controlar el pop-up modal
 
   const tagOptions = {
-    Ubicación: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
     "Tipo de evento": [
       "Naturaleza",
       "Deporte",
       "Aventura",
       "Fiesta",
-      "Convivencia",
+      "Cultura",
+      "Tecnología",
+    ],
+    Ubicación: [
+      "Madrid",
+      "Barcelona",
+      "Sevilla",
+      "Valencia",
+      "Granada",
+      "Bilbao",
     ],
   };
+
+  const handleTagClick = (tag) => {
+    setActiveTag((prevTag) => (prevTag === tag ? "" : tag));
+  };
+
+  const handleOptionSelect = (tag, option) => {
+    setSelectedTag(option); // Guarda la opción seleccionada
+    setActiveTag(""); // Cierra el dropdown
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        !Object.values(tagRefs.current).some(
+          (ref) => ref && ref.contains(e.target)
+        )
+      ) {
+        setActiveTag(""); // Cierra cualquier dropdown abierto
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   // Maneja la apertura y cierre del modal
   const toggleModal = () => {
@@ -39,7 +77,7 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
             <button
               className={`filter-button ${
-                selectedOption === "join" ? "selected-join" : ""
+                selectedOption === "join" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("join")}
             >
@@ -50,7 +88,7 @@ const EventSection = ({ isHomeLogin }) => {
           <>
             <button
               className={`filter-button ${
-                selectedOption === "parent" ? "selected-parent" : ""
+                selectedOption === "parent" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("parent")}
             >
@@ -58,7 +96,7 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
             <button
               className={`filter-button ${
-                selectedOption === "caregiver" ? "selected-caregiver" : ""
+                selectedOption === "caregiver" ? "selected" : ""
               }`}
               onClick={() => setSelectedOption("caregiver")}
             >
@@ -66,55 +104,40 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
           </>
         )}
-      </div>
 
-      {/* Mostrar modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={toggleModal}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()} // Evitar cerrar al hacer clic dentro del modal
-          >
-            <button className="modal-close" onClick={toggleModal}>
-              ✖
-            </button>
-            <CreateEventForm />
-          </div>
-        </div>
-      )}
-
-      {/* Tarjetas de eventos */}
-      <div className="event-cards-container">
-        {events.map((event, index) => (
-          <div
-            key={index}
-            className={`event-card ${flippedCards[index] ? "flipped" : ""}`}
-            onClick={() =>
-              setFlippedCards((prev) => ({
-                ...prev,
-                [index]: !prev[index],
-              }))
-            }
-          >
-            <div className="card-inner">
-              <div className="card-front">
-                <img src={"/" + event.img} alt={event.title} />
-                <div className="event-description">
-                  <h3>{event.title}</h3>
-                  <p>Haga clic para ver más</p>
-                </div>
-              </div>
-              <div className="card-back">
-                <h3>{event.title}</h3>
-                <ul>
-                  {event.details.map((detail, idx) => (
-                    <li key={idx}>{detail}</li>
+        {/* Menús desplegables para filtros */}
+        <div className="dropdown-filters">
+          {["Edad", "Tipo de evento", "Ubicación"].map((tag) => (
+            <div
+              key={tag}
+              className="tag-container"
+              ref={(el) => (tagRefs.current[tag] = el)}
+            >
+              <button
+                className={`tag ${activeTag === tag ? "selected" : ""}`}
+                onClick={() => handleTagClick(tag)}
+              >
+                {tag}
+              </button>
+              {activeTag === tag && (
+                <ul className="dropdown-menu">
+                  {tagOptions[tag].map((option) => (
+                    <li
+                      key={option}
+                      className="dropdown-option"
+                      onClick={() => handleOptionSelect(tag, option)}
+                    >
+                      {option}
+                    </li>
                   ))}
                 </ul>
-              </div>
+              )}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* Aquí añadimos el componente Eventlist que renderiza las tarjetas*/}
+
+        <EventList></EventList>
       </div>
     </section>
   );

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Tech for children",
+    "description": "Introducing children in the TechWorld.",
+    "image": "Imagen",
+    "ageBracket": "6-8",
+    "date": "2025-05-10T10:00:00",
+    "location": {
+      "postalCode": "29014",
+      "name": "Málaga",
+      "country": "Spain"
+    },
+    "participations": []
+  },
+  {
+    "id": 2,
+    "name": "en el campo",
+    "description": "Introducing children in the TechWorld.",
+    "image": "Imagen",
+    "ageBracket": "6-8",
+    "date": "2025-05-10T10:00:00",
+    "location": {
+      "postalCode": "29014",
+      "name": "Málaga",
+      "country": "Spain"
+    },
+    "participations": []
+  }
+]

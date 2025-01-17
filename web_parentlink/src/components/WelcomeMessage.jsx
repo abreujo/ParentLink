@@ -5,7 +5,7 @@ import "../styles/WelcomeMessage.css";
 const WelcomeMessage = ({ username }) => {
   return (
     <div className="welcome-message">
-      <h1>Hola, {username}!</h1>
+      <h1>Ahora formas parte de la comunidad Parentlink!</h1>
     </div>
   );
 };

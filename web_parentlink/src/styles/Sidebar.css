@@ -41,18 +41,28 @@
   transition: background-color 0.3s ease;
 }
 
-.menu-item:hover {
-  background-color: #7d2181; /* Cambia a color lila oscuro al pasar el ratón */
+.filter-button {
+  background-color: #a294f9; /* Color predeterminado para todos los botones */
+  color: white; /* Color del texto */
+  border: none; /* Opcional: Elimina bordes */
+  padding: 10px 20px; /* Ajusta el espacio interior */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a puntero */
+  transition: background-color 0.3s ease; /* Transición suave */
 }
 
-.menu-item.selected {
-  background-color: #a294f9; /* Mantén el color azul celeste cuando esté seleccionado */
-  color: white;
+.filter-button:hover {
+  background-color: #7d2181; /* Color al pasar el ratón */
 }
 
-.menu-item h3 {
-  margin: 0;
+.filter-button:active {
+  background-color: #4b0081; /* Color al hacer clic */
 }
+
+.filter-button.selected {
+  border: 2px solid white; /* Opcional: Marca adicional para botones seleccionados */
+}
+
 .user-icon {
   width: 20px; /* Tamaño reducido del icono */
   height: 20px; /* Tamaño reducido del icono */
