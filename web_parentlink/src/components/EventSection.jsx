@@ -13,8 +13,6 @@ const EventSection = ({ isHomeLogin }) => {
   const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
 
   // Opciones para los menús desplegables
-  const [activeTag, setActiveTag] = useState(""); // Track which tag is clicked
-  const tagRefs = useRef({}); // Refs to detect clicks outside
   const [showModal, setShowModal] = useState(false); // Estado para controlar el pop-up modal
 
   const tagOptions = {
