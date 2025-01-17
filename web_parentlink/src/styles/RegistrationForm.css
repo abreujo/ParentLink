@@ -1,0 +1,132 @@
+.registration-form-container {
+    background-color: #F5EFFF;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.registration-form {
+    background-color: #E5D9F2;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+
+h2 {
+    text-align: center;
+    color: #7D2181;
+    margin-bottom: 1.5rem;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #7D2181;
+    cursor: pointer;
+    transition:
+        transform 0.5s ease-in-out,
+        color 0.8s ease-in-out;
+}
+
+.close-button:hover {
+    color: #4b0081;
+    transform: scale(1.3);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #7D2181;
+}
+
+input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #CDC1FF;
+    border-radius: 8px;
+    background-color: #FFF;
+    color: #333;
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: #A294F9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(162, 148, 249, 0.5);
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.show-password-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: center;
+    background-color: #7D2181;
+    color: #FFF;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition:
+        transform 0.5s ease,
+        background-color 0.8s ease,
+        color 0.5s ease;
+}
+
+.show-password-button:hover {
+    background-color: #4b0081;
+    transform: translateY(-50%) scale(1.1);
+}
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #7D2181;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+.submit-button:hover {
+    background-color: #4b0081;
+    transform: scale(1.05);
+}
+
+.submit-button:disabled {
+    background-color: #CDC1FF;
+    cursor: not-allowed;
+}

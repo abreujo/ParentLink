@@ -1,0 +1,43 @@
+/* Estilos generales */
+.container-quienessomos {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2%;
+  /*height: 100vh; /* Establece que el contenedor ocupe toda la altura de la ventana */
+}
+
+.text-container {
+  background-color: #f0f8ff;
+  border-radius: 20%;
+}
+.image-container {
+  flex: 1;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+}
+
+.large-image {
+  width: 80%; /* Ajusta el tamaño de la imagen, 80% del contenedor */
+  height: auto;
+  border-radius: 10px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.text-container {
+  flex: 1;
+  padding: 20px;
+  text-align: justify;
+  font-size: 1.3rem;
+}
+
+h1 {
+  font-size: 48px; /* Establece un tamaño grande para el texto */
+  font-weight: bold;
+  color: #333; /* Cambia el color del texto si es necesario */
+}

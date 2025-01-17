@@ -1,0 +1,219 @@
+/* Estilos originales */
+.event-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.filters,
+.tags {
+  margin: 20px 0;
+}
+
+.filter-button,
+.tag {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.filter-button {
+  background-color: #a294f9; /* Color predeterminado */
+  color: white; /* Color del texto */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave para cambios */
+}
+
+.filter-button:hover {
+  background-color: #7d2181; /* Color al pasar el ratón */
+}
+
+.filter-button:active {
+  background-color: #4b0081; /* Color al hacer clic */
+}
+
+.event-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.event-card {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease,
+    z-index 0.5s ease;
+  position: relative; /* Inicialmente relativa para el diseño estándar */
+}
+
+.event-card.flipped {
+  transform: scale(1.5); /* Escala la tarjeta */
+  position: fixed; /* Hace que se superponga en la pantalla */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%) scale(1.7); /* Ajusta para centrar y escalar */
+  z-index: 999; /* Lleva la tarjeta al frente */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Añade un efecto de sombra */
+  background-color: white; /* Asegura que tenga un fondo */
+  transition: transform 0.5s ease, z-index 0.3s ease;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.event-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card-front {
+  background-color: #e5d9f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 15px; /* Ajusta el valor para más o menos redondeo */
+}
+
+.card-back {
+  background-color: #f0f0f0;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Estilo para el contenedor del dropdown */
+.tag-container {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+/* Estilo de los botones de tag */
+.tag {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Cuando el tag está seleccionado */
+.tag.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Estilo del dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Lo coloca justo debajo del botón */
+  left: 0;
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  border-radius: 5px;
+  width: 100%;
+  display: block; /* Asegura que el dropdown sea visible */
+  z-index: 10;
+}
+
+/* Estilo para cada opción dentro del dropdown */
+.dropdown-option {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover sobre las opciones */
+.dropdown-option:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* --- Estilos adicionales para el modal (CreateEventForm) --- */
+
+/* Fondo oscuro detrás del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out; /* Efecto de entrada */
+}
+
+/* Botón para cerrar el modal */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Animación para el modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,205 @@
+/* Menu.css */
+
+/* Contenedor principal */
+.menu {
+  display: flex;
+  justify-content: space-between; /* Separar logo y letras a la izquierda, y resto a la derecha */
+  align-items: center;
+  padding: 20px;
+  background-color: #fcf8f8;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de logo y letras */
+.menu-logo-container {
+  .logo-menu {
+    width: 60px; /* Cambia a tu preferencia */
+    height: 60px; /* O usa auto si prefieres */
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+  }
+}
+
+/* Estilo para los logos */
+.menu-logo {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+.letras {
+  max-height: 44px; /* Ajustar la altura máxima de las letras */
+  height: auto;
+}
+
+/* Contenedor de enlaces y botones a la derecha */
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacio entre los elementos a la derecha */
+}
+
+.menu-links {
+  display: flex;
+  gap: 30px;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.menu-link:hover {
+  transform: scale(1.1);
+  text-decoration: underline;
+  color: #4b0081;
+}
+
+.menu-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-register,
+.btn-login {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7d2181;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-register:hover,
+.btn-login:hover {
+  background-color: #4b0081;
+  transform: scale(1.05);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #E5D9F2;
+  border-radius: 20px;
+  padding: 3rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideDown 0.4s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #7D2181;
+  /* Темно-ліловий */
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #A294F9;
+  /* Блакитний */
+  transform: scale(1.2);
+  transition: 0.2s ease-in-out;
+}
+
+.registration-form h2 {
+  text-align: center;
+  color: #7D2181;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #7D2181;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #CDC1FF;
+  border-radius: 12px;
+  background-color: #FFF;
+  font-size: 1rem;
+  color: #333;
+}
+
+input:focus {
+  border-color: #A294F9;
+  outline: none;
+  box-shadow: 0 0 10px rgba(162, 148, 249, 0.5);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #7D2181;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #A294F9;
+  box-shadow: 0 0 15px rgba(162, 148, 249, 0.7);
+}
+
+.submit-button:disabled {
+  background-color: #CDC1FF;
+  cursor: not-allowed;
+}
+
+.modal-shadow {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}

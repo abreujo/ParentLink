@@ -1,0 +1,146 @@
+.event-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.filters,
+.tags {
+  margin: 20px 0;
+}
+
+.filter-button,
+.tag {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-button.selected-parent,
+.filter-button.selected-caregiver,
+.tag.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.event-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.event-card {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-card.flipped {
+  transform: scale(1.2);
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.event-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card-front {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+.card-back {
+  background-color: #f0f0f0;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Estilo para el contenedor del dropdown */
+.tag-container {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+/* Estilo de los botones de tag */
+.tag {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Cuando el tag está seleccionado */
+.tag.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Estilo del dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Lo coloca justo debajo del botón */
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  border-radius: 5px;
+  width: 100%;
+  display: block; /* Asegura que el dropdown sea visible */
+  z-index: 10;
+}
+
+/* Estilo para cada opción dentro del dropdown */
+.dropdown-option {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover sobre las opciones */
+.dropdown-option:hover {
+  background-color: #007bff;
+  color: white;
+}

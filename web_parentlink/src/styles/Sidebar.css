@@ -1,0 +1,71 @@
+/* Sidebar.css */
+
+.sidebar {
+  width: 250px;
+  background-color: #f5eff1;
+  height: 100vh; /* 100% de la altura de la ventana */
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  background-color: #e5d9f2;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 40px; /* Espacio adicional entre el saludo y los eventos */
+  text-align: center;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu-item {
+  background-color: #a294f9;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button {
+  background-color: #a294f9; /* Color predeterminado para todos los botones */
+  color: white; /* Color del texto */
+  border: none; /* Opcional: Elimina bordes */
+  padding: 10px 20px; /* Ajusta el espacio interior */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a puntero */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.filter-button:hover {
+  background-color: #7d2181; /* Color al pasar el ratón */
+}
+
+.filter-button:active {
+  background-color: #4b0081; /* Color al hacer clic */
+}
+
+.filter-button.selected {
+  border: 2px solid white; /* Opcional: Marca adicional para botones seleccionados */
+}
+
+.user-icon {
+  width: 20px; /* Tamaño reducido del icono */
+  height: 20px; /* Tamaño reducido del icono */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
+}

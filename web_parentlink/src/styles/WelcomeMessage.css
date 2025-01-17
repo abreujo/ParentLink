@@ -1,0 +1,18 @@
+.welcome-message {
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-message h1 {
+  font-size: 2rem;
+  color: #007bff;
+}
+
+.welcome-message p {
+  font-size: 1rem;
+  color: #333;
+}
