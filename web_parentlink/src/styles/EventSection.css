@@ -57,7 +57,7 @@
   position: fixed; /* Hace que se superponga en la pantalla */
   top: 50%; /* Centra verticalmente */
   left: 50%; /* Centra horizontalmente */
-  transform: translate(-50%, -50%) scale(2.5); /* Ajusta para centrar y escalar */
+  transform: translate(-50%, -50%) scale(1.7); /* Ajusta para centrar y escalar */
   z-index: 999; /* Lleva la tarjeta al frente */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Añade un efecto de sombra */
   background-color: white; /* Asegura que tenga un fondo */
