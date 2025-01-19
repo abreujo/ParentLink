@@ -70,11 +70,4 @@ public class EventService {
         }
         eventRepository.deleteById(id);
     }
-
-    public boolean canAddRemark(Event event) {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        LocalDateTime eventEndDate = event.getDate().plusDays(1); // Sumar un día al evento
-
-        return currentDateTime.isAfter(eventEndDate); // Si la fecha actual es, al menos, un día después del evento
-    }
 }

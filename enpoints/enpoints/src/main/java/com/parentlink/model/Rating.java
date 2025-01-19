@@ -16,6 +16,15 @@ public enum Rating {
     public int getNumericValue() {
         return numericValue;
     }
+
+    public static Rating fromNumericValue(int numericValue) {
+        for (Rating r : Rating.values()) {
+            if (r.getNumericValue() == numericValue) {
+                return r;
+            }
+        }
+        throw new IllegalArgumentException("Invalid numeric value for Rating: " + numericValue);
+    }
 }
 
 
