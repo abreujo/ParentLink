@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../styles/EventSection.css"; // Asegúrate de que este archivo tenga los estilos para las tarjetas.
+import "../styles/EventSection.css";
+import "../styles/ButtonParticipa.css";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -28,6 +29,12 @@ const EventList = () => {
       ...prevState,
       [index]: !prevState[index],
     }));
+  };
+
+  const handleJoinEvent = (eventId) => {
+    // Aquí puedes manejar lo que sucede cuando el usuario hace clic en el botón "Únete al evento"
+    console.log(`Te has unido al evento con ID: ${eventId}`);
+    // Aquí puedes agregar tu lógica para unirte al evento, como hacer una solicitud a la API
   };
 
   return (
@@ -62,6 +69,12 @@ const EventList = () => {
                   <li>Rango de Edad: {event.ageBracket}</li>
                   <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
                 </ul>
+                <button
+                  className="join-button"
+                  onClick={() => handleJoinEvent(event.id)}
+                >
+                  Participar
+                </button>
               </div>
             </div>
           </div>

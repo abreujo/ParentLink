@@ -11,9 +11,10 @@ const EventSection = ({ isHomeLogin }) => {
   const [flippedCards, setFlippedCards] = useState({});
   const [activeTag, setActiveTag] = useState(""); // Controla qué dropdown está activo
   const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
-  const [showForm, setShowForm] = useState(false); // Controla si se muestra el formulario
 
   // Opciones para los menús desplegables
+  const [showForm, setShowForm] = useState(false); // Estado para controlar el pop-up del formulario
+
   const tagOptions = {
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
     "Tipo de evento": [
@@ -32,6 +33,11 @@ const EventSection = ({ isHomeLogin }) => {
       "Granada",
       "Bilbao",
     ],
+  };
+
+  // Función para alternar la visibilidad del formulario
+  const toggleForm = () => {
+    setShowForm((prev) => !prev); // Alterna entre true/false
   };
 
   const handleTagClick = (tag) => {
@@ -60,11 +66,6 @@ const EventSection = ({ isHomeLogin }) => {
     };
   }, []);
 
-  // Maneja la apertura y cierre del formulario
-  const toggleForm = () => {
-    setShowForm((prev) => !prev);
-  };
-
   return (
     <section className="event-section">
       <h2>{isHomeLogin ? "Eventos" : "Encuentra tu evento"}</h2>
@@ -73,14 +74,6 @@ const EventSection = ({ isHomeLogin }) => {
           <>
             <button className="filter-button" onClick={toggleForm}>
               Crea tu evento
-            </button>
-            <button
-              className={`filter-button ${
-                selectedOption === "join" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("join")}
-            >
-              Únete a un evento
             </button>
           </>
         ) : (
@@ -104,51 +97,17 @@ const EventSection = ({ isHomeLogin }) => {
           </>
         )}
 
-        {/* Menús desplegables para filtros */}
-        <div className="dropdown-filters">
-          {["Edad", "Tipo de evento", "Ubicación"].map((tag) => (
-            <div
-              key={tag}
-              className="tag-container"
-              ref={(el) => (tagRefs.current[tag] = el)}
-            >
-              <button
-                className={`tag ${activeTag === tag ? "selected" : ""}`}
-                onClick={() => handleTagClick(tag)}
-              >
-                {tag}
-              </button>
-              {activeTag === tag && (
-                <ul className="dropdown-menu">
-                  {tagOptions[tag].map((option) => (
-                    <li
-                      key={option}
-                      className="dropdown-option"
-                      onClick={() => handleOptionSelect(tag, option)}
-                    >
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-        </div>
         {/* Aquí añadimos el componente EventList que renderiza las tarjetas */}
         <EventList />
 
         {/* Formulario de creación de evento */}
         {showForm && (
           <div className="modal-overlay">
-            {" "}
-            {/* Cambié form-overlay a modal-overlay */}
             <div className="modal-content">
-              {" "}
-              {/* Añado el contenedor con la clase modal-content */}
               <CreateEventForm />
               <button
                 className="close-form-button"
-                onClick={() => setShowForm(false)}
+                onClick={() => setShowForm(false)} // Cerrar el formulario
               >
                 Cerrar
               </button>
