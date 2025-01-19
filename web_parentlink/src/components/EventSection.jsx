@@ -11,10 +11,9 @@ const EventSection = ({ isHomeLogin }) => {
   const [flippedCards, setFlippedCards] = useState({});
   const [activeTag, setActiveTag] = useState(""); // Controla qué dropdown está activo
   const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
+  const [showForm, setShowForm] = useState(false); // Controla si se muestra el formulario
 
   // Opciones para los menús desplegables
-  const [showModal, setShowModal] = useState(false); // Estado para controlar el pop-up modal
-
   const tagOptions = {
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
     "Tipo de evento": [
@@ -61,9 +60,9 @@ const EventSection = ({ isHomeLogin }) => {
     };
   }, []);
 
-  // Maneja la apertura y cierre del modal
-  const toggleModal = () => {
-    setShowModal((prev) => !prev);
+  // Maneja la apertura y cierre del formulario
+  const toggleForm = () => {
+    setShowForm((prev) => !prev);
   };
 
   return (
@@ -72,7 +71,7 @@ const EventSection = ({ isHomeLogin }) => {
       <div className="filters">
         {isHomeLogin ? (
           <>
-            <button className="filter-button" onClick={toggleModal}>
+            <button className="filter-button" onClick={toggleForm}>
               Crea tu evento
             </button>
             <button
@@ -135,9 +134,27 @@ const EventSection = ({ isHomeLogin }) => {
             </div>
           ))}
         </div>
-        {/* Aquí añadimos el componente Eventlist que renderiza las tarjetas*/}
+        {/* Aquí añadimos el componente EventList que renderiza las tarjetas */}
+        <EventList />
 
-        <EventList></EventList>
+        {/* Formulario de creación de evento */}
+        {showForm && (
+          <div className="modal-overlay">
+            {" "}
+            {/* Cambié form-overlay a modal-overlay */}
+            <div className="modal-content">
+              {" "}
+              {/* Añado el contenedor con la clase modal-content */}
+              <CreateEventForm />
+              <button
+                className="close-form-button"
+                onClick={() => setShowForm(false)}
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
