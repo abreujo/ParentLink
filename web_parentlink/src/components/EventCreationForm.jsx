@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const CreateEventForm = ({ onSubmit }) => {
+const CreateEventForm = () => {
+  // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -10,15 +11,60 @@ const CreateEventForm = ({ onSubmit }) => {
     postalCode: "",
   });
 
+  // Estado para mensajes de éxito o error
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  // Manejar envío del formulario
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData); // Verificar el contenido antes de enviarlo
-    onSubmit(formData); // Llamar a la función de envío proporcionada como prop
+
+    // Validaciones básicas
+    if (!formData.name || !formData.description || !formData.date || !formData.postalCode) {
+      setErrorMessage("Por favor, complete todos los campos obligatorios.");
+      setSuccessMessage("");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8081/api/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+    
+      if (response.ok) {
+        setSuccessMessage("¡Evento creado con éxito!");
+        setErrorMessage("");
+        setFormData({
+          name: "",
+          description: "",
+          image: "",
+          ageBracket: "",
+          date: "",
+          postalCode: "",
+        });
+      } else {
+        const errorData = await response.json(); // Intentar leer la respuesta del servidor
+        setErrorMessage(errorData.message || `Error: ${response.status} - ${response.statusText}`);
+        setSuccessMessage("");
+      }
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+      setErrorMessage("Error de conexión: " + error.message);
+      setSuccessMessage("");
+    }
   };
 
   return (
@@ -95,6 +141,10 @@ const CreateEventForm = ({ onSubmit }) => {
           required
         />
       </div>
+
+      {/* Mostrar mensajes de error o éxito */}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
 
       <button type="submit">Create Event</button>
     </form>
