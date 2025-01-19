@@ -17,6 +17,7 @@ const CreateEventForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData); // Verificar el contenido antes de enviarlo
     onSubmit(formData); // Llamar a la función de envío proporcionada como prop
   };
 
