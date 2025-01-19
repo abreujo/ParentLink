@@ -53,6 +53,7 @@ public class ParticipateDTO {
         dto.setEvent(EventDTO.fromEvent(participate.getEvent()));
         return dto;
     }
+
 }
 
 class UserDTO {
