@@ -21,9 +21,19 @@ public class ParticipateController {
     @Autowired
     private ParticipateService participateService;
 
+    @Autowired
+    public ParticipateController(ParticipateService participateService) {
+        this.participateService = participateService;
+    }
+
     @GetMapping
-    public ResponseEntity<List<Participate>> getAllParticipations() {
-        return ResponseEntity.ok(participateService.getAllParticipations());
+    public ResponseEntity<List<ParticipateDTO>> getAllParticipations() {
+        List<Participate> participations = participateService.getAllParticipations();
+        // Convertir a DTOs
+        List<ParticipateDTO> participateDTOs = participations.stream()
+                .map(ParticipateDTO::fromParticipate)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(participateDTOs);
     }
 
     @GetMapping("/{id}")
@@ -45,6 +55,7 @@ public class ParticipateController {
             // Devolver el DTO en la respuesta con el código de estado CREATED
             return ResponseEntity.status(HttpStatus.CREATED).body(newParticipationDTO);
         } catch (RuntimeException e) {
+            e.printStackTrace(); // Para verificar la excepción real en los logs
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: User is already registered for this event.");
         }
     }
@@ -114,9 +125,17 @@ public class ParticipateController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: " + userId);
         }
     }
-
-
-
-
 }
+
+/*
+http://localhost:8081/api/participations
+{
+  "user": {
+    "id": 2
+  },
+  "event": {
+    "id": 3
+  }
+}
+*/
 

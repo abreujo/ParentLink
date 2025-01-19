@@ -70,8 +70,8 @@ public class ParticipateDTO {
         ParticipateDTO dto = new ParticipateDTO();
         dto.setId(participate.getId());
         dto.setRemark(participate.getRemark());
-        // Ajuste para la conversión de 'rating' si es un enum
-        dto.setRating(participate.getRating().toString());  // Cambia según el tipo real de 'rating'
+        // Si rating es null, dejamos el valor como null en el DTO
+        dto.setRating(participate.getRating() != null ? participate.getRating().toString() : null);
         dto.setUser(UserDTO.fromUser(participate.getUser()));
         dto.setEvent(EventDTO.fromEvent(participate.getEvent()));
         return dto;
