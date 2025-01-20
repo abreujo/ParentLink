@@ -114,4 +114,7 @@ public class UserCreateDto {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
+
+    public void setId(Long id) {
+    }
 }

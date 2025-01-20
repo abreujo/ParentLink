@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
+import { Link } from "react-router-dom";
 const MenuLogin = () => {
   return (
     <nav className="menu">
@@ -15,6 +16,9 @@ const MenuLogin = () => {
 
       {/* Botones a la derecha */}
       <div className="menu-right">
+        <Link to="/eventos" className="menu-highlight-link">
+          Eventos
+        </Link>
         <button className="menu-button">Mi Perfil</button>
         <button className="menu-button logout">Cerrar Sesión</button>
       </div>

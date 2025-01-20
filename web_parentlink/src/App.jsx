@@ -13,7 +13,6 @@ import ComoFunciona from "./components/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
-import UserProfileForm from "./components/UserProfileForm";
 
 function App() {
   return (
@@ -43,6 +42,8 @@ function App() {
           {/* Nueva ruta para HomeLogIn */}
           <Route path="/home-login" element={<HomeLogIn />} />{" "}
           {/* Nueva ruta para HomeLogIn */}
+          <Route path="/eventos" element={<EventPage />} />{" "}
+          {/* Ruta para EventPage */}
         </Routes>
 
         {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}

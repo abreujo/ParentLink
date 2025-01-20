@@ -12,13 +12,12 @@ const HomePage = () => {
     <div className="homepage">
       {/* Menu */}
       <Menu />
-
       {/* Hero Section */}
       <HeroSection />
       {/* Description Section */}
       <DescriptionSection />
       {/* Event Section */}
-      <EventSection />
+      <EventSection isHomeLogin={true} eventLimit={5} />{" "}
       {/* carrusel Section */}
       <CarruselSection />
       <PublicidadSection />

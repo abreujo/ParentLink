@@ -14,8 +14,9 @@
   margin: 5px;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-size: 1.55rem; /* 1 rem = 16px, así que 1.25rem = 20px */
+  padding: 1rem 2rem;
 }
 .filter-button {
   background-color: #a294f9; /* Color predeterminado */
@@ -24,6 +25,7 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 3vw;
   transition: background-color 0.3s ease; /* Transición suave para cambios */
 }
 
@@ -57,7 +59,7 @@
   position: fixed; /* Hace que se superponga en la pantalla */
   top: 50%; /* Centra verticalmente */
   left: 50%; /* Centra horizontalmente */
-  transform: translate(-50%, -50%) scale(2.5); /* Ajusta para centrar y escalar */
+  transform: translate(-50%, -50%) scale(1.7); /* Ajusta para centrar y escalar */
   z-index: 999; /* Lleva la tarjeta al frente */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Añade un efecto de sombra */
   background-color: white; /* Asegura que tenga un fondo */
@@ -125,12 +127,14 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: #7d2181;
+  color: #ffffff;
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
-
+.tag :hoover {
+  background-color: #411343;
+}
 /* Cuando el tag está seleccionado */
 .tag.selected {
   background-color: #007bff;
@@ -163,7 +167,7 @@
 
 /* Hover sobre las opciones */
 .dropdown-option:hover {
-  background-color: #007bff;
+  background-color: #7d2181;
   color: white;
 }
 
