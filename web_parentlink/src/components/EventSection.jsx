@@ -96,10 +96,8 @@ const EventSection = ({ isHomeLogin }) => {
             </button>
           </>
         )}
-
-        {/* Aquí añadimos el componente EventList que renderiza las tarjetas */}
-        <EventList />
-
+        {/* Pasamos el límite de eventos a EventList */}
+        <EventList eventLimit={isHomeLogin ? 5 : undefined} />{" "}
         {/* Formulario de creación de evento */}
         {showForm && (
           <div className="modal-overlay">
