@@ -13,6 +13,7 @@ import ComoFunciona from "./components/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
+import UserProfileForm from "./components/UserProfileForm";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
 
         {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
         <FooterFrame />
+        <UserProfileForm></UserProfileForm>
       </Router>
     </>
   );
