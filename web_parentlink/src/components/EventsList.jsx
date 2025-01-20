@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = () => {
+const EventList = ({ eventLimit }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
@@ -37,11 +37,14 @@ const EventList = () => {
     // Aquí puedes agregar tu lógica para unirte al evento, como hacer una solicitud a la API
   };
 
+  // Limitar los eventos si se pasa un límite
+  const eventsToRender = eventLimit ? events.slice(0, eventLimit) : events;
+
   return (
     <div>
       {error && <p>Error: {error}</p>}
       <div className="event-cards-container">
-        {events.map((event, index) => (
+        {eventsToRender.map((event, index) => (
           <div
             key={index}
             className={`event-card ${flippedCards[index] ? "flipped" : ""}`}
