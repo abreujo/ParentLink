@@ -16,7 +16,7 @@ const MenuLogin = () => {
 
       {/* Botones a la derecha */}
       <div className="menu-right">
-        <Link href="/eventos" className="menu-highlight-link">
+        <Link to="/eventos" className="menu-highlight-link">
           Eventos
         </Link>
         <button className="menu-button">Mi Perfil</button>
