@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FiltersEvent from "../components/FiltersEvent"; // Importa tu componente FiltersEvent
 import EventList from "../components/EventsList"; // Importa tu componente EventList
 
@@ -16,6 +16,10 @@ const EventPage = () => {
       [tag]: option,
     }));
   };
+
+  useEffect(() => {
+    console.log("Llamar al backend", filters)
+  }, [filters])
 
   return (
     <div className="event-page">

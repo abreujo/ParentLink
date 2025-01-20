@@ -1,10 +1,32 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const Filters = ({ onFilterChange }) => {
   const [activeTag, setActiveTag] = useState(null); // Estado para el botón activo
   const tagRefs = useRef({}); // Referencias a los elementos si las necesitas
+  const [tagOptions, setTagOptions] = useState({
+    "Ubicación": [],
+    "Edad": ["0-3", "3-5", "6-9+", "10-12", "12-15", "+16"],
+    "Tipo de evento": [
+      "Picknick en el parque",
+      "Tarde de bolos",
+      "Ruta por el bosque",
+      "Kayak para todos",
+    ],
+  })
+
+  async function fetchLocations() {
+    const response = await fetch("http://localhost:8081/api/locations");
+    const locations = await response.json()
+    tagOptions["Ubicación"] = locations.map(e=>e.name)
+    setTagOptions(tagOptions)
+  }
+
+  useEffect(() => {
+    fetchLocations()
+  })
 
   // Opciones para cada filtro
+  /*
   const tagOptions = {
     Ubicación: ["Málaga", "Barcelona", "Madrid", "sevilla", "Cádiz"],
     Edad: ["0-3", "3-5", "6-9+", "10-12", "12-15", "+16"],
@@ -15,6 +37,7 @@ const Filters = ({ onFilterChange }) => {
       "Kayak para todos",
     ],
   };
+  */
 
   // Maneja el clic en los botones principales
   const handleTagClick = (tag) => {
