@@ -6,16 +6,12 @@ import com.parentlink.model.Event;
 
 public class ParticipateDTO {
     private Long id;
-    private String remark;
-    private String rating;
     private UserDTO user;
     private EventDTO event;
 
     // Constructor con parámetros
-    public ParticipateDTO(Long id, String remark, String rating, UserDTO user, EventDTO event) {
+    public ParticipateDTO(Long id, UserDTO user, EventDTO event) {
         this.id = id;
-        this.remark = remark;
-        this.rating = rating;
         this.user = user;
         this.event = event;
     }
@@ -31,22 +27,6 @@ public class ParticipateDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
     }
 
     public UserDTO getUser() {
@@ -69,13 +49,11 @@ public class ParticipateDTO {
     public static ParticipateDTO fromParticipate(Participate participate) {
         ParticipateDTO dto = new ParticipateDTO();
         dto.setId(participate.getId());
-        dto.setRemark(participate.getRemark());
-        // Ajuste para la conversión de 'rating' si es un enum
-        dto.setRating(participate.getRating().toString());  // Cambia según el tipo real de 'rating'
         dto.setUser(UserDTO.fromUser(participate.getUser()));
         dto.setEvent(EventDTO.fromEvent(participate.getEvent()));
         return dto;
     }
+
 }
 
 class UserDTO {

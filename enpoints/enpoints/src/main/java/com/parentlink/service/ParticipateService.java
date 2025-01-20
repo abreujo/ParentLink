@@ -38,22 +38,21 @@ public class ParticipateService {
         return participateRepository.findById(id);
     }
 
-
-    // CREATE PARTICPATION NO DEBERÍA INCLUIR REMARK PORQUE SIMPLEMENTE NOS ESTAMOS REGISTRANDO A UN EVENTO
-    // INCLUIR UNA REMARK APARTE CON ADDREMARK
     public Participate createParticipation(Participate participate) {
         // Validar que el User y el Event no sean nulos
         if (participate.getUser() == null || participate.getEvent() == null) {
             throw new IllegalArgumentException("User and Event cannot be null.");
         }
+
         // Verificar si ya existe una participación para el mismo User y Event
-        Optional<Participate> existingParticipation = participateRepository.findByUserAndEvent(participate.getUser(), participate.getEvent());
+        Optional<Participate> existingParticipation = participateRepository.findByUserAndEvent(
+                participate.getUser(),
+                participate.getEvent()
+        );
         if (existingParticipation.isPresent()) {
-            // Verificar si ya existe una remark para esa participación
-            if (existingParticipation.get().getRemark() != null) {
-                throw new RuntimeException("A remark has already been added for this participation.");
-            }
+            throw new RuntimeException("User is already registered for this event.");
         }
+
         // Verificar que el User existe en la base de datos
         User user = userRepository.findById(participate.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -66,22 +65,10 @@ public class ParticipateService {
         participate.setUser(user);
         participate.setEvent(event);
 
-        // Verificar si se requiere una remark y que la fecha del evento es válida
-        if (participate.getRemark() != null && event.getDate() != null) {
-            LocalDateTime eventDateTime = event.getDate(); // Suponemos que la fecha del evento es LocalDateTime
-            LocalDateTime currentDateTime = LocalDateTime.now(); // Fecha y hora actuales
+        // Ignorar cualquier valor de remark o rating enviado en la solicitud
+        participate.setRemark(null);
+        participate.setRating(null);
 
-            // Si es necesario comparar solo la fecha sin la hora
-            LocalDate eventDate = eventDateTime.toLocalDate();
-            LocalDate currentDate = currentDateTime.toLocalDate();
-
-            // Compara si la fecha actual es al menos un día posterior a la fecha del evento
-            LocalDate eventDatePlusOneDay = eventDate.plusDays(1);
-
-            if (currentDate.isBefore(eventDatePlusOneDay)) {
-                throw new RuntimeException("You can only add a remark after the event date has passed by at least one day.");
-            }
-        }
         // Guardar la participación en la base de datos
         return participateRepository.save(participate);
     }
@@ -91,20 +78,37 @@ public class ParticipateService {
     }
 
     public Participate addRemark(Long participateId, String remarkContent, Rating rating) {
+        // Buscar la participación en la base de datos
         Participate participate = participateRepository.findById(participateId)
                 .orElseThrow(() -> new NoSuchElementException("Participation not found"));
 
+        // Obtener el evento relacionado
         Event event = participate.getEvent();
 
-        // Verificación de que el evento haya terminado (al menos un día después)
-        if (eventService.canAddRemark(event)) {
-            participate.setRemark(remarkContent);
-            participate.setRating(rating); // Aquí se guarda la calificación que llega desde el controlador
-            return participateRepository.save(participate); // Guarda la participación con la remark
-        } else {
-            throw new IllegalStateException("Cannot add remark before the event finishes");
+        // Verificar si el evento ya ha pasado
+        if (event.getDate().isAfter(LocalDateTime.now())) {
+            throw new IllegalStateException("Cannot add remark for a future event.");
         }
+
+        // Agregar la remark
+        participate.setRemark(remarkContent);
+
+        // Validación del rating (si se proporciona)
+        if (rating != null) {
+            // Verificamos si el valor del rating está dentro de los valores permitidos
+            try {
+                // Verificamos si el rating tiene un valor numérico válido
+                Rating validRating = Rating.fromNumericValue(rating.getNumericValue());
+                participate.setRating(validRating);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalStateException("Invalid numeric value for Rating: " + rating.getNumericValue());
+            }
+        }
+
+        // Guardar la participación actualizada
+        return participateRepository.save(participate);
     }
+
 
 
     public List<String> getRemarksByEvent(Long eventId) {

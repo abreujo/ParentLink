@@ -1,7 +1,8 @@
 package com.parentlink.controller;
 
-import com.parentlink.model.Event;
+import com.parentlink.model.*;
 import com.parentlink.service.EventService;
+import com.parentlink.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
+
+    @Autowired
+    private LocationService locationService;
 
     @Autowired
     private EventService eventService;
@@ -35,10 +39,26 @@ public class EventController {
     }
 
     // Crear un nuevo evento
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event createdEvent = eventService.createEvent(event);
         return ResponseEntity.ok(createdEvent);  // Devolver el evento creado
+    }*/
+
+    @PostMapping
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        // Verifica si el código postal existe
+        Optional<Location> location = locationService.getLocationByPostalCode(event.getLocation().getPostalCode());
+
+        if (location.isEmpty()) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        // Si el código postal es válido, asigna la ubicación al evento
+        event.setLocation(location.get());
+        Event createdEvent = eventService.createEvent(event);
+
+        return ResponseEntity.ok(createdEvent);
     }
 
     // Actualizar un evento existente
@@ -69,7 +89,6 @@ JSON EVENT
 http://localhost:8081/api/events
 
 METODO POST PARA CREAR UN EVENTO
-
   DEBE ESTAR CREADA LA UBICACION EN LA BD
 
 {
