@@ -9,28 +9,32 @@ public class Participate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_event", nullable = false)
     private Event event;
 
-    @OneToOne(mappedBy = "participate", cascade = CascadeType.ALL)
-    private Remark remark;
+    @Column(length = 500)
+    private String remark;
+
+    @Enumerated(EnumType.STRING) // Guardamos el nombre del enum como texto en la base de datos
+    private Rating rating;
 
     // Constructor vacío
     public Participate() {}
 
     // Constructor completo
-    public Participate(User user, Event event) {
+    public Participate(User user, Event event, String remark, Rating rating) {
         this.user = user;
         this.event = event;
+        this.remark = remark;
+        this.rating = rating;
     }
 
     // Getters y setters
-
     public Long getId() {
         return id;
     }
@@ -55,12 +59,24 @@ public class Participate {
         this.event = event;
     }
 
-    public Remark getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Remark remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
-}
 
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+    // Método para obtener el valor numérico del rating
+    public int getRatingNumericValue() {
+        return rating != null ? rating.getNumericValue() : 0;
+    }
+}
