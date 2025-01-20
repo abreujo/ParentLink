@@ -45,8 +45,8 @@ public class UserSystemController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        Optional<UserSystem> user = userSystemService.login(username, password);
+    public ResponseEntity<String> login(@RequestBody UserSystem loginRequest) {
+        Optional<UserSystem> user = userSystemService.login(loginRequest.getUsername(), loginRequest.getPassword());
         return user.isPresent()
                 ? ResponseEntity.ok("Login Satisfactorio!")
                 : ResponseEntity.status(401).body("Nombre de usuario o Password invalido!!!");
