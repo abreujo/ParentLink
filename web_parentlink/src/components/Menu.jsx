@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Menu.css";
 import RegistrationForm from "../components/RegistrationForm";
-import LoginForm from "../components/LoginForm";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
 import letras from "../assets/images/letrasparentlink.png";
 
 const Menu = () => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
 
   const handleOpenRegisterForm = () => {
     setShowRegisterForm(true);
@@ -16,14 +14,6 @@ const Menu = () => {
 
   const handleCloseRegisterForm = () => {
     setShowRegisterForm(false);
-  };
-
-  const handleOpenLoginForm = () => {
-    setShowLoginForm(true);
-  };
-
-  const handleCloseLoginForm = () => {
-    setShowLoginForm(false);
   };
 
   return (
@@ -50,9 +40,9 @@ const Menu = () => {
           <button className="btn-register" onClick={handleOpenRegisterForm}>
             Registrarse
           </button>
-          <button className="btn-login" onClick={handleOpenLoginForm}>
-            Acceder
-          </button>
+          <Link to="/home-login">
+            <button className="btn-login">Acceder</button>
+          </Link>
         </div>
       </div>
 
@@ -60,14 +50,6 @@ const Menu = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <RegistrationForm onClose={handleCloseRegisterForm} />
-          </div>
-        </div>
-      )}
-
-      {showLoginForm && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <LoginForm onClose={handleCloseLoginForm} />
           </div>
         </div>
       )}

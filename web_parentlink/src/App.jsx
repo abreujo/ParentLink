@@ -48,7 +48,6 @@ function App() {
 
         {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
         <FooterFrame />
-        <UserProfileForm></UserProfileForm>
       </Router>
     </>
   );
