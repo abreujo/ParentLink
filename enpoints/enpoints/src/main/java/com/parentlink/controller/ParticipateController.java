@@ -2,7 +2,7 @@ package com.parentlink.controller;
 
 import com.parentlink.dto.ParticipateDTO;
 import com.parentlink.model.Participate;
-import com.parentlink.model.Rating;
+import com.parentlink.model.RemarkRequest;
 import com.parentlink.service.ParticipateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,14 +72,17 @@ public class ParticipateController {
     }
 
     @PostMapping("/{id}/remark")
-    public ResponseEntity<?> addRemark(@PathVariable Long id,
-                                       @RequestParam String remarkContent,
-                                       @RequestParam(required = false) Rating rating) {
+    public ResponseEntity<?> addRemark(@PathVariable Long id, @RequestBody RemarkRequest remarkRequest) {
         try {
-            Participate updatedParticipation = participateService.addRemark(id, remarkContent, rating);
+            // Llama al servicio para agregar la remark y el rating
+            Participate updatedParticipation = participateService.addRemark(id, remarkRequest.getRemarkContent(), remarkRequest.getRating());
             return ResponseEntity.ok(updatedParticipation);
+        } catch (IllegalStateException e) {
+            // Manejar la excepción si la fecha del evento es futura
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Cannot add remark.");
+            // Maneja errores con una respuesta clara
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
     }
 
@@ -127,15 +130,27 @@ public class ParticipateController {
     }
 }
 
-/*
+/* JSON PARA INSCRIBIRSE A UN EVENTO (CREAR UNA PARTICIPATE)
+
 http://localhost:8081/api/participations
+
 {
   "user": {
     "id": 2
   },
   "event": {
-    "id": 3
+    "id": 1
   }
+}
+
+JSON PARA ESCRIBIR UNA RESEÑA EN UN EVENTO PASADO
+
+http://localhost:8081/api/participations/{ID PARTICIPATE}}/remark
+EJ: http://localhost:8081/api/participations/21/remark
+
+{
+  "remarkContent": "This event was amazing!",
+  "rating": 1
 }
 */
 

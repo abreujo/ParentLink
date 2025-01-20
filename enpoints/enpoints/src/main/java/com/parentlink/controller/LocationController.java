@@ -63,3 +63,12 @@ public class LocationController {
     }
 }
 
+/*
+http://localhost:8081/api/locations
+
+{
+"name": "Málaga",
+"postalCode": "29014"
+}
+* */
+
