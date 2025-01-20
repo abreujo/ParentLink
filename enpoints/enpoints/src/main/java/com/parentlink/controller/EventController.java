@@ -1,8 +1,8 @@
 package com.parentlink.controller;
 
 import com.parentlink.model.*;
-import com.parentlink.service.EventService;
-import com.parentlink.service.LocationService;
+import com.parentlink.service.*;
+import com.parentlink.dto.EventCreateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,20 +46,29 @@ public class EventController {
     }*/
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        // Verifica si el código postal existe
-        Optional<Location> location = locationService.getLocationByPostalCode(event.getLocation().getPostalCode());
+    public ResponseEntity<String> createEvent(@RequestBody EventCreateDTO eventCreateDTO) {
+        // Buscar la ubicación por código postal
+        Optional<Location> locationOptional = locationService.getLocationByPostalCode(eventCreateDTO.getPostalCode());
 
-        if (location.isEmpty()) {
-            return ResponseEntity.badRequest().body(null);
+        if (locationOptional.isEmpty()) {
+            return ResponseEntity.badRequest().body("El código postal no existe en la base de datos.");
         }
 
-        // Si el código postal es válido, asigna la ubicación al evento
-        event.setLocation(location.get());
-        Event createdEvent = eventService.createEvent(event);
+        // Crear la entidad Event y asignar la ubicación
+        Event event = new Event();
+        event.setName(eventCreateDTO.getName());
+        event.setDescription(eventCreateDTO.getDescription());
+        event.setImage(eventCreateDTO.getImage());
+        event.setAgeBracket(eventCreateDTO.getAgeBracket());
+        event.setDate(eventCreateDTO.getDate());
+        event.setLocation(locationOptional.get());
 
-        return ResponseEntity.ok(createdEvent);
+        // Guardar el evento
+        eventService.createEvent(event);
+
+        return ResponseEntity.ok("Evento creado con éxito.");
     }
+
 
     // Actualizar un evento existente
     @PutMapping("/{id}")
