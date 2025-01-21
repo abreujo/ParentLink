@@ -5,13 +5,9 @@ import "../styles/ButtonParticipa.css";
 const EventList = ({ eventLimit }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
-<<<<<<< HEAD
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
-=======
-  const [flippedCards, setFlippedCards] = useState({});
->>>>>>> dev
 
   useEffect(() => {
     // Realizar la solicitud GET a la API
@@ -77,7 +73,6 @@ const EventList = ({ eventLimit }) => {
     }
   };
 
-<<<<<<< HEAD
   const handleClickOutside = (event) => {
     // Si el clic fue fuera del contenedor de eventos, se cierran todas las tarjetas giradas
     if (eventListRef.current && !eventListRef.current.contains(event.target)) {
@@ -87,8 +82,6 @@ const EventList = ({ eventLimit }) => {
   };
 
   // Limitar los eventos si se pasa un límite
-=======
->>>>>>> dev
   const eventsToRender = eventLimit ? events.slice(0, eventLimit) : events;
 
   // Añadir el listener para clics fuera del contenedor de eventos
