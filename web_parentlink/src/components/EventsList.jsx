@@ -2,12 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit, locationName }) => {
+const EventList = ({ eventLimit, filters = [] }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
+  //debugger
+  const {locationName, Edad} = filters;
 
   //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
@@ -17,14 +19,14 @@ const EventList = ({ eventLimit, locationName }) => {
       let url = "http://localhost:8081/api/events"; // URL base
       const urlSearchParams = new URLSearchParams();
 
-      if (locationName) urlSearchParams.append("name", locationName);
+      if (locationName)
+        urlSearchParams.append("name", locationName)
 
-      /*
-      if (edad)
-        urlSearchParams.append("edad", edad)
-      */
+      if (Edad)
+        urlSearchParams.append("age", Edad)
 
-      if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
+      if (urlSearchParams.size)
+        url=`${url}?${urlSearchParams.toString()}`
 
       try {
         const response = await fetch(url, {
@@ -44,8 +46,9 @@ const EventList = ({ eventLimit, locationName }) => {
       }
     };
 
-    fetchEvents();
-  }, [locationName]); // Depende de locationName para cambiar cuando se seleccione una ciudad
+    if (token)
+      fetchEvents();
+  }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
     if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
@@ -71,10 +74,15 @@ const EventList = ({ eventLimit, locationName }) => {
     };
 
     try {
+      //INSCRIPCION DE UN PARTICIPANTE EN UN EVENTO
+      const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+      if (!token)
+          return
       const response = await fetch("http://localhost:8081/api/participations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
         },
         body: JSON.stringify(participationData),
       });
