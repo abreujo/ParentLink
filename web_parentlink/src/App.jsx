@@ -14,6 +14,8 @@ import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
 import EventPage from "./pages/EventPage";
+import LoginFormTest from "./components/LoginFormTest";
+import UserDetails from "./components/UserDetails";
 
 function App() {
   return (
@@ -49,6 +51,9 @@ function App() {
 
         {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
         <FooterFrame />
+
+        {/* PRUEBA DEL FORMULARIO DE LOGIN TEST */}
+        <LoginFormTest></LoginFormTest>
       </Router>
     </>
   );
