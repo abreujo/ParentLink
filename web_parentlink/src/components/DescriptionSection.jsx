@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/DescriptionSection.css";
 import imagen1 from "../assets/images/fotofamilia.jpg";
+import dibujo1 from "../assets/images/landingPage.png";
 
 const DescriptionSection = () => {
   return (

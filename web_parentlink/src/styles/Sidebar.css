@@ -1,4 +1,4 @@
-/* Sidebar.css */
+/* src/styles/Sidebar.css */
 
 .sidebar {
   width: 250px;
@@ -20,6 +20,25 @@
   margin: 0;
   font-size: 18px;
   color: #333;
+}
+
+.user-details {
+  margin-top: 20px;
+}
+
+.user-info-list {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0;
+}
+
+.user-info-list li {
+  margin-bottom: 15px; /* Añade espacio entre los elementos */
+  color: #63278f; /* Color de las letras */
+  font-weight: 600; /* Texto más grueso */
+}
+
+.user-info-list li strong {
+  font-weight: 700; /* Hace los títulos aún más gruesos */
 }
 
 .sidebar-menu {

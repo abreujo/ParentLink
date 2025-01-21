@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import userIcon from "../assets/images/userIcon.png"; // Asegúrate de que la ruta sea correcta
 import "../styles/Sidebar.css"; // Asegúrate de tener el archivo CSS
 
-const Sidebar = ({ username }) => {
+const Sidebar = ({ username, surname, email, location }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleEventClick = (eventName) => {
@@ -21,32 +21,22 @@ const Sidebar = ({ username }) => {
         </div>
       </div>
 
-      {/* Menú de eventos */}
-      <div className="sidebar-menu">
-        <div
-          className={`menu-item ${
-            selectedEvent === "Eventos Creados" ? "selected" : ""
-          }`}
-          onClick={() => handleEventClick("Eventos Creados")}
-        >
-          <h3>Eventos creados</h3>
-        </div>
-        <div
-          className={`menu-item ${
-            selectedEvent === "Eventos Próximos" ? "selected" : ""
-          }`}
-          onClick={() => handleEventClick("Eventos Próximos")}
-        >
-          <h3>Eventos próximos</h3>
-        </div>
-        <div
-          className={`menu-item ${
-            selectedEvent === "Eventos Asistidos" ? "selected" : ""
-          }`}
-          onClick={() => handleEventClick("Eventos Asistidos")}
-        >
-          <h3>Eventos asistidos</h3>
-        </div>
+      {/* Espacio entre el nombre del usuario y los datos */}
+      <div className="user-details">
+        <ul className="user-info-list">
+          <li>
+            <strong>Nombre:</strong> {username}
+          </li>
+          <li>
+            <strong>Apellidos:</strong> {surname}
+          </li>
+          <li>
+            <strong>Correo Electrónico:</strong> {email}
+          </li>
+          <li>
+            <strong>Ubicación:</strong> {location}
+          </li>
+        </ul>
       </div>
     </div>
   );

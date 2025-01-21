@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const Filters = ({ onFilterChange }) => {
   const [activeTag, setActiveTag] = useState(null);
@@ -37,14 +38,28 @@ const Filters = ({ onFilterChange }) => {
     setActiveTag(null); // Cierra el menú desplegable
   };
 
+  // Cierra el menú si se hace clic fuera del contenedor de filtros
+  useEffect(() => {
+    // Función que detecta clic fuera del componente de filtros
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setActiveTag(null); // Cierra el menú desplegable si se hace clic fuera
+      }
+    };
+
+    // Añadimos el listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Limpiamos el listener cuando el componente se desmonta
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="tags">
+    <div className="tags" ref={filterRef}>
       {Object.keys(tagOptions).map((tag) => (
-        <div
-          key={tag}
-          className="tag-container"
-          ref={(el) => (tagRefs.current[tag] = el)}
-        >
+        <div key={tag} className="tag-container">
           <button
             className={`tag ${activeTag === tag ? "selected" : ""}`}
             onClick={() => handleTagClick(tag)}

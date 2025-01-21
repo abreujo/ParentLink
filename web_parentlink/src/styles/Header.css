@@ -1,0 +1,31 @@
+/* src/styles/Header.css */
+
+.header {
+  position: static;
+  padding: 3rem 6rem; /* Incrementado */
+  text-align: center; /* Centra el texto */
+  top: 0;
+  z-index: 1000;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.header-title {
+  color: #63278f; /* Color del texto */
+  font-size: 2.6rem; /* Tamaño del texto */
+  font-weight: bold;
+  margin: 0;
+  opacity: 0; /* Invisible inicialmente */
+  transform: translateY(-20px); /* Posición inicial más arriba */
+  transition: opacity 1s ease, transform 1s ease; /* Transición suave */
+}
+
+.header-title.visible {
+  opacity: 1; /* Totalmente visible */
+  transform: translateY(0); /* Posición original */
+}
+.patrick-hand-regular {
+  font-family: "Patrick Hand", serif;
+  font-weight: 400;
+  font-style: normal;
+}
