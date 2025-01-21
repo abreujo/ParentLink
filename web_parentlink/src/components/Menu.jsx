@@ -32,9 +32,9 @@ const Menu = () => {
           <Link className="menu-link" to="/">
             Sobre Nosotros
           </Link>
-          <a href="#como-funciona" className="menu-link">
+          <Link className="menu-link" to="/como-funciona">
             ¿Cómo Funciona?
-          </a>
+          </Link>
         </div>
         <div className="menu-buttons">
           <button className="btn-register" onClick={handleOpenRegisterForm}>

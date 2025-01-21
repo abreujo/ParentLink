@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
@@ -6,6 +6,8 @@ const EventList = ({ eventLimit }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
+  const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
+  const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
   useEffect(() => {
     // Realizar la solicitud GET a la API
@@ -25,10 +27,12 @@ const EventList = ({ eventLimit }) => {
   }, []); // El array vacío asegura que la solicitud se haga solo una vez
 
   const handleCardClick = (index) => {
+    if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
     setFlippedCards((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
     }));
+    setIsCardClicked(true); // Marcar que una tarjeta fue clicada
   };
 
   const handleJoinEvent = (eventId) => {
@@ -37,11 +41,27 @@ const EventList = ({ eventLimit }) => {
     // Aquí puedes agregar tu lógica para unirte al evento, como hacer una solicitud a la API
   };
 
+  const handleClickOutside = (event) => {
+    // Si el clic fue fuera del contenedor de eventos, se cierran todas las tarjetas giradas
+    if (eventListRef.current && !eventListRef.current.contains(event.target)) {
+      setFlippedCards({}); // Cierra todas las tarjetas
+      setIsCardClicked(false); // Permite que otras tarjetas sean clicadas nuevamente
+    }
+  };
+
   // Limitar los eventos si se pasa un límite
   const eventsToRender = eventLimit ? events.slice(0, eventLimit) : events;
 
+  // Añadir el listener para clics fuera del contenedor de eventos
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div>
+    <div ref={eventListRef}>
       {error && <p>Error: {error}</p>}
       <div className="event-cards-container">
         {eventsToRender.map((event, index) => (

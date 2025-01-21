@@ -17,8 +17,8 @@ const HomeLogIn = () => {
         <Sidebar username={userName} />
 
         {/* Contenido principal */}
-        <div style={{ marginLeft: "250px", padding: "20px", flex: 1 }}>
-          <h1>Bienvenido, {userName}!</h1>
+        <div>
+          <h1 className="Bienvenido">Bienvenido, {userName}!</h1>
           {/* Mostrar el mensaje de bienvenida */}
           <WelcomeMessage username={userName} />
           {/* Mostrar la sección de eventos */}

@@ -9,8 +9,6 @@ const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
-  const [activeTag, setActiveTag] = useState(""); // Controla qué dropdown está activo
-  const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
 
   // Opciones para los menús desplegables
   const [showForm, setShowForm] = useState(false); // Estado para controlar el pop-up del formulario
@@ -68,36 +66,16 @@ const EventSection = ({ isHomeLogin }) => {
 
   return (
     <section className="event-section">
-      <h2>{isHomeLogin ? "Eventos" : "Encuentra tu evento"}</h2>
       <div className="filters">
         {isHomeLogin ? (
           <>
-            <button className="filter-button" onClick={toggleForm}>
-              Crea tu evento
-            </button>
+            <h1 className="h1Events">Eventos destacados</h1>
           </>
         ) : (
-          <>
-            <button
-              className={`filter-button ${
-                selectedOption === "parent" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("parent")}
-            >
-              Soy madre/padre
-            </button>
-            <button
-              className={`filter-button ${
-                selectedOption === "caregiver" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("caregiver")}
-            >
-              Quiero ser papá/mamá
-            </button>
-          </>
+          <></>
         )}
         {/* Pasamos el límite de eventos a EventList */}
-        <EventList eventLimit={isHomeLogin ? 5 : undefined} />{" "}
+        <EventList eventLimit={isHomeLogin ? 4 : undefined} />{" "}
         {/* Formulario de creación de evento */}
         {showForm && (
           <div className="modal-overlay">

@@ -1,4 +1,3 @@
-// src/pages/HomePage.jsx
 import React from "react";
 import Menu from "../components/Menu";
 import HeroSection from "../components/HeroSection";
@@ -8,8 +7,17 @@ import CarruselSection from "../components/Carrusel";
 import PublicidadSection from "../components/Publicidad";
 
 const HomePage = () => {
+  const backgroundStyle = {
+    backgroundImage: "url(/BackgroundHome.jpg)", // Ruta correcta para public/
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    minHeight: "100vh",
+    width: "100%",
+    height: "100%",
+  };
+
   return (
-    <div className="homepage">
+    <div className="homepage" style={backgroundStyle}>
       {/* Menu */}
       <Menu />
       {/* Hero Section */}
@@ -17,8 +25,8 @@ const HomePage = () => {
       {/* Description Section */}
       <DescriptionSection />
       {/* Event Section */}
-      <EventSection isHomeLogin={true} eventLimit={5} />{" "}
-      {/* carrusel Section */}
+      <EventSection isHomeLogin={true} eventLimit={5} />
+      {/* Carrusel Section */}
       <CarruselSection />
       <PublicidadSection />
     </div>
