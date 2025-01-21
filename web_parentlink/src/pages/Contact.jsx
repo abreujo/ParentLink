@@ -6,6 +6,7 @@ import myroslav from "../assets/images/Myroslav.png";
 import david from "../assets/images/David.png";
 import johel from "../assets/images/Johel.jpg";
 import milagros from "../assets/images/milagros.jpg";
+import UserDetails from "../components/UserDetails";
 
 function Contact() {
   const cardsData = [
@@ -53,6 +54,7 @@ function Contact() {
           photo={card.photo}
         />
       ))}
+      <UserDetails></UserDetails>
     </div>
   );
 }

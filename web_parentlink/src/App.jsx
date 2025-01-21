@@ -14,6 +14,8 @@ import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
 import EventPage from "./pages/EventPage";
+import LoginFormTest from "./components/LoginFormTest";
+import UserDetails from "./components/UserDetails";
 import UserProfileForm from "./components/UserProfileForm";
 
 function App() {
@@ -34,8 +36,6 @@ function App() {
           <Route path="/menu-login" element={<MenuLogin />} />
           <Route path="/me" element={<HomeLogIn />} />
           <Route path="/me/edit" element={<UserProfileForm />} />
-
-
           {/* Ruta para el menú de usuarios registrados */}
           <Route
             path="/dashboard"
@@ -55,6 +55,9 @@ function App() {
 
         {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
         <FooterFrame />
+
+        {/* PRUEBA DEL FORMULARIO DE LOGIN TEST */}
+        <LoginFormTest></LoginFormTest>
       </Router>
     </>
   );

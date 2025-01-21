@@ -2,29 +2,50 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit }) => {
+const EventList = ({ eventLimit, locationName }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
+  //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
-    // Realizar la solicitud GET a la API
-    fetch("http://localhost:8081/api/events")
-      .then((response) => {
+    const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+
+    const fetchEvents = async () => {
+      let url = "http://localhost:8081/api/events"; // URL base
+      const urlSearchParams = new URLSearchParams();
+
+      if (locationName) urlSearchParams.append("name", locationName);
+
+      /*
+      if (edad)
+        urlSearchParams.append("edad", edad)
+      */
+
+      if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+          },
+        });
         if (!response.ok) {
           throw new Error("Error al obtener los eventos");
         }
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         setEvents(data);
-      })
-      .catch((err) => {
+      } catch (err) {
         setError(err.message);
-      });
-  }, []);
+      }
+    };
+
+    fetchEvents();
+  }, [locationName]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
     if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
@@ -42,12 +63,11 @@ const EventList = ({ eventLimit }) => {
       return;
     }
 
-    // Reemplaza este ID por el ID del usuario autenticado
     const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
 
     const participationData = {
-      user: { id: userId }, // Estructura del usuario
-      event: { id: eventId }, // Estructura del evento
+      user: { id: userId },
+      event: { id: eventId },
     };
 
     try {

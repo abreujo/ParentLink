@@ -1,12 +1,19 @@
 package com.parentlink.controller;
 
 
+import com.parentlink.dto.AuthResponse;
 import com.parentlink.dto.ErrorResponseDto;
 import com.parentlink.dto.UserSystemDto;
 import com.parentlink.model.UserSystem;
+import com.parentlink.security.JwtUtil;
 import com.parentlink.service.UserSystemService;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -44,13 +51,37 @@ public class UserSystemController {
 
     }
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserSystem loginRequest) {
+    public ResponseEntity<?> login(@RequestBody UserSystem loginRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(new AuthResponse("error", "Usuario o Password invalidos!!!", null));
+        }
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+        // Generar el token
+        String token = jwtUtil.generateToken(loginRequest.getUsername());
+        return ResponseEntity.ok(new AuthResponse("success", "Autenticación exitosa", token));
+    }
+        //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        //final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+
+        //return ResponseEntity.ok(jwtUtil.generateToken(userDetails.getUsername()));
+        //return jwtUtil.generateToken(loginRequest.getUsername());
+        /*
         Optional<UserSystem> user = userSystemService.login(loginRequest.getUsername(), loginRequest.getPassword());
         return user.isPresent()
                 ? ResponseEntity.ok("Login Satisfactorio!")
                 : ResponseEntity.status(401).body("Nombre de usuario o Password invalido!!!");
-    }
+        */
+    //}
 }
 
 /*
