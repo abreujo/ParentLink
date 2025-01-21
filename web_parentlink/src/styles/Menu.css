@@ -6,28 +6,35 @@
   justify-content: space-between; /* Separar logo y letras a la izquierda, y resto a la derecha */
   align-items: center;
   padding: 20px;
+  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
   background-color: #fcf8f8;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fijar el menú en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 10; /* Asegura que el menú esté encima de los demás componentes */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben */
+  box-sizing: border-box; /* Asegura que los bordes y el relleno no aumenten el ancho total */
+}
+
+body {
+  padding-top: 60px; /* Ajustar para que no se solape con el menú fijo */
 }
 
 /* Contenedor de logo y letras */
 .menu-logo-container {
-  .logo-menu {
-    width: 60px; /* Cambia a tu preferencia */
-    height: 60px; /* O usa auto si prefieres */
-    object-fit: contain; /* Mantiene la proporción de la imagen */
-  }
+  display: flex;
+  align-items: center;
 }
 
-/* Estilo para los logos */
 .menu-logo {
   width: 60px;
-  height: auto;
+  height: 60px;
   object-fit: contain;
 }
 
 .letras {
-  max-height: 44px; /* Ajustar la altura máxima de las letras */
+  max-height: 44px;
   height: auto;
 }
 
@@ -36,6 +43,7 @@
   display: flex;
   align-items: center;
   gap: 30px; /* Espacio entre los elementos a la derecha */
+  margin-left: auto; /* Empuja el contenido de la derecha */
 }
 
 .menu-links {
@@ -62,6 +70,7 @@
   gap: 15px;
 }
 
+/* Ajuste de botones */
 .btn-register,
 .btn-login {
   padding: 10px 20px;
@@ -81,6 +90,7 @@
   transform: scale(1.05);
 }
 
+/* Modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -94,112 +104,20 @@
   z-index: 1000;
 }
 
-.modal-content {
-  background-color: #E5D9F2;
-  border-radius: 20px;
-  padding: 3rem;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  position: relative;
-  animation: slideDown 0.4s ease-in-out;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
+/* Ajustes responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column; /* Hace que los elementos del menú se apilen en lugar de alinearse en una fila */
+    align-items: center;
   }
 
-  to {
-    transform: translateY(0);
-    opacity: 1;
+  .menu-right {
+    width: 100%; /* Asegura que los elementos se ajusten en una fila */
+    justify-content: space-between;
   }
-}
 
-.close-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: transparent;
-  border: none;
-  font-size: 1.8rem;
-  color: #7D2181;
-  /* Темно-ліловий */
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color: #A294F9;
-  /* Блакитний */
-  transform: scale(1.2);
-  transition: 0.2s ease-in-out;
-}
-
-.registration-form h2 {
-  text-align: center;
-  color: #7D2181;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-label {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #7D2181;
-}
-
-input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #CDC1FF;
-  border-radius: 12px;
-  background-color: #FFF;
-  font-size: 1rem;
-  color: #333;
-}
-
-input:focus {
-  border-color: #A294F9;
-  outline: none;
-  box-shadow: 0 0 10px rgba(162, 148, 249, 0.5);
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #7D2181;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #A294F9;
-  box-shadow: 0 0 15px rgba(162, 148, 249, 0.7);
-}
-
-.submit-button:disabled {
-  background-color: #CDC1FF;
-  cursor: not-allowed;
-}
-
-.modal-shadow {
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  .menu-buttons {
+    width: 100%; /* Los botones ocuparán todo el ancho */
+    justify-content: center; /* Centra los botones */
+  }
 }

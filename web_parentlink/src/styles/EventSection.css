@@ -41,7 +41,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 35px;
+  margin-bottom: 50px;
 }
 
 .event-card {
@@ -132,12 +133,12 @@
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
-.tag :hoover {
-  background-color: #411343;
+.tag:hover {
+  background-color: #4b0081;
 }
 /* Cuando el tag está seleccionado */
 .tag.selected {
-  background-color: #007bff;
+  background-color: #4b0081;
   color: white;
 }
 
@@ -220,4 +221,8 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+.h1Events {
+  color: #7d2181;
+  padding: 25px;
 }
