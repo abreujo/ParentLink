@@ -24,6 +24,20 @@ public class EventService {
         return eventRepository.findById(id);
     }
 
+    // Método para obtener eventos filtrados
+    public List<Event> findEventsByFilters(String name, String age) {
+        if (name != null && age != null) {
+            return eventRepository.findByLocationNameAndAgeBracket(name, age);
+        } else if (name != null) {
+            return eventRepository.findByLocationName(name);
+        } else if (age != null) {
+            return eventRepository.findByAgeBracket(age);
+        } else {
+            return eventRepository.findAll();
+        }
+    }
+
+
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }

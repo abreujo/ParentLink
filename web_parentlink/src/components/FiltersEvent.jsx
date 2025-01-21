@@ -1,30 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
 
 const Filters = ({ onFilterChange }) => {
-  const [activeTag, setActiveTag] = useState(null); // Estado para el botón activo
-  const tagRefs = useRef({}); // Referencias a los elementos si las necesitas
+  const [activeTag, setActiveTag] = useState(null);
   const filterRef = useRef(null); // Ref para el contenedor de filtros (completo)
+  const [tagOptions, setTagOptions] = useState({
+    "Ubicación": [],
+    "Edad": ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
+  });
 
-  // Opciones para cada filtro
-  const tagOptions = {
-    Ubicación: ["Málaga", "Barcelona", "Madrid", "Sevilla", "Cádiz"],
-    Edad: ["0-3", "3-5", "6-9+", "10-12", "12-15", "+16"],
-    "Tipo de evento": [
-      "Picknick en el parque",
-      "Tarde de bolos",
-      "Ruta por el bosque",
-      "Kayak para todos",
-    ],
-  };
+  async function fetchLocations() {
+    const response = await fetch("http://localhost:8081/api/locations");
+    const locations = await response.json();
+    setTagOptions(prevOptions => ({
+      ...prevOptions,
+      "Ubicación": locations.map(e => e.name),
+    }));
+  }
+
+  useEffect(() => {
+    fetchLocations();
+  }, []);
 
   // Maneja el clic en los botones principales
   const handleTagClick = (tag) => {
     setActiveTag(activeTag === tag ? null : tag); // Alterna entre abrir/cerrar el menú
   };
 
-  // Maneja la selección de una opción en el menú desplegable
+ 
+
   const handleOptionSelect = (tag, option) => {
-    onFilterChange(tag, option); // Notifica al componente padre
+    if (tag === "Ubicación") {
+      onFilterChange({ locationName: option }); // Enviar filtro por ubicación
+    } else {
+      onFilterChange({ [tag]: option }); // Enviar otros filtros si es necesario
+    }
     setActiveTag(null); // Cierra el menú desplegable
   };
 
