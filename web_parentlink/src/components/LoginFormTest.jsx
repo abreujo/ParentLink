@@ -29,7 +29,7 @@ const LoginFormTest = () => {
         // Redirigir o mostrar mensaje de éxito
         alert("Inicio de sesión exitoso");
       } else {
-        setError("Usuacio o Password invalidos!!!");
+        setError("Usuario o Password invalidos!!!");
         localStorage.setItem("jwtToken", "");
       }
     } catch (error) {
