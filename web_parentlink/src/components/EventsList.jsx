@@ -9,24 +9,31 @@ const EventList = ({ eventLimit, locationName }) => {
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
+  //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
+    const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+
     const fetchEvents = async () => {
       let url = "http://localhost:8081/api/events"; // URL base
       const urlSearchParams = new URLSearchParams();
 
-      if (locationName)
-        urlSearchParams.append("name", locationName)
+      if (locationName) urlSearchParams.append("name", locationName);
 
       /*
       if (edad)
         urlSearchParams.append("edad", edad)
       */
 
-      if (urlSearchParams.size)
-        url=`${url}?${urlSearchParams.toString()}`
+      if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
 
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+          },
+        });
         if (!response.ok) {
           throw new Error("Error al obtener los eventos");
         }

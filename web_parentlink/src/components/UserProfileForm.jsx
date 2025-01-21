@@ -211,7 +211,9 @@ const UserProfileForm = () => {
           />
         </div>
 
-        {errorMessage && <p className="profile-error-message">{errorMessage}</p>}
+        {errorMessage && (
+          <p className="profile-error-message">{errorMessage}</p>
+        )}
 
         <button type="submit" className="profile-submit-button">
           Guardar
