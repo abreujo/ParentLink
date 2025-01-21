@@ -2,20 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit, filters }) => {
+const EventList = ({ eventLimit, filters = [] }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
   //debugger
-  const {locationName, Edad} = filters
-  console.log(filters)
+  const {locationName, Edad} = filters;
 
   //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
-    console.log("Fetching events in EventsList component!")
-    console.log(filters, locationName, Edad)
     const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
 
     const fetchEvents = async () => {
@@ -30,8 +27,6 @@ const EventList = ({ eventLimit, filters }) => {
 
       if (urlSearchParams.size)
         url=`${url}?${urlSearchParams.toString()}`
-
-      console.log({url})
 
       try {
         const response = await fetch(url, {
@@ -51,7 +46,8 @@ const EventList = ({ eventLimit, filters }) => {
       }
     };
 
-    fetchEvents();
+    if (token)
+      fetchEvents();
   }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
@@ -80,6 +76,8 @@ const EventList = ({ eventLimit, filters }) => {
     try {
       //INSCRIPCION DE UN PARTICIPANTE EN UN EVENTO
       const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+      if (!token)
+          return
       const response = await fetch("http://localhost:8081/api/participations", {
         method: "POST",
         headers: {
