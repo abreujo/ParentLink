@@ -18,7 +18,6 @@ const HomeLogIn = () => {
 
         {/* Contenido principal */}
         <div>
-          <h1 className="Bienvenido">Bienvenido, {userName}!</h1>
           {/* Mostrar el mensaje de bienvenida */}
           <WelcomeMessage username={userName} />
           {/* Mostrar la sección de eventos */}

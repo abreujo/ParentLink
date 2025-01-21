@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import FiltersEvent from "../components/FiltersEvent"; // Importa tu componente FiltersEvent
 import EventList from "../components/EventsList"; // Importa tu componente EventList
+import "../styles/EventPage.css"; // Importa el archivo CSS con el fondo
 
 const EventPage = () => {
   const [filters, setFilters] = useState({

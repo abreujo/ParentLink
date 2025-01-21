@@ -5,6 +5,8 @@
   align-items: center; /* Centra los elementos verticalmente */
   height: 60vh; /* Altura del Hero Section */
   padding: 15px;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .left-container {
