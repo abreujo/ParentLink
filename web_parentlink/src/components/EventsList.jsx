@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
@@ -6,6 +6,8 @@ const EventList = ({ eventLimit }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
+  const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
+  const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
   useEffect(() => {
     // Realizar la solicitud GET a la API
@@ -17,31 +19,81 @@ const EventList = ({ eventLimit }) => {
         return response.json();
       })
       .then((data) => {
-        setEvents(data); // Almacenar los eventos en el estado
+        setEvents(data);
       })
       .catch((err) => {
-        setError(err.message); // Manejo de errores
+        setError(err.message);
       });
-  }, []); // El array vacío asegura que la solicitud se haga solo una vez
+  }, []);
 
   const handleCardClick = (index) => {
+    if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
     setFlippedCards((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
     }));
+    setIsCardClicked(true); // Marcar que una tarjeta fue clicada
   };
 
-  const handleJoinEvent = (eventId) => {
-    // Aquí puedes manejar lo que sucede cuando el usuario hace clic en el botón "Únete al evento"
-    console.log(`Te has unido al evento con ID: ${eventId}`);
-    // Aquí puedes agregar tu lógica para unirte al evento, como hacer una solicitud a la API
+  const handleJoinEvent = async (eventId) => {
+    const userConfirmed = window.confirm("Confirma tu asistencia");
+    if (!userConfirmed) {
+      console.log("El usuario canceló la inscripción.");
+      return;
+    }
+
+    // Reemplaza este ID por el ID del usuario autenticado
+    const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
+
+    const participationData = {
+      user: { id: userId }, // Estructura del usuario
+      event: { id: eventId }, // Estructura del evento
+    };
+
+    try {
+      const response = await fetch("http://localhost:8081/api/participations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(participationData),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Error al registrar la participación");
+      }
+
+      const result = await response.json();
+      alert("Te has inscrito al evento correctamente.");
+      console.log("Participación creada:", result);
+    } catch (error) {
+      console.error("Error al inscribirse:", error.message);
+      alert("No se pudo completar la inscripción. " + error.message);
+    }
+  };
+
+  const handleClickOutside = (event) => {
+    // Si el clic fue fuera del contenedor de eventos, se cierran todas las tarjetas giradas
+    if (eventListRef.current && !eventListRef.current.contains(event.target)) {
+      setFlippedCards({}); // Cierra todas las tarjetas
+      setIsCardClicked(false); // Permite que otras tarjetas sean clicadas nuevamente
+    }
   };
 
   // Limitar los eventos si se pasa un límite
   const eventsToRender = eventLimit ? events.slice(0, eventLimit) : events;
 
+  // Añadir el listener para clics fuera del contenedor de eventos
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div>
+    <div ref={eventListRef}>
       {error && <p>Error: {error}</p>}
       <div className="event-cards-container">
         {eventsToRender.map((event, index) => (
@@ -74,7 +126,10 @@ const EventList = ({ eventLimit }) => {
                 </ul>
                 <button
                   className="join-button"
-                  onClick={() => handleJoinEvent(event.id)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Evitar que el click rote la tarjeta
+                    handleJoinEvent(event.id);
+                  }}
                 >
                   Participar
                 </button>

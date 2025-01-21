@@ -1,6 +1,5 @@
 /* Contenedor principal del carrusel */
 .carrusel-container {
-  background-color: #a294f9; /* Fondo azul celeste */
   padding: 40px 20px;
   text-align: center;
   position: relative;
@@ -8,9 +7,10 @@
 }
 
 .carrusel-container h2 {
-  color: #333;
+  color: #63278f;
   font-size: 24px;
   margin-bottom: 30px;
+  font-size: 2.5rem;
 }
 
 /* Carrusel */
