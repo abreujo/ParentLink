@@ -12,9 +12,12 @@ const EventList = ({ eventLimit, filters }) => {
   const {locationName, Edad} = filters
   console.log(filters)
 
+  //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
     console.log("Fetching events in EventsList component!")
     console.log(filters, locationName, Edad)
+    const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+
     const fetchEvents = async () => {
       let url = "http://localhost:8081/api/events"; // URL base
       const urlSearchParams = new URLSearchParams();
@@ -31,7 +34,13 @@ const EventList = ({ eventLimit, filters }) => {
       console.log({url})
 
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+          },
+        });
         if (!response.ok) {
           throw new Error("Error al obtener los eventos");
         }
@@ -69,10 +78,13 @@ const EventList = ({ eventLimit, filters }) => {
     };
 
     try {
+      //INSCRIPCION DE UN PARTICIPANTE EN UN EVENTO
+      const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
       const response = await fetch("http://localhost:8081/api/participations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
         },
         body: JSON.stringify(participationData),
       });

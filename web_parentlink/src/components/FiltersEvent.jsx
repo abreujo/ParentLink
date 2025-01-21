@@ -4,16 +4,22 @@ const Filters = ({ onFilterChange }) => {
   const [activeTag, setActiveTag] = useState(null);
   const filterRef = useRef(null); // Ref para el contenedor de filtros (completo)
   const [tagOptions, setTagOptions] = useState({
-    "Ubicación": [],
-    "Edad": ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
+    Ubicación: [],
+    Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
   });
-
+  const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
   async function fetchLocations() {
-    const response = await fetch("http://localhost:8081/api/locations");
+    const response = await fetch("http://localhost:8081/api/locations", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+      },
+    });
     const locations = await response.json();
-    setTagOptions(prevOptions => ({
+    setTagOptions((prevOptions) => ({
       ...prevOptions,
-      "Ubicación": locations.map(e => e.name),
+      Ubicación: locations.map((e) => e.name),
     }));
   }
 
@@ -25,8 +31,6 @@ const Filters = ({ onFilterChange }) => {
   const handleTagClick = (tag) => {
     setActiveTag(activeTag === tag ? null : tag); // Alterna entre abrir/cerrar el menú
   };
-
- 
 
   const handleOptionSelect = (tag, option) => {
     if (tag === "Ubicación")
