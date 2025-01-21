@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Menu.css";
 import RegistrationForm from "../components/RegistrationForm";
+import LoginForm from "../components/LoginForm"; // Імпортувати LoginForm
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
 import letras from "../assets/images/letrasparentlink.png";
 
 const Menu = () => {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false); // Додати стан для LoginForm
 
   const handleOpenRegisterForm = () => {
     setShowRegisterForm(true);
@@ -14,6 +16,14 @@ const Menu = () => {
 
   const handleCloseRegisterForm = () => {
     setShowRegisterForm(false);
+  };
+
+  const handleOpenLoginForm = () => {
+    setShowLoginForm(true); // Відкрити LoginForm
+  };
+
+  const handleCloseLoginForm = () => {
+    setShowLoginForm(false); // Закрити LoginForm
   };
 
   return (
@@ -40,9 +50,9 @@ const Menu = () => {
           <button className="btn-register" onClick={handleOpenRegisterForm}>
             Registrarse
           </button>
-          <Link to="/home-login">
-            <button className="btn-login">Acceder</button>
-          </Link>
+          <button className="btn-login" onClick={handleOpenLoginForm}>
+            Acceder
+          </button>
         </div>
       </div>
 
@@ -50,6 +60,14 @@ const Menu = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <RegistrationForm onClose={handleCloseRegisterForm} />
+          </div>
+        </div>
+      )}
+
+      {showLoginForm && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <LoginForm onClose={handleCloseLoginForm} />
           </div>
         </div>
       )}
