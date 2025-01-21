@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import React, { useState, useRef, useEffect } from "react";
 
 const Filters = ({ onFilterChange }) => {
   const [activeTag, setActiveTag] = useState(null);
-  const tagRefs = useRef({});
+  const filterRef = useRef(null); // Ref para el contenedor de filtros (completo)
   const [tagOptions, setTagOptions] = useState({
     "Ubicación": [],
     "Edad": ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],

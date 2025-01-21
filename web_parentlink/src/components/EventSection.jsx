@@ -47,23 +47,6 @@ const EventSection = ({ isHomeLogin }) => {
     setActiveTag(""); // Cierra el dropdown
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        !Object.values(tagRefs.current).some(
-          (ref) => ref && ref.contains(e.target)
-        )
-      ) {
-        setActiveTag(""); // Cierra cualquier dropdown abierto
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   return (
     <section className="event-section">
       <div className="filters">
