@@ -57,7 +57,7 @@ const UserProfileForm = () => {
       });
 
       if (response.ok) {
-        navigate("/home-login");
+        navigate("/me");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al guardar los datos.");
