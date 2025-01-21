@@ -7,6 +7,7 @@ const UserProfileForm = () => {
   const [formData, setFormData] = useState({
     surname: "",
     name: "",
+    password: "", // Пароль повернуто
     email: "",
     phone: "",
     dateOfBirth: "",
@@ -92,6 +93,17 @@ const UserProfileForm = () => {
             value={formData.name}
             onChange={handleChange}
             required
+          />
+        </div>
+
+        <div className="profile-form-group">
+          <label htmlFor="password">Contraseña (opcional):</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
           />
         </div>
 
