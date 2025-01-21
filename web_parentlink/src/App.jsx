@@ -16,6 +16,7 @@ import EventList from "./components/EventsList";
 import EventPage from "./pages/EventPage";
 import LoginFormTest from "./components/LoginFormTest";
 import UserDetails from "./components/UserDetails";
+import UserProfileForm from "./components/UserProfileForm";
 
 function App() {
   return (

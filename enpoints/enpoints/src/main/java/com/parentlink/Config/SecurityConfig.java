@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .cors() // Habilitar soporte para CORS
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("api/usersystem/register", "/api/usersystem/login", "/api/events").permitAll()
+                .requestMatchers("api/usersystem/register", "/api/usersystem/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

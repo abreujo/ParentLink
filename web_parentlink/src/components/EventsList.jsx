@@ -9,7 +9,33 @@ const EventList = ({ eventLimit }) => {
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
+  //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
+    const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+
+    fetch("http://localhost:8081/api/events", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener los eventos");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setEvents(data); // Almacenar los eventos en el estado
+      })
+      .catch((err) => {
+        setError(err.message); // Manejar errores
+      });
+  }, []);
+
+  /* CODIGO ANTERIOR A LA INCORPORACION DE JWT SEGURIDAD */
+  /*   useEffect(() => {
     // Realizar la solicitud GET a la API
     fetch("http://localhost:8081/api/events")
       .then((response) => {
@@ -24,7 +50,7 @@ const EventList = ({ eventLimit }) => {
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  }, []); */
 
   const handleCardClick = (index) => {
     if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
