@@ -9,15 +9,18 @@ import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
-import ComoFunciona from "./components/ComoFunciona";
+import ComoFunciona from "./pages/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
+import EventPage from "./pages/EventPage";
+import UserProfileForm from "./components/UserProfileForm";
 
 function App() {
   return (
     <>
       <Router>
+        <MenuLogin></MenuLogin>
         <ScrollToTop />
 
         <Routes>
@@ -29,6 +32,10 @@ function App() {
           <Route path="/ods" element={<Ods />} />
           <Route path="/comofunciona" element={<ComoFunciona />} />
           <Route path="/menu-login" element={<MenuLogin />} />
+          <Route path="/me" element={<HomeLogIn />} />
+          <Route path="/me/edit" element={<UserProfileForm />} />
+
+
           {/* Ruta para el menú de usuarios registrados */}
           <Route
             path="/dashboard"
@@ -42,6 +49,8 @@ function App() {
           {/* Nueva ruta para HomeLogIn */}
           <Route path="/home-login" element={<HomeLogIn />} />{" "}
           {/* Nueva ruta para HomeLogIn */}
+          <Route path="/eventos" element={<EventPage />} />{" "}
+          {/* Ruta para EventPage */}
         </Routes>
 
         {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}

@@ -1,7 +1,8 @@
 package com.parentlink.controller;
 
-import com.parentlink.model.Event;
-import com.parentlink.service.EventService;
+import com.parentlink.model.*;
+import com.parentlink.service.*;
+import com.parentlink.dto.EventCreateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
+
+    @Autowired
+    private LocationService locationService;
 
     @Autowired
     private EventService eventService;
@@ -35,11 +39,36 @@ public class EventController {
     }
 
     // Crear un nuevo evento
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event createdEvent = eventService.createEvent(event);
         return ResponseEntity.ok(createdEvent);  // Devolver el evento creado
+    }*/
+
+    @PostMapping
+    public ResponseEntity<String> createEvent(@RequestBody EventCreateDTO eventCreateDTO) {
+        // Buscar la ubicación por código postal
+        Optional<Location> locationOptional = locationService.getLocationByPostalCode(eventCreateDTO.getPostalCode());
+
+        if (locationOptional.isEmpty()) {
+            return ResponseEntity.badRequest().body("El código postal no existe en la base de datos.");
+        }
+
+        // Crear la entidad Event y asignar la ubicación
+        Event event = new Event();
+        event.setName(eventCreateDTO.getName());
+        event.setDescription(eventCreateDTO.getDescription());
+        event.setImage(eventCreateDTO.getImage());
+        event.setAgeBracket(eventCreateDTO.getAgeBracket());
+        event.setDate(eventCreateDTO.getDate());
+        event.setLocation(locationOptional.get());
+
+        // Guardar el evento
+        eventService.createEvent(event);
+
+        return ResponseEntity.ok("Evento creado con éxito.");
     }
+
 
     // Actualizar un evento existente
     @PutMapping("/{id}")
@@ -69,7 +98,6 @@ JSON EVENT
 http://localhost:8081/api/events
 
 METODO POST PARA CREAR UN EVENTO
-
   DEBE ESTAR CREADA LA UBICACION EN LA BD
 
 {

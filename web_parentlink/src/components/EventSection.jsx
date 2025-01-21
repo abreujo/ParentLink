@@ -9,11 +9,9 @@ const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
-  const [activeTag, setActiveTag] = useState(""); // Controla qué dropdown está activo
-  const tagRefs = useRef({}); // Refs para detectar clics fuera de los dropdowns
 
   // Opciones para los menús desplegables
-  const [showModal, setShowModal] = useState(false); // Estado para controlar el pop-up modal
+  const [showForm, setShowForm] = useState(false); // Estado para controlar el pop-up del formulario
 
   const tagOptions = {
     Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
@@ -33,6 +31,11 @@ const EventSection = ({ isHomeLogin }) => {
       "Granada",
       "Bilbao",
     ],
+  };
+
+  // Función para alternar la visibilidad del formulario
+  const toggleForm = () => {
+    setShowForm((prev) => !prev); // Alterna entre true/false
   };
 
   const handleTagClick = (tag) => {
@@ -61,83 +64,32 @@ const EventSection = ({ isHomeLogin }) => {
     };
   }, []);
 
-  // Maneja la apertura y cierre del modal
-  const toggleModal = () => {
-    setShowModal((prev) => !prev);
-  };
-
   return (
     <section className="event-section">
-      <h2>{isHomeLogin ? "Eventos" : "Encuentra tu evento"}</h2>
       <div className="filters">
         {isHomeLogin ? (
           <>
-            <button className="filter-button" onClick={toggleModal}>
-              Crea tu evento
-            </button>
-            <button
-              className={`filter-button ${
-                selectedOption === "join" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("join")}
-            >
-              Únete a un evento
-            </button>
+            <h1 className="h1Events">Eventos destacados</h1>
           </>
         ) : (
-          <>
-            <button
-              className={`filter-button ${
-                selectedOption === "parent" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("parent")}
-            >
-              Soy madre/padre
-            </button>
-            <button
-              className={`filter-button ${
-                selectedOption === "caregiver" ? "selected" : ""
-              }`}
-              onClick={() => setSelectedOption("caregiver")}
-            >
-              Quiero ser papá/mamá
-            </button>
-          </>
+          <></>
         )}
-
-        {/* Menús desplegables para filtros */}
-        <div className="dropdown-filters">
-          {["Edad", "Tipo de evento", "Ubicación"].map((tag) => (
-            <div
-              key={tag}
-              className="tag-container"
-              ref={(el) => (tagRefs.current[tag] = el)}
-            >
+        {/* Pasamos el límite de eventos a EventList */}
+        <EventList eventLimit={isHomeLogin ? 4 : undefined} />{" "}
+        {/* Formulario de creación de evento */}
+        {showForm && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <CreateEventForm />
               <button
-                className={`tag ${activeTag === tag ? "selected" : ""}`}
-                onClick={() => handleTagClick(tag)}
+                className="close-form-button"
+                onClick={() => setShowForm(false)} // Cerrar el formulario
               >
-                {tag}
+                Cerrar
               </button>
-              {activeTag === tag && (
-                <ul className="dropdown-menu">
-                  {tagOptions[tag].map((option) => (
-                    <li
-                      key={option}
-                      className="dropdown-option"
-                      onClick={() => handleOptionSelect(tag, option)}
-                    >
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
-          ))}
-        </div>
-        {/* Aquí añadimos el componente Eventlist que renderiza las tarjetas*/}
-
-        <EventList></EventList>
+          </div>
+        )}
       </div>
     </section>
   );

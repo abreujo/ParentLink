@@ -5,6 +5,7 @@ paleta de colores de la web:
 #CDC1FF->tono gris oscuro
 #A294F9->tono azul celeste
 #7d2181->tono lila oscuro BOTONES
+#4f1751->tono lila más oscuro para hoover y click
 */
 #root {
   max-width: 1280px;
@@ -16,6 +17,8 @@ paleta de colores de la web:
 .Ods-image {
   width: 100%;
 }
+/* Aplica la fuente Patrick Hand y estilo a los títulos */
+
 /*
 .logo {
   height: 6em;
