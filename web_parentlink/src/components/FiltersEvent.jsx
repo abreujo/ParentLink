@@ -29,13 +29,20 @@ const Filters = ({ onFilterChange }) => {
  
 
   const handleOptionSelect = (tag, option) => {
-    if (tag === "Ubicación") {
-      onFilterChange({ locationName: option }); // Enviar filtro por ubicación
-    } else {
-      onFilterChange({ [tag]: option }); // Enviar otros filtros si es necesario
-    }
+    if (tag === "Ubicación")
+      onFilterChange("locationName", option ); // Enviar filtro por ubicación
+    else
+      onFilterChange(tag, option); // Enviar otros filtros si es necesario
     setActiveTag(null); // Cierra el menú desplegable
   };
+
+  // const handleOptionSelect = (tag, option) => {
+  //   console.log(tagOptions, tag, option)
+  //   setTagOptions((prevFilters) => ({
+  //     ...prevFilters,
+  //     [tag]: option,
+  //   }));
+  // };
 
   // Cierra el menú si se hace clic fuera del contenedor de filtros
   useEffect(() => {

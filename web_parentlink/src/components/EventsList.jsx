@@ -2,14 +2,19 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit, locationName }) => {
+const EventList = ({ eventLimit, filters }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
+  //debugger
+  const {locationName, Edad} = filters
+  console.log(filters)
 
   useEffect(() => {
+    console.log("Fetching events in EventsList component!")
+    console.log(filters, locationName, Edad)
     const fetchEvents = async () => {
       let url = "http://localhost:8081/api/events"; // URL base
       const urlSearchParams = new URLSearchParams();
@@ -17,13 +22,13 @@ const EventList = ({ eventLimit, locationName }) => {
       if (locationName)
         urlSearchParams.append("name", locationName)
 
-      /*
-      if (edad)
-        urlSearchParams.append("edad", edad)
-      */
+      if (Edad)
+        urlSearchParams.append("age", Edad)
 
       if (urlSearchParams.size)
         url=`${url}?${urlSearchParams.toString()}`
+
+      console.log({url})
 
       try {
         const response = await fetch(url);
@@ -38,7 +43,7 @@ const EventList = ({ eventLimit, locationName }) => {
     };
 
     fetchEvents();
-  }, [locationName]); // Depende de locationName para cambiar cuando se seleccione una ciudad
+  }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
     if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
