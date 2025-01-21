@@ -28,35 +28,42 @@ function LoginForm({ onClose }) {
         }
 
         console.log(JSON.stringify({
-                    username: formData.username,
-                    password: formData.password,        
-                }))
+            username: formData.username,
+            password: formData.password,
+        }));
 
         try {
-            const response = await fetch('http://localhost:8081/api/usersystem/login', { // Replace with your endpoint
+            const response = await fetch('http://localhost:8081/api/usersystem/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     username: formData.username,
-                    password: formData.password,        
+                    password: formData.password,
                 }),
             });
 
-            console.log({response})
+            console.log({ response });
 
             if (response.ok) {
+                const data = await response.json();
+                const token = data.token;
+
+                // Зберігаємо токен у локальному сховищі
+                localStorage.setItem("jwtToken", token);
+
+                console.log('User successfully logged in:', data);
                 navigate('/me');
-                const result = await response.json();
-                console.log('User successfully logged in:', result);
             } else {
                 const errorData = await response.json();
                 setErrorMessage(errorData.message || 'Error al iniciar sesión');
+                localStorage.setItem("jwtToken", ""); // Очищуємо токен у разі помилки
             }
         } catch (error) {
             console.error('Error while sending data:', error);
-            setErrorMessage('Error en el servidor!!!');
+            setErrorMessage('Error en el servidor');
+            localStorage.setItem("jwtToken", ""); // Очищуємо токен у разі помилки
         }
     };
 
