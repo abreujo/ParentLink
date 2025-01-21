@@ -5,7 +5,8 @@
   align-items: center; /* Centra los elementos verticalmente */
   height: 60vh; /* Altura del Hero Section */
   padding: 15px;
-  background-color: #f0f0f0; /* Fondo de la sección */
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .left-container {
@@ -21,10 +22,10 @@
 }
 
 .text-content {
-  background-color: #a294f9; /* Fondo del contenedor de texto */
+  font-weight: 500;
   padding: 10px; /* Espaciado interior */
   border-radius: 40px; /* Esquinas redondeadas */
-  color: white; /* Color de texto */
+  color: #63278f; /* Color de texto */
   text-align: left; /* Alinea el texto a la izquierda */
 }
 
@@ -41,5 +42,5 @@
   object-fit: contain; /* Mantiene la proporción del logo */
 }
 .h2 {
-  color: rgb(255, 255, 255);
+  color: #63278f;
 }

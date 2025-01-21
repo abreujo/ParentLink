@@ -22,12 +22,14 @@ a:hover {
   color: #535bf2;
 }
 
+/* index.css o estilos globales */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background-image: url("/fondoBlanco.jpg"); /* Ruta de la imagen */
+  background-size: cover; /* Para cubrir toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  min-height: 100vh; /* Asegúrate de que ocupe toda la altura */
+  margin: 0; /* Elimina los márgenes predeterminados */
+  font-family: Arial, sans-serif; /* O cualquier otra fuente que uses */
 }
 
 h1 {

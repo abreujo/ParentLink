@@ -9,7 +9,7 @@ import Contact from "./pages/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Ods from "./components/Ods";
-import ComoFunciona from "./components/ComoFunciona";
+import ComoFunciona from "./pages/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
@@ -20,6 +20,7 @@ function App() {
   return (
     <>
       <Router>
+        <MenuLogin></MenuLogin>
         <ScrollToTop />
 
         <Routes>

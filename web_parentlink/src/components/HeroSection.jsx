@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section className="hero-section">
       <div className="text-container">
         <div className="text-content">
-          <h2 className="h2">Encuentra a tu familia perfecta</h2>
+          <h1 className="h2">Encuentra a tu familia perfecta</h1>
           <ul className="hero-list">
             <li>Únete a la experiencia.</li>
             <li>Muchas familias forman parte de Parentlink.</li>
