@@ -71,10 +71,13 @@ const EventList = ({ eventLimit, locationName }) => {
     };
 
     try {
+      //INSCRIPCION DE UN PARTICIPANTE EN UN EVENTO
+      const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
       const response = await fetch("http://localhost:8081/api/participations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
         },
         body: JSON.stringify(participationData),
       });
