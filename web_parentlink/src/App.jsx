@@ -14,6 +14,7 @@ import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import UserSystemList from "./components/UserSystemList";
 import EventList from "./components/EventsList";
 import EventPage from "./pages/EventPage";
+import UserProfileForm from "./components/UserProfileForm";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
           <Route path="/ods" element={<Ods />} />
           <Route path="/comofunciona" element={<ComoFunciona />} />
           <Route path="/menu-login" element={<MenuLogin />} />
+          <Route path="/me" element={<HomeLogIn />} />
+          <Route path="/me/edit" element={<HomeLogIn />} />
+
+
           {/* Ruta para el menú de usuarios registrados */}
           <Route
             path="/dashboard"

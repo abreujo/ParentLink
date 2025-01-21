@@ -27,6 +27,11 @@ function LoginForm({ onClose }) {
             return;
         }
 
+        console.log(JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,        
+                }))
+
         try {
             const response = await fetch('http://localhost:8081/api/usersystem/login', { // Replace with your endpoint
                 method: 'POST',
@@ -34,15 +39,17 @@ function LoginForm({ onClose }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                     username: formData.username,
+                    username: formData.username,
                     password: formData.password,        
                 }),
             });
 
+            console.log({response})
+
             if (response.ok) {
+                navigate('/me');
                 const result = await response.json();
                 console.log('User successfully logged in:', result);
-                navigate('/HomeLogIn'); // Redirect to HomeLogIn page
             } else {
                 const errorData = await response.json();
                 setErrorMessage(errorData.message || 'Error al iniciar sesión');

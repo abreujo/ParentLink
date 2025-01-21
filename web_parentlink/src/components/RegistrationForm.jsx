@@ -59,8 +59,8 @@ function RegistrationForm({ onClose }) {
         setErrorMessage("");
         setFormData({ username: "", password: "", confirmPassword: "" });
 
-        // Перенаправлення на UserProfileForm
-        navigate("/UserProfileForm");//colocar el nombre de la pagina a donde ir
+    
+        navigate("/me/edit");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al registrar usuario");
