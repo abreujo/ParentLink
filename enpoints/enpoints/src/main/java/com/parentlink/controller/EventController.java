@@ -22,10 +22,10 @@ public class EventController {
     private EventService eventService;
 
     // Obtener todos los eventos
-    @GetMapping
+    /*@GetMapping
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
-    }
+    }*/
 
     // Obtener un evento por su ID
     @GetMapping("/{id}")
@@ -67,6 +67,20 @@ public class EventController {
         eventService.createEvent(event);
 
         return ResponseEntity.ok("Evento creado con éxito.");
+    }
+
+    // Endpoint para obtener eventos filtrados
+    @GetMapping
+    public ResponseEntity<List<Event>> getEvents(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String age) {
+        List<Event> events;
+        if (name == null && age == null) {
+            events = eventService.getAllEvents(); // Lógica para obtener todos los eventos
+        } else {
+            events = eventService.findEventsByFilters(name, age); // Lógica para filtrar
+        }
+        return ResponseEntity.ok(events);
     }
 
 

@@ -111,12 +111,12 @@ const CreateEventForm = () => {
           required
         >
           <option value="">Select an age group</option>
-          <option value="0-3">6-8</option>
-          <option value="4-6">9-12</option>
-          <option value="6-8">13-18</option>
-          <option value="8-10">13-18</option>
-          <option value="10-12">13-18</option>
-          <option value="+12">13-18</option>
+          <option value="0-3">0-3</option>
+          <option value="4-6">4-6</option>
+          <option value="6-8">6-8</option>
+          <option value="8-10">8-10</option>
+          <option value="10-12">10-12</option>
+          <option value="+12">+12</option>
         </select>
       </div>
 

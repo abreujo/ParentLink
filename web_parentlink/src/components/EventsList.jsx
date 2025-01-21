@@ -2,27 +2,41 @@ import React, { useEffect, useState } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit }) => {
+const EventList = ({ eventLimit, locationName }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({});
 
   useEffect(() => {
-    // Realizar la solicitud GET a la API
-    fetch("http://localhost:8081/api/events")
-      .then((response) => {
+    const fetchEvents = async () => {
+      let url = "http://localhost:8081/api/events"; // URL base
+      const urlSearchParams = new URLSearchParams();
+
+      if (locationName)
+        urlSearchParams.append("name", locationName)
+
+      /*
+      if (edad)
+        urlSearchParams.append("edad", edad)
+      */
+
+      if (urlSearchParams.size)
+        url=`${url}?${urlSearchParams.toString()}`
+
+      try {
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Error al obtener los eventos");
         }
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         setEvents(data);
-      })
-      .catch((err) => {
+      } catch (err) {
         setError(err.message);
-      });
-  }, []);
+      }
+    };
+
+    fetchEvents();
+  }, [locationName]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
     setFlippedCards((prevState) => ({
@@ -38,12 +52,11 @@ const EventList = ({ eventLimit }) => {
       return;
     }
 
-    // Reemplaza este ID por el ID del usuario autenticado
     const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
 
     const participationData = {
-      user: { id: userId }, // Estructura del usuario
-      event: { id: eventId }, // Estructura del evento
+      user: { id: userId },
+      event: { id: eventId },
     };
 
     try {
