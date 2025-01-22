@@ -65,7 +65,7 @@ export default function ComoFunciona() {
       {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
-          <h1 className="hero-title">Bienvenido a ParentLink</h1>
+          <h1 className="hero-title">Como funciona ParentLink</h1>
           <p className="hero-description">
             La plataforma ideal para compartir el cuidado de tus hijos con otras familias. ¡Fácil, segura y confiable!
           </p>
