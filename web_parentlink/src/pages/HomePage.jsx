@@ -9,7 +9,6 @@ import PublicidadSection from "../components/Publicidad";
 
 const HomePage = () => {
   const backgroundStyle = {
-    backgroundImage: "url(/fondoBlanco.jpg)", // Ruta correcta para public/
     backgroundSize: "cover",
     backgroundPosition: "center",
     minHeight: "100vh",
