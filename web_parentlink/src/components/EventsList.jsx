@@ -20,7 +20,7 @@ const EventList = ({ eventLimit, filters = [] }) => {
       const urlSearchParams = new URLSearchParams();
 
       if (locationName)
-        urlSearchParams.append("name", locationName)
+        urlSearchParams.append("locationName", locationName)
 
       if (Edad)
         urlSearchParams.append("age", Edad)
