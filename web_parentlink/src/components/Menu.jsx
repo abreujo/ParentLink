@@ -42,7 +42,7 @@ const Menu = () => {
           <Link className="menu-link" to="/">
             Sobre Nosotros
           </Link>
-          <Link className="menu-link" to="/como-funciona">
+          <Link className="menu-link" to="/comofunciona">
             ¿Cómo Funciona?
           </Link>
         </div>
