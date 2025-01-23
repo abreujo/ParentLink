@@ -11,57 +11,47 @@ import Services from "./components/Services";
 import Ods from "./components/Ods";
 import ComoFunciona from "./pages/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
-import UserSystemList from "./components/UserSystemList";
-import EventList from "./components/EventsList";
 import EventPage from "./pages/EventPage";
-import LoginFormTest from "./components/LoginFormTest";
-import UserDetails from "./components/UserDetails";
 import UserProfileForm from "./components/UserProfileForm";
 import SobreNosotros from "./pages/SobreNosotros";
 
 function App() {
   return (
     <>
-      <Router>
-        <MenuLogin></MenuLogin>
-        <ScrollToTop />
+      <MenuLogin></MenuLogin>
+      <ScrollToTop />
 
-        <Routes>
-          {/* Rutas principales */}
-          <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/ods" element={<Ods />} />
-          <Route path="/comofunciona" element={<ComoFunciona />} />
+      <Routes>
+        {/* Rutas principales */}
+        <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/ods" element={<Ods />} />
+        <Route path="/comofunciona" element={<ComoFunciona />} />
           <Route path="/sobrenosotros" element={<SobreNosotros/>} />
-          <Route path="/menu-login" element={<MenuLogin />} />
-          <Route path="/me" element={<HomeLogIn />} />
-          <Route path="/me/edit" element={<UserProfileForm />} />
-          
-          {/* Ruta para el menú de usuarios registrados */}
-          <Route
-            path="/dashboard"
-            element={
-              <>
-                <MenuLogin />
-                <div>Contenido del Dashboard</div>
-              </>
-            }
-          />
-          {/* Nueva ruta para HomeLogIn */}
-          <Route path="/home-login" element={<HomeLogIn />} />{" "}
-          {/* Nueva ruta para HomeLogIn */}
-          <Route path="/eventos" element={<EventPage />} />{" "}
-          {/* Ruta para EventPage */}
-        </Routes>
+        <Route path="/menu-login" element={<MenuLogin />} />
+        <Route path="/me" element={<HomeLogIn />} />
+        <Route path="/me/edit" element={<UserProfileForm />} />
+        {/* Ruta para el menú de usuarios registrados */}
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <MenuLogin />
+              <div>Contenido del Dashboard</div>
+            </>
+          }
+        />
+        {/* Nueva ruta para HomeLogIn */}
+        <Route path="/home-login" element={<HomeLogIn />} />{" "}
+        {/* Nueva ruta para HomeLogIn */}
+        <Route path="/eventos" element={<EventPage />} />{" "}
+        {/* Ruta para EventPage */}
+      </Routes>
 
-        {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
-        <FooterFrame />
-
-        {/* PRUEBA DEL FORMULARIO DE LOGIN TEST */}
-        <LoginFormTest></LoginFormTest>
-      </Router>
+      {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
+      <FooterFrame />
     </>
   );
 }

@@ -4,11 +4,13 @@ public class AuthResponse {
     private String status;
     private String message;
     private String token;
+    private Long userId;
 
-    public AuthResponse(String status, String message, String token) {
+    public AuthResponse(String status, String message, String token, Long userId) {
         this.status = status;
         this.message = message;
         this.token = token;
+        this.userId = userId;
     }
 
     // Getters y Setters
@@ -34,5 +36,13 @@ public class AuthResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long UserId) {
+        this.userId = userId;
     }
 }

@@ -40,6 +40,10 @@ public class Event {
     @JsonIgnore
     private List<Participate> participations;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    private UserSystem userSystem;
+
     // Constructor vacío
     public Event() {}
 
@@ -116,5 +120,13 @@ public class Event {
 
     public void setParticipations(List<Participate> participations) {
         this.participations = participations;
+    }
+
+    public UserSystem getUserSystem() {
+        return userSystem;
+    }
+
+    public void setUserSystem(UserSystem userSystem) {
+        this.userSystem = userSystem;
     }
 }

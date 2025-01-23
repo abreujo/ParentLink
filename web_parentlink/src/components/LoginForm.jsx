@@ -1,122 +1,128 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contex/AuthContext";
 
 function LoginForm({ onClose }) {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
+  const { token } = useAuth(); // Obtener el token del contexto
+  const { logout } = useAuth(); //funcion para hacer logout
+  const { login } = useAuth(); // Contexto para hacer login
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const [errorMessage, setErrorMessage] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // State for password visibility
-    const navigate = useNavigate(); // Hook for navigation
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+    // Local validation
+    if (!formData.username.trim() || !formData.password.trim()) {
+      setErrorMessage("El nombre de usuario y la contraseña son obligatorios");
+      return;
+    }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    console.log(
+      JSON.stringify({
+        username: formData.username,
+        password: formData.password,
+      })
+    );
 
-        // Local validation
-        if (!formData.username.trim() || !formData.password.trim()) {
-            setErrorMessage('El nombre de usuario y la contraseña son obligatorios');
-            return;
-        }
-
-        console.log(JSON.stringify({
+    try {
+      const response = await fetch(
+        "http://localhost:8081/api/usersystem/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             username: formData.username,
             password: formData.password,
-        }));
-
-        try {
-            const response = await fetch('http://localhost:8081/api/usersystem/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: formData.username,
-                    password: formData.password,
-                }),
-            });
-
-            console.log({ response });
-
-            if (response.ok) {
-                const data = await response.json();
-                const token = data.token;
-
-                // Зберігаємо токен у локальному сховищі
-                localStorage.setItem("jwtToken", token);
-
-                console.log('User successfully logged in:', data);
-                navigate('/me');
-            } else {
-                const errorData = await response.json();
-                setErrorMessage(errorData.message || 'Error al iniciar sesión');
-                localStorage.setItem("jwtToken", ""); // Очищуємо токен у разі помилки
-            }
-        } catch (error) {
-            console.error('Error while sending data:', error);
-            setErrorMessage('Error en el servidor');
-            localStorage.setItem("jwtToken", ""); // Очищуємо токен у разі помилки
+          }),
         }
-    };
+      );
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+      console.log({ response });
 
-    return (
-        <div className="registration-form-container">
-            <form className="registration-form" onSubmit={handleSubmit}>
-                {/* Close button */}
-                <button className="close-button" type="button" onClick={onClose}>
-                    ✖
-                </button>
-                <h2>Iniciar sesión</h2>
-                <div className="form-group">
-                    <label htmlFor="username">Nombre de usuario:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+      if (response.ok) {
+        const data = await response.json();
+        login(data.token); // Guardar el token en el contexto
+        navigate("/me");
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || "Error al iniciar sesión");
+        logout();
+      }
+    } catch (error) {
+      console.error("Error while sending data:", error);
+      setErrorMessage("Error en el servidor");
+      logout();
+    }
+  };
 
-                <div className="form-group password-group">
-                    <label htmlFor="password">Contraseña:</label>
-                    <div className="password-input-wrapper">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                        <button
-                            type="button"
-                            className="show-password-button"
-                            onClick={togglePasswordVisibility}
-                        >
-                            {showPassword ? 'Ocultar' : 'Mostrar'}
-                        </button>
-                    </div>
-                </div>
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-                <button className="submit-button" type="submit">Iniciar sesión</button>
-            </form>
+  return (
+    <div className="registration-form-container">
+      <form className="registration-form" onSubmit={handleSubmit}>
+        {/* Close button */}
+        <button className="close-button" type="button" onClick={onClose}>
+          ✖
+        </button>
+        <h2>Iniciar sesión</h2>
+        <div className="form-group">
+          <label htmlFor="username">Nombre de usuario:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
         </div>
-    );
+
+        <div className="form-group password-group">
+          <label htmlFor="password">Contraseña:</label>
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="show-password-button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </div>
+        </div>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+        <button className="submit-button" type="submit">
+          Iniciar sesión
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default LoginForm;

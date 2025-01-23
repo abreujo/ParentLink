@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Імпорт useNavigate
 import "../styles/RegistrationForm.css";
+import { useAuth } from "../contex/AuthContext";
 
 function RegistrationForm({ onClose }) {
   const navigate = useNavigate(); // Ініціалізація useNavigate
@@ -9,6 +10,9 @@ function RegistrationForm({ onClose }) {
     password: "",
     confirmPassword: "",
   });
+  /*Variables para el manejo de entorno*/
+  const { login } = useAuth(); // Contexto para hacer login
+  const { userId } = useAuth(); //Contexto para guardar el Id del User System
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -55,12 +59,13 @@ function RegistrationForm({ onClose }) {
         const result = await response.json();
         console.log("User successfully registered:", result);
 
+        //envio hacer login y guardo las variables de contexto.
+
         setSuccessMessage("Usuario registrado con éxito");
         setErrorMessage("");
         setFormData({ username: "", password: "", confirmPassword: "" });
 
-    
-        navigate("/me/edit");
+        //navigate("/me/edit");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al registrar usuario");

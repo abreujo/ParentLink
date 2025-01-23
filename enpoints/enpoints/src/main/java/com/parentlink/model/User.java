@@ -60,6 +60,8 @@ public class User {
     @JsonIgnore
     private Set<Participate> participations;
 
+
+
     @Enumerated(EnumType.STRING)  // Esto asegura que se almacene como un String (INDIVIDUO o FAMILIA)
     private UserType userType;
 
