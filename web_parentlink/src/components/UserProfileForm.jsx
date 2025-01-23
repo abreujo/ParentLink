@@ -50,6 +50,8 @@ const UserProfileForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //Debugger
+      console.log(JSON.stringify(formData));
       const response = await fetch("http://localhost:8081/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,6 +62,10 @@ const UserProfileForm = () => {
         navigate("/me");
       } else {
         const errorData = await response.json();
+
+        //Debugger
+        console.log(errorData);
+
         setErrorMessage(errorData.message || "Error al guardar los datos.");
       }
     } catch (error) {

@@ -3,13 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contex/AuthContext";
 
 function LoginForm({ onClose }) {
-  const { token } = useAuth(); // Obtener el token del contexto
-  const { logout } = useAuth(); //funcion para hacer logout
-  const { login } = useAuth(); // Contexto para hacer login
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+  const { performLogin } = useAuth();
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for password visibility
@@ -31,14 +26,10 @@ function LoginForm({ onClose }) {
       return;
     }
 
-    console.log(
-      JSON.stringify({
-        username: formData.username,
-        password: formData.password,
-      })
-    );
+    e.preventDefault();
+    await performLogin(formData.username, formData.password, setErrorMessage);
 
-    try {
+    /*     try {
       const response = await fetch(
         "http://localhost:8081/api/usersystem/login",
         {
@@ -68,7 +59,7 @@ function LoginForm({ onClose }) {
       console.error("Error while sending data:", error);
       setErrorMessage("Error en el servidor");
       logout();
-    }
+    } */
   };
 
   const togglePasswordVisibility = () => {
