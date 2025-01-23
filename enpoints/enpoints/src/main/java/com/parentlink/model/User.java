@@ -24,8 +24,8 @@ public class User {
     @Size(max = 100, message = "Name cannot exceed 100 characters")
     private String name;
 
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;
+    /*@Size(min = 8, message = "Password must be at least 8 characters long")
+    private String password;*/
 
     @NotBlank(message = "Email is required and cannot be blank")
     @Email(message = "Email should be valid")
@@ -63,14 +63,16 @@ public class User {
     @Enumerated(EnumType.STRING)  // Esto asegura que se almacene como un String (INDIVIDUO o FAMILIA)
     private UserType userType;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserSystem userSystem;
+
     // Constructor vacío
     public User() {}
 
     // Constructor completo
-    public User(String surname, String name, String password, String email, String phone, Gender gender, LocalDate dateOfBirth, Location location, Boolean children, Integer numberOfChildren) {
+    public User(String surname, String name, String password, String email, String phone, Gender gender, LocalDate dateOfBirth, Location location, Boolean children, Integer numberOfChildren, UserSystem userSystem) {
         this.surname = surname;
         this.name = name;
-        this.password = password;
         this.email = email;
         this.phone = phone;
         this.dateOfBirth = dateOfBirth;
@@ -78,6 +80,7 @@ public class User {
         this.location = location;
         this.children = children;
         this.numberOfChildren = numberOfChildren;
+        this.userSystem = userSystem;
     }
 
     // Getters y setters
@@ -103,14 +106,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -206,5 +201,13 @@ public class User {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public UserSystem getUserSystem() {
+        return userSystem;
+    }
+
+    public void setUserSystem(UserSystem userSystem) {
+        this.userSystem = userSystem;
     }
 }

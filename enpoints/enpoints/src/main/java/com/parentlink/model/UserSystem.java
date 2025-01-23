@@ -1,6 +1,7 @@
 package com.parentlink.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,4 +18,10 @@ public class UserSystem {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
+    private User user; // Relación bidireccional (opcional)
+
 }
