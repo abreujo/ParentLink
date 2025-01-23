@@ -120,6 +120,14 @@ public class UserController {
         List<Child> children = userService.getChildrenByUserId(userId);
         return ResponseEntity.ok(children);  // Devuelve los hijos del usuario
     }
+
+    //Metodo Pos para crear Usuarios sin hijos...
+    @PostMapping("/without-children")
+    public ResponseEntity<User> createUserWithoutChildren(@RequestBody UserCreateDto userCreateDto) {
+        User user = userService.createUserWithoutChildren(userCreateDto);
+        return ResponseEntity.ok(user);
+    }
+
 }
     /*
     JSON USER
