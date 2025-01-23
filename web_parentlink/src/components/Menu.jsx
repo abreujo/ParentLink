@@ -26,14 +26,25 @@ const Menu = () => {
     setShowLoginForm(false); // Закрити LoginForm
   };
 
+  // Función para desplazarse a la parte superior
+  const scrollToTop = () => {
+    window.scrollTo(0, 0); // Desplazamiento instantáneo al inicio
+  };
+
   return (
     <nav className="menu">
       <div className="menu-logo-container">
         <div className="logo-menu">
-          <img src={logo} alt="Logo" className="menu-logo" />
+          {/* Agregar onClick al logo para desplazar hacia arriba */}
+          <Link to="/" onClick={scrollToTop}>
+            <img src={logo} alt="Logo" className="menu-logo" />
+          </Link>
         </div>
         <div className="letras-logo">
-          <img src={letras} alt="Letras" className="letras" />
+          {/* Agregar onClick al texto del logo para desplazar hacia arriba */}
+          <Link to="/" onClick={scrollToTop}>
+            <img src={letras} alt="Letras" className="letras" />
+          </Link>
         </div>
       </div>
 

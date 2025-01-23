@@ -53,6 +53,9 @@ const EventSection = ({ isHomeLogin }) => {
         {isHomeLogin ? (
           <>
             <h1 className="h1Events">Eventos destacados</h1>
+            <button className="filter-button" onClick={toggleForm}>
+              Crea tu evento
+            </button>{" "}
           </>
         ) : (
           <></>

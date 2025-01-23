@@ -2,11 +2,16 @@ import React from "react";
 import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Importamos useLocation
+
 const MenuLogin = () => {
+  const location = useLocation(); // Obtenemos la ubicación actual de la página
+
+  // Lógica para mostrar "Mi Perfil" solo si no estamos en la página "/home-login"
+  const showProfileButton = location.pathname !== "/home-login";
+
   return (
     <nav className="menu">
-      {/* Logo en el lado izquierdo */}
       {/* Logo en el lado izquierdo */}
       <div className="menu-left">
         <div className="menu-logo-container">
@@ -34,6 +39,14 @@ const MenuLogin = () => {
         <Link className="menu-highlight-link" to="/eventos">
           Eventos
         </Link>
+
+        {/* Mostrar el botón "Mi Perfil" solo si no estamos en la página "/home-login" */}
+        {showProfileButton && (
+          <Link to="/me" className="menu-link">
+            Mi Perfil
+          </Link>
+        )}
+
         <button className="menu-button logout">Cerrar Sesión</button>
       </div>
     </nav>

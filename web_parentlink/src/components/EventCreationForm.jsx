@@ -29,7 +29,12 @@ const CreateEventForm = () => {
     e.preventDefault();
 
     // Validaciones básicas
-    if (!formData.name || !formData.description || !formData.date || !formData.postalCode) {
+    if (
+      !formData.name ||
+      !formData.description ||
+      !formData.date ||
+      !formData.postalCode
+    ) {
       setErrorMessage("Por favor, complete todos los campos obligatorios.");
       setSuccessMessage("");
       return;
@@ -43,7 +48,7 @@ const CreateEventForm = () => {
         },
         body: JSON.stringify(formData),
       });
-    
+
       if (response.ok) {
         setSuccessMessage("¡Evento creado con éxito!");
         setErrorMessage("");
@@ -57,7 +62,10 @@ const CreateEventForm = () => {
         });
       } else {
         const errorData = await response.json(); // Intentar leer la respuesta del servidor
-        setErrorMessage(errorData.message || `Error: ${response.status} - ${response.statusText}`);
+        setErrorMessage(
+          errorData.message ||
+            `Error: ${response.status} - ${response.statusText}`
+        );
         setSuccessMessage("");
       }
     } catch (error) {
