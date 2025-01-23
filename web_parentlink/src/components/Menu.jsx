@@ -39,7 +39,7 @@ const Menu = () => {
 
       <div className="menu-right">
         <div className="menu-links">
-          <Link className="menu-link" to="/">
+          <Link className="menu-link" to="/sobrenosotros">
             Sobre Nosotros
           </Link>
           <Link className="menu-link" to="/comofunciona">
@@ -58,7 +58,7 @@ const Menu = () => {
 
       {showRegisterForm && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content2">
             <RegistrationForm onClose={handleCloseRegisterForm} />
           </div>
         </div>
@@ -66,7 +66,7 @@ const Menu = () => {
 
       {showLoginForm && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content2">
             <LoginForm onClose={handleCloseLoginForm} />
           </div>
         </div>

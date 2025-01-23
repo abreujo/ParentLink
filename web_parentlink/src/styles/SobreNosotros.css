@@ -1,0 +1,160 @@
+/* SobreNosotros.css */
+
+/* General Section */
+.sobre-hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #A294F9, #E5D9F2);
+    color: white;
+    margin-top: 30px;
+}
+
+.sobre-hero-content {
+    max-width: 600px;
+}
+
+.sobre-hero-title {
+    font-size: 2.8rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sobre-hero-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.sobre-hero-image-container {
+    flex: 1;
+}
+
+.sobre-hero-image {
+    width: 70%;
+        max-width: 450px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+    
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+    
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+/* Content Section */
+.sobre-content-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.sobre-content-block {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    background: #FFF;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sobre-content-block.reverse {
+    flex-direction: row-reverse;
+}
+
+.sobre-content-image-container {
+    flex: 1;
+}
+
+.sobre-content-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sobre-content-text-container {
+    flex: 2;
+}
+
+.sobre-content-title {
+    font-size: 1.8rem;
+    color: #7d2181;
+    margin-bottom: 1rem;
+}
+
+.sobre-content-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.sobre-ods-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sobre-ods-list li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sobre-hero-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .sobre-hero-image {
+        max-width: 300px;
+    }
+
+    .sobre-content-block {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .sobre-content-block.reverse {
+        flex-direction: column;
+    }
+
+    .sobre-content-image {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sobre-hero-title {
+        font-size: 2rem;
+    }
+
+    .sobre-hero-description {
+        font-size: 1rem;
+    }
+
+    .sobre-content-title {
+        font-size: 1.5rem;
+    }
+
+    .sobre-content-text {
+        font-size: 0.9rem;
+    }
+
+    .sobre-content-image {
+        max-width: 200px;
+    }
+}

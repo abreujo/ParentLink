@@ -13,6 +13,7 @@ import ComoFunciona from "./pages/ComoFunciona";
 import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import EventPage from "./pages/EventPage";
 import UserProfileForm from "./components/UserProfileForm";
+import SobreNosotros from "./pages/SobreNosotros";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/ods" element={<Ods />} />
         <Route path="/comofunciona" element={<ComoFunciona />} />
+          <Route path="/sobrenosotros" element={<SobreNosotros/>} />
         <Route path="/menu-login" element={<MenuLogin />} />
         <Route path="/me" element={<HomeLogIn />} />
         <Route path="/me/edit" element={<UserProfileForm />} />
