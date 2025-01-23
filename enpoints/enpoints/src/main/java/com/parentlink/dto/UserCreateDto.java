@@ -8,7 +8,6 @@ import java.util.List;
 public class UserCreateDto {
     private String surname;
     private String name;
-    private String password;
     private String email;
     private String phone;
     private LocalDate dateOfBirth;
@@ -18,6 +17,9 @@ public class UserCreateDto {
     private Integer numberOfChildren;
     private List<ChildCreateDto> childrenList;
     private UserType userType;
+
+    // Nuevo campo para asociar el UserSystem
+    private Long userSystemId;
 
     public String getSurname() {
         return surname;
@@ -33,14 +35,6 @@ public class UserCreateDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -115,6 +109,11 @@ public class UserCreateDto {
         this.userType = userType;
     }
 
-    public void setId(Long id) {
+    public Long getUserSystemId() {
+        return userSystemId;
+    }
+
+    public void setUserSystemId(Long userSystemId) {
+        this.userSystemId = userSystemId;
     }
 }
