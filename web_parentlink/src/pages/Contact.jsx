@@ -5,8 +5,7 @@ import pacco from "../assets/images/Pacco.png";
 import myroslav from "../assets/images/Myroslav.png";
 import david from "../assets/images/David.png";
 import johel from "../assets/images/Johel.jpg";
-import milagros from "../assets/images/milagros.jpg";
-import UserDetails from "../components/UserDetails";
+import UserDetailsEntorno from "../components/UserDetailsEntorno";
 
 function Contact() {
   const cardsData = [
@@ -54,7 +53,7 @@ function Contact() {
           photo={card.photo}
         />
       ))}
-      <UserDetails></UserDetails>
+      <UserDetailsEntorno></UserDetailsEntorno>
     </div>
   );
 }

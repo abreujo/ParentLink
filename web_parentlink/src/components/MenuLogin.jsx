@@ -4,20 +4,20 @@ import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contex/AuthContext";
 
 const MenuLogin = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Obtener la función login del contexto
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-  
-    localStorage.removeItem("authToken");
-    localStorage.setItem("jwtToken", ""); 
-    navigate("/"); 
+    logout();
+    navigate("/");
   };
 
   return (
     <nav className="menu">
-     
       <div className="menu-left">
         <div className="menu-logo-container">
           <Link to="/">
@@ -29,7 +29,6 @@ const MenuLogin = () => {
         </div>
       </div>
 
-  
       <div className="menu-right">
         <Link className="menu-link" to="/sobre-nosotros">
           Sobre Nosotros

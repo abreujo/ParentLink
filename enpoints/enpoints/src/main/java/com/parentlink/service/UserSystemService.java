@@ -1,6 +1,7 @@
 package com.parentlink.service;
 
 import com.parentlink.dto.UserSystemDto;
+import com.parentlink.exception.UserNotFoundException;
 import com.parentlink.model.UserSystem;
 import com.parentlink.repository.UserSystemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,14 @@ public class UserSystemService {
                 .stream()
                 .map(user -> new UserSystemDto(user.getId(), user.getUsername())) // Mapea al DTO incluyendo el ID
                 .collect(Collectors.toList());
+    }
+
+    //Impementacion para leer los datos de un usuario al tener el userName
+    // Metodo GET para obtener el ID del usuario por nombre de usuario
+    public Long getUserIdByUsername(String username) {
+        Optional<UserSystem> user = userSystemRepository.findByUsername(username);
+        return user.map(UserSystem::getId) // Usa map para obtener el ID de forma segura
+                .orElseThrow(() -> new UserNotFoundException("Usuario con nombre de usuario '" + username + "' no encontrado"));
+        //Lanza una excepcion personalizada para un mejor manejo de errores en el controlador
     }
 }
