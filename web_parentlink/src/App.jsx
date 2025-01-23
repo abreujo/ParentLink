@@ -36,6 +36,7 @@ function App() {
           <Route path="/menu-login" element={<MenuLogin />} />
           <Route path="/me" element={<HomeLogIn />} />
           <Route path="/me/edit" element={<UserProfileForm />} />
+          
           {/* Ruta para el menú de usuarios registrados */}
           <Route
             path="/dashboard"
