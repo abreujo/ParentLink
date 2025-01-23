@@ -60,6 +60,9 @@ public class UserService {
             children.add(child);
         }
         // Obtener el UserSystem por ID y asociarlo
+        if (userCreateDto.getUserSystemId() == null) {
+            throw new IllegalArgumentException("UserSystem ID must not be null");
+        }
         UserSystem userSystem = userSystemRepository.findById(userCreateDto.getUserSystemId())
                 .orElseThrow(() -> new IllegalArgumentException("UserSystem not found"));
 
