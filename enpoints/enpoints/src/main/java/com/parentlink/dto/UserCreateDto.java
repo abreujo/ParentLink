@@ -19,6 +19,9 @@ public class UserCreateDto {
     private List<ChildCreateDto> childrenList;
     private UserType userType;
 
+    // Nuevo campo para asociar el UserSystem
+    private Long userSystemId;
+
     public String getSurname() {
         return surname;
     }
@@ -115,6 +118,11 @@ public class UserCreateDto {
         this.userType = userType;
     }
 
-    public void setId(Long id) {
+    public Long getUserSystemId() {
+        return userSystemId;
+    }
+
+    public void setUserSystemId(Long userSystemId) {
+        this.userSystemId = userSystemId;
     }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
+import Filters from "./FiltersEvent"
 
 import EventList from "./EventsList";
 import events from "../data/events.json";
@@ -9,6 +10,7 @@ const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
+  const [filters, setFilters] = useState({})
 
   // Opciones para los menús desplegables
   const [showForm, setShowForm] = useState(false); // Estado para controlar el pop-up del formulario
