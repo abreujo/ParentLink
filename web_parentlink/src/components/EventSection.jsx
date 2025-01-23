@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
+import Filters from "./FiltersEvent";
 
 import EventList from "./EventsList";
 import events from "../data/events.json";
@@ -9,29 +10,10 @@ const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
+  const [filters, setFilters] = useState({});
 
   // Opciones para los menús desplegables
   const [showForm, setShowForm] = useState(false); // Estado para controlar el pop-up del formulario
-
-  const tagOptions = {
-    Edad: ["0-3", "4-6", "6-8", "8-10", "10-12", "+12"],
-    "Tipo de evento": [
-      "Naturaleza",
-      "Deporte",
-      "Aventura",
-      "Fiesta",
-      "Cultura",
-      "Tecnología",
-    ],
-    Ubicación: [
-      "Madrid",
-      "Barcelona",
-      "Sevilla",
-      "Valencia",
-      "Granada",
-      "Bilbao",
-    ],
-  };
 
   // Función para alternar la visibilidad del formulario
   const toggleForm = () => {
@@ -45,6 +27,14 @@ const EventSection = ({ isHomeLogin }) => {
   const handleOptionSelect = (tag, option) => {
     setSelectedTag(option); // Guarda la opción seleccionada
     setActiveTag(""); // Cierra el dropdown
+  };
+
+  // Manejar cambios en los filtros
+  const handleFilterChange = (key, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [key]: value,
+    }));
   };
 
   return (

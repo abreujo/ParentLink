@@ -5,9 +5,8 @@ import "../styles/EventPage.css"; // Importa el archivo CSS con el fondo
 
 const EventPage = () => {
   const [filters, setFilters] = useState({
-    Ubicación: null,
+    locationName: null,
     Edad: null,
-    "Tipo de evento": null,
   });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Estado para el dropdown (si es necesario)
@@ -17,6 +16,7 @@ const EventPage = () => {
 
   // Maneja los cambios en los filtros
   const handleFilterChange = (tag, option) => {
+    console.log(filters, tag, option)
     setFilters((prevFilters) => ({
       ...prevFilters,
       [tag]: option,

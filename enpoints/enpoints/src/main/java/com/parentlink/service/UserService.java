@@ -4,9 +4,11 @@ import com.parentlink.dto.ChildCreateDto;
 import com.parentlink.dto.UserCreateDto;
 import com.parentlink.model.User;
 import com.parentlink.model.Child;
+import com.parentlink.model.UserSystem;
 import com.parentlink.model.UserType;
 import com.parentlink.repository.UserRepository;
 import com.parentlink.repository.ChildRepository;
+import com.parentlink.repository.UserSystemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -25,6 +27,9 @@ public class UserService {
     @Autowired
     private ChildRepository childRepository;
 
+    @Autowired
+    private UserSystemRepository userSystemRepository;
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -37,7 +42,6 @@ public class UserService {
         User user = new User();
         user.setSurname(userCreateDto.getSurname());
         user.setName(userCreateDto.getName());
-        user.setPassword(userCreateDto.getPassword());
         user.setEmail(userCreateDto.getEmail());
         user.setPhone(userCreateDto.getPhone());
         user.setDateOfBirth(userCreateDto.getDateOfBirth());
@@ -55,6 +59,15 @@ public class UserService {
             child.setUser(user);  // Vincular al usuario
             children.add(child);
         }
+        // Obtener el UserSystem por ID y asociarlo
+        if (userCreateDto.getUserSystemId() == null) {
+            throw new IllegalArgumentException("UserSystem ID must not be null");
+        }
+        UserSystem userSystem = userSystemRepository.findById(userCreateDto.getUserSystemId())
+                .orElseThrow(() -> new IllegalArgumentException("UserSystem not found"));
+
+        user.setUserSystem(userSystem);
+
         user.setChildrenList(children);
 
         // Validación antes de guardar

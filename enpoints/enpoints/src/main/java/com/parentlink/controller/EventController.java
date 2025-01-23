@@ -72,13 +72,13 @@ public class EventController {
     // Endpoint para obtener eventos filtrados
     @GetMapping
     public ResponseEntity<List<Event>> getEvents(
-            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String locationName,
             @RequestParam(required = false) String age) {
         List<Event> events;
-        if (name == null && age == null) {
+        if (locationName == null && age == null) {
             events = eventService.getAllEvents(); // Lógica para obtener todos los eventos
         } else {
-            events = eventService.findEventsByFilters(name, age); // Lógica para filtrar
+            events = eventService.findEventsByFilters(locationName, age); // Lógica para filtrar
         }
         return ResponseEntity.ok(events);
     }

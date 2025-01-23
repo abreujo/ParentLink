@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
@@ -15,7 +16,6 @@ const MenuLogin = () => {
       {/* Logo en el lado izquierdo */}
       <div className="menu-left">
         <div className="menu-logo-container">
-          {/* Logos clickeables */}
           <Link to="/">
             <img src={logo} alt="Logo" className="menu-logo" />
           </Link>
@@ -25,7 +25,6 @@ const MenuLogin = () => {
         </div>
       </div>
 
-      {/* Botones a la derecha */}
       <div className="menu-right">
         <Link className="menu-link" to="/sobre-nosotros">
           Sobre Nosotros
