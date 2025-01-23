@@ -56,6 +56,13 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         login(data.token, data.userId); // Guardar token e ID en el contexto
         navigate("/me"); // Navegar al dashboard o página principal
+        //Debuger
+        console.log(
+          "hago login y ya tengo el token..> " +
+            data.token +
+            "  UserId..: " +
+            data.userId
+        );
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al iniciar sesión");
