@@ -61,7 +61,7 @@
 
 .hero-image-container {
     flex: 1;
-    animation: float 3s ease-in-out infinite;
+    
 }
 
 .hero-image {
@@ -69,6 +69,7 @@
     max-width: 450px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {

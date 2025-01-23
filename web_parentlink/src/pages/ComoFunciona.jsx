@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Menu from "../components/Menu";
 import ModalWithVideo from "../components/ModalWithVideo";
+import RegistrationForm from "../components/RegistrationForm";
 import "../styles/ComoFunciona.css";
 
 // Імпорт зображень
@@ -16,9 +17,18 @@ import ctaImage from "../assets/images/cta-image.png"; // CTA зображенн
 
 export default function ComoFunciona() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const handleOpenRegisterForm = () => {
+    setShowRegisterForm(true);
+  };
+
+  const handleCloseRegisterForm = () => {
+    setShowRegisterForm(false);
+  };
 
   const steps = [
     {
@@ -68,7 +78,6 @@ export default function ComoFunciona() {
   return (
     <>
       <Menu />
-      {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">Como funciona ParentLink</h1>
@@ -82,7 +91,6 @@ export default function ComoFunciona() {
         </div>
       </div>
 
-      {/* Steps Section */}
       <div className="how-it-works">
         {steps.map((step, index) => (
           <section className="step" key={index}>
@@ -97,22 +105,27 @@ export default function ComoFunciona() {
         ))}
       </div>
 
-      {/* CTA Section */}
       <div className="cta-section">
         <div className="cta-content">
           <h2 className="cta-title">¿Listo para empezar?</h2>
           <p className="cta-description">
             Regístrate ahora y únete a miles de familias que ya confían en ParentLink.
           </p>
-          <button className="cta-button">Regístrate Ahora</button>
+          <button className="cta-button" onClick={handleOpenRegisterForm}>Regístrate Ahora</button>
         </div>
         <div className="cta-image-container">
           <img src={ctaImage} alt="CTA" className="cta-image" />
         </div>
       </div>
 
-      {/* Modal Section */}
       {isModalOpen && <ModalWithVideo onClose={closeModal} />}
+      {showRegisterForm && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <RegistrationForm onClose={handleCloseRegisterForm} />
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background-color: white; /* Fondo blanco para el modal */
+  background: linear-gradient(180deg, #E5D9F2 0%, #CDC1FF 50%, #A294F9 100%); /* Fondo blanco para el modal */
   padding: 20px;
   border-radius: 10px;
   text-align: center;
