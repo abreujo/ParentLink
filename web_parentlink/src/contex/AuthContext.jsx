@@ -30,11 +30,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userId");
 
     //se envia al login
-    navigate("/login");
+    //navigate("/login");
   };
 
   // Función para realizar el login desde cualquier parte
-  const performLogin = async (username, password, setErrorMessage) => {
+  const performLogin = async (
+    username,
+    password,
+    setErrorMessage,
+    registro
+  ) => {
     try {
       const response = await fetch(
         "http://localhost:8081/api/usersystem/login",
