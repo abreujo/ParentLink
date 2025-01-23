@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "../components/Menu";
+import ModalWithVideo from "../components/ModalWithVideo";
 import "../styles/ComoFunciona.css";
 
 // Імпорт зображень
@@ -14,6 +15,11 @@ import heroImage from "../assets/images/hero-image.png"; // Hero зображе�
 import ctaImage from "../assets/images/cta-image.png"; // CTA зображення
 
 export default function ComoFunciona() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const steps = [
     {
       title: "1. Regístrate y comparte tus necesidades",
@@ -69,7 +75,7 @@ export default function ComoFunciona() {
           <p className="hero-description">
             La plataforma ideal para compartir el cuidado de tus hijos con otras familias. ¡Fácil, segura y confiable!
           </p>
-          <button className="hero-button">Descubre Más</button>
+          <button className="hero-button" onClick={openModal}>Descubre Más</button>
         </div>
         <div className="hero-image-container">
           <img src={heroImage} alt="Hero" className="hero-image" />
@@ -104,6 +110,9 @@ export default function ComoFunciona() {
           <img src={ctaImage} alt="CTA" className="cta-image" />
         </div>
       </div>
+
+      {/* Modal Section */}
+      {isModalOpen && <ModalWithVideo onClose={closeModal} />}
     </>
   );
 }
