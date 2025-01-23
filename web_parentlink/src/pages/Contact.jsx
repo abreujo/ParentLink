@@ -53,7 +53,8 @@ function Contact() {
           photo={card.photo}
         />
       ))}
-      <UserDetailsEntorno></UserDetailsEntorno>
+      {/* Ejemplo de uso de las variables de contexto y mostrar el JSON
+      <UserDetailsEntorno></UserDetailsEntorno> */}
     </div>
   );
 }
