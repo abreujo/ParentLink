@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "usersystem")
@@ -23,5 +25,9 @@ public class UserSystem {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnore
     private User user; // Relación bidireccional (opcional)
+
+    @OneToMany(mappedBy = "userSystem", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Event> events;
 
 }

@@ -4,6 +4,7 @@ import com.parentlink.model.*;
 import com.parentlink.service.*;
 import com.parentlink.dto.EventCreateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,9 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private UserService userService;
 
     // Obtener todos los eventos
     /*@GetMapping
@@ -38,35 +42,32 @@ public class EventController {
         }
     }
 
-    // Crear un nuevo evento
-    /*@PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        Event createdEvent = eventService.createEvent(event);
-        return ResponseEntity.ok(createdEvent);  // Devolver el evento creado
-    }*/
-
     @PostMapping
-    public ResponseEntity<String> createEvent(@RequestBody EventCreateDTO eventCreateDTO) {
-        // Buscar la ubicación por código postal
-        Optional<Location> locationOptional = locationService.getLocationByPostalCode(eventCreateDTO.getPostalCode());
+    public ResponseEntity<?> createEvent(@RequestBody EventCreateDTO eventCreateDTO) {
 
-        if (locationOptional.isEmpty()) {
-            return ResponseEntity.badRequest().body("El código postal no existe en la base de datos.");
-        }
+            // Buscar la ubicación por código postal
+            Optional<Location> locationOptional = locationService.getLocationByPostalCode(eventCreateDTO.getPostalCode());
+            if (locationOptional.isEmpty()) {
+                return ResponseEntity.badRequest().body("El código postal no existe en la base de datos.");
+            }
 
-        // Crear la entidad Event y asignar la ubicación
-        Event event = new Event();
-        event.setName(eventCreateDTO.getName());
-        event.setDescription(eventCreateDTO.getDescription());
-        event.setImage(eventCreateDTO.getImage());
-        event.setAgeBracket(eventCreateDTO.getAgeBracket());
-        event.setDate(eventCreateDTO.getDate());
-        event.setLocation(locationOptional.get());
+            UserSystem userSystem = new UserSystem();
+            userSystem.setId(eventCreateDTO.getUserSystemId());
 
-        // Guardar el evento
-        eventService.createEvent(event);
+            // Crear y configurar la entidad Event
+            Event event = new Event();
+            event.setName(eventCreateDTO.getName());
+            event.setDescription(eventCreateDTO.getDescription());
+            event.setImage(eventCreateDTO.getImage());
+            event.setAgeBracket(eventCreateDTO.getAgeBracket());
+            event.setDate(eventCreateDTO.getDate());
+            event.setLocation(locationOptional.get());
+            event.setUserSystem(userSystem);
 
-        return ResponseEntity.ok("Evento creado con éxito.");
+            // Guardar el evento en la base de datos
+            Event savedEvent = eventService.createEvent(event);
+
+            return ResponseEntity.ok("Evento creado con éxito.");
     }
 
     // Endpoint para obtener eventos filtrados
