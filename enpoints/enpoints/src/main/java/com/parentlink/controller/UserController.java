@@ -127,13 +127,12 @@ public class UserController {
     http://localhost:8081/api/users
 
 {
-  "surname": "García",
-  "name": "Pepa",
-  "password": "password890",
-  "email": "pepa.garcia@gmail.com",
+  "surname": "Ortega",
+  "name": "Luis",
+  "email": "luis.ortega@gmail.com",
   "phone": "+34987654321",
   "dateOfBirth": "1978-04-09",
-  "gender": "FEMALE",
+  "gender": "MALE",
   "location": {
     "postalCode": "28001"
   },
@@ -145,6 +144,7 @@ public class UserController {
       "gender": "MALE",
       "dateOfBirth": "2018-06-15"
     }
-  ]
+  ],
+  "userSystemId": 1
 }
     * */
