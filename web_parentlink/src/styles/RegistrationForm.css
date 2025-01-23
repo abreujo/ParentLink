@@ -130,3 +130,13 @@ input:focus {
     background-color: #CDC1FF;
     cursor: not-allowed;
 }
+.modal-content2 {
+    background: linear-gradient(180deg, #E5D9F2 0%, #CDC1FF 50%, #A294F9 100%);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}

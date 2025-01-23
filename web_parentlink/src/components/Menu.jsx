@@ -58,7 +58,7 @@ const Menu = () => {
 
       {showRegisterForm && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content2">
             <RegistrationForm onClose={handleCloseRegisterForm} />
           </div>
         </div>
@@ -66,7 +66,7 @@ const Menu = () => {
 
       {showLoginForm && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content2">
             <LoginForm onClose={handleCloseLoginForm} />
           </div>
         </div>
