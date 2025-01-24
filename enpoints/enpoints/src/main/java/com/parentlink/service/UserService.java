@@ -46,39 +46,47 @@ public class UserService {
         user.setGender(userCreateDto.getGender());
         user.setLocation(userCreateDto.getLocation());
         user.setChildren(userCreateDto.getChildren());
-        user.setNumberOfChildren(userCreateDto.getNumberOfChildren());
 
-        List<Child> children = new ArrayList<>();
-        for (ChildCreateDto childCreateDto : userCreateDto.getChildrenList()) {
-            Child child = new Child();
-            child.setName(childCreateDto.getName());
-            child.setGender(childCreateDto.getGender());
-            child.setDateOfBirth(LocalDate.now());;
-            child.setUser(user);  // Vincular al usuario
-            children.add(child);
+        // Si el usuario tiene hijos, configuramos los detalles
+        if (Boolean.TRUE.equals(userCreateDto.getChildren())) {
+            user.setNumberOfChildren(userCreateDto.getNumberOfChildren());
+
+            // Mapear y asociar hijos
+            List<Child> children = new ArrayList<>();
+            for (ChildCreateDto childCreateDto : userCreateDto.getChildrenList()) {
+                Child child = new Child();
+                child.setName(childCreateDto.getName());
+                child.setGender(childCreateDto.getGender());
+                child.setDateOfBirth(LocalDate.now());
+                child.setUser(user);
+                children.add(child);
+            }
+            user.setChildrenList(children);
+        } else {
+            // Si no tiene hijos, aseguramos que los campos relacionados estén en null
+            user.setNumberOfChildren(null);
+            user.setChildrenList(null);
         }
-        // Obtener el UserSystem por ID y asociarlo
+
+        // Validar y asociar UserSystem
         if (userCreateDto.getUserSystemId() == null) {
             throw new IllegalArgumentException("UserSystem ID must not be null");
         }
         UserSystem userSystem = userSystemRepository.findById(userCreateDto.getUserSystemId())
                 .orElseThrow(() -> new IllegalArgumentException("UserSystem not found"));
-
         user.setUserSystem(userSystem);
 
-        user.setChildrenList(children);
-
-        // Validación antes de guardar
+        // Validar antes de guardar
         validateUser(user);
 
-        // Guardamos el usuario primero
+        // Guardar usuario
         user = userRepository.save(user);
 
-        // Si el usuario tiene hijos, asociamos y guardamos los hijos
+        // Si tiene hijos, guardar los hijos también
         if (Boolean.TRUE.equals(user.isChildren())) {
             for (Child child : user.getChildrenList()) {
-                child.setUser(user);  // Asociamos el hijo con el usuario
-                childRepository.save(child);  // Guardamos cada hijo
+                child.setUser(user);
+                childRepository.save(child);
             }
         }
         return user;
@@ -88,7 +96,8 @@ public class UserService {
         if (user.isChildren() == null) {
             throw new IllegalArgumentException("The 'children' field cannot be null.");
         }
-        if (user.isChildren()) {
+
+        if (Boolean.TRUE.equals(user.isChildren())) {
             if (user.getNumberOfChildren() == null || user.getNumberOfChildren() < 1) {
                 throw new IllegalArgumentException("Number of children must be greater than 0 for family users.");
             }
@@ -103,6 +112,7 @@ public class UserService {
                 throw new IllegalArgumentException("Individual users cannot have a list of children.");
             }
         }
+
         if (user.getEmail() != null && !StringUtils.hasText(user.getEmail())) {
             throw new IllegalArgumentException("The email field cannot be empty.");
         }
