@@ -18,7 +18,7 @@ import SobreNosotros from "./pages/SobreNosotros";
 function App() {
   return (
     <>
-      <MenuLogin></MenuLogin>
+      <Menu />
       <ScrollToTop />
 
       <Routes>
@@ -29,20 +29,9 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/ods" element={<Ods />} />
         <Route path="/comofunciona" element={<ComoFunciona />} />
-          <Route path="/sobrenosotros" element={<SobreNosotros/>} />
-        <Route path="/menu-login" element={<MenuLogin />} />
+        <Route path="/sobrenosotros" element={<SobreNosotros />} />
         <Route path="/me" element={<HomeLogIn />} />
         <Route path="/me/edit" element={<UserProfileForm />} />
-        {/* Ruta para el menú de usuarios registrados */}
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <MenuLogin />
-              <div>Contenido del Dashboard</div>
-            </>
-          }
-        />
         {/* Nueva ruta para HomeLogIn */}
         <Route path="/home-login" element={<HomeLogIn />} />{" "}
         {/* Nueva ruta para HomeLogIn */}

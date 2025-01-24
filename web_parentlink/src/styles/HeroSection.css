@@ -6,6 +6,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
   padding: 3rem 2rem;
   background: linear-gradient(135deg, #A294F9, #E5D9F2);
   color: #fff;
