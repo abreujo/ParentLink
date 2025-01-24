@@ -8,8 +8,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
   const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
   const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
-  //debugger
-  const {locationName, Edad} = filters;
+
+  const { locationName, Edad } = filters;
 
   //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
@@ -19,14 +19,11 @@ const EventList = ({ eventLimit, filters = [] }) => {
       let url = "http://localhost:8081/api/events"; // URL base
       const urlSearchParams = new URLSearchParams();
 
-      if (locationName)
-        urlSearchParams.append("locationName", locationName)
+      if (locationName) urlSearchParams.append("locationName", locationName);
 
-      if (Edad)
-        urlSearchParams.append("age", Edad)
+      if (Edad) urlSearchParams.append("age", Edad);
 
-      if (urlSearchParams.size)
-        url=`${url}?${urlSearchParams.toString()}`
+      if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
 
       try {
         const response = await fetch(url, {
@@ -46,8 +43,7 @@ const EventList = ({ eventLimit, filters = [] }) => {
       }
     };
 
-    if (token)
-      fetchEvents();
+    if (token) fetchEvents();
   }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
@@ -76,8 +72,7 @@ const EventList = ({ eventLimit, filters = [] }) => {
     try {
       //INSCRIPCION DE UN PARTICIPANTE EN UN EVENTO
       const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
-      if (!token)
-          return
+      if (!token) return;
       const response = await fetch("http://localhost:8081/api/participations", {
         method: "POST",
         headers: {

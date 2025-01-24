@@ -8,11 +8,14 @@ spring.datasource.password=[TU PASSWORD]
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 
-# Configuraci�n de JPA/Hibernate
+# Configuraciï¿½n de JPA/Hibernate
 # Puedes usar 'create', 'update' o 'none'
+#Usar para actualizar la estructura de la BD
+#spring.jpa.hibernate.ddl-auto=create-drop
+#Usar para la carga inicial de datos.
+#spring.jpa.hibernate.ddl-auto=create
+#Usar para actualizar ya en productivo
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-
-# Security key
-apt.jwt.key = "yH7kXf9LpQz6N8JmRtVbYp3Wq5KdMz4yH7kXf9LpQz6N8JmRtVbYp3Wq5KdMz4="
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver

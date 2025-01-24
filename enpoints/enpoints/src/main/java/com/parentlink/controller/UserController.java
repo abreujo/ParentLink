@@ -1,9 +1,7 @@
 package com.parentlink.controller;
 
 import com.parentlink.dto.UserCreateDto;
-import com.parentlink.model.Child;
-import com.parentlink.model.User;
-import com.parentlink.model.UserType;
+import com.parentlink.model.*;
 import com.parentlink.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -125,6 +124,27 @@ public class UserController {
     @PostMapping("/without-children")
     public ResponseEntity<User> createUserWithoutChildren(@RequestBody UserCreateDto userCreateDto) {
         User user = userService.createUserWithoutChildren(userCreateDto);
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/initial")
+    public ResponseEntity<User> createUserDataInitializer() {
+        UserCreateDto user1 = new UserCreateDto(
+                "Pérez",
+                "Carlos",
+                "carlos.perez@example.com",
+                "+34987654321",
+                LocalDate.of(1985, 5, 20),
+                Gender.MALE,
+                new Location("29014", null),
+                true,
+                0,
+                null,
+                UserType.INDIVIDUO,
+                "1" // ID de UserSystem asociado (debe ser válido)
+        );
+
+        User user = userService.createUserWithoutChildren(user1);
         return ResponseEntity.ok(user);
     }
 
