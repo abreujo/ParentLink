@@ -1,46 +1,137 @@
-/* src/styles/HeroSection.css */
+/* HeroSection.css */
+
+/* Загальний стиль секції Hero */
 .hero-section {
   display: flex;
-  justify-content: space-around;
-  align-items: center; /* Centra los elementos verticalmente */
-  height: 60vh; /* Altura del Hero Section */
-  padding: 15px;
-  margin-top: 30px;
-  margin-bottom: 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #A294F9, #E5D9F2);
+  color: #fff;
+  min-height: 60vh;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
-.left-container {
-  display: flex;
-  flex-direction: column; /* Coloca los elementos en una columna (uno encima del otro) */
-  justify-content: flex-start; /* Alinea los elementos al principio */
-  width: 60%; /* Controla el ancho del contenedor izquierdo */
-  gap: 20px; /* Espacio entre los elementos de la columna */
-}
-
+/* Текстова частина */
 .text-container {
-  margin-bottom: 20px; /* Espacio entre el texto y la imagen */
+  flex: 1;
+  z-index: 2;
 }
 
 .text-content {
-  font-weight: 500;
-  padding: 10px; /* Espaciado interior */
-  border-radius: 40px; /* Esquinas redondeadas */
-  color: #63278f; /* Color de texto */
-  text-align: left; /* Alinea el texto a la izquierda */
+  max-width: 600px;
+  text-align: left;
+  animation: fadeIn 2s ease-in-out;
 }
 
-.right-container {
-  display: flex;
-  justify-content: center; /* Centra el logo horizontalmente */
-  align-items: center; /* Centra el logo verticalmente */
-  width: 30%; /* Ancho del contenedor derecho */
-}
-
-.hero-logo {
-  max-width: 400px; /* Ajusta el tamaño del logo */
-  max-height: 600px;
-  object-fit: contain; /* Mantiene la proporción del logo */
-}
 .h2 {
-  color: #63278f;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #fff;
+}
+
+.hero-list li {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.hero-list li::before {
+  content: "\2713";
+  /* Checkmark */
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  color: #7d2181;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Логотип */
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-logo2 {
+  width: 70%;
+  max-width: 400px;
+  /* animation: float 3s ease-in-out infinite; */
+  border-radius: 236px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Анімації */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .text-content {
+    margin-bottom: 2rem;
+  }
+
+  .h2 {
+    font-size: 2.5rem;
+  }
+
+  .hero-logo {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .h2 {
+    font-size: 2rem;
+  }
+
+  .hero-list li {
+    font-size: 1rem;
+  }
+
+  .hero-logo {
+    width: 70%;
+  }
 }
