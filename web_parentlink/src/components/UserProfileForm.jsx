@@ -63,18 +63,12 @@ const UserProfileForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Debugger
-    console.log(JSON.stringify(formData));
-
     try {
       if (!token) {
         throw new Error(
           "Token no disponible. Por favor, inicia sesión nuevamente."
         );
       }
-
-      //Debuger
-      console.log("Token:" + token);
 
       const response = await fetchWithAuth(
         "http://localhost:8081/api/users/without-children", // URL de tu API
@@ -86,14 +80,13 @@ const UserProfileForm = () => {
         }
       );
 
+      //Debugger
+      console.log(JSON.stringify(formData));
+
       if (response.ok) {
         navigate("/me");
       } else {
         const errorData = await response.json();
-
-        //Debugger
-        console.log(errorData);
-
         setErrorMessage(errorData.message || "Error al guardar los datos.");
       }
     } catch (error) {

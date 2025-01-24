@@ -1,5 +1,6 @@
 package com.parentlink.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -36,6 +37,7 @@ public class User {
 
     @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be a past date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     @NotNull(message = "Gender is required")

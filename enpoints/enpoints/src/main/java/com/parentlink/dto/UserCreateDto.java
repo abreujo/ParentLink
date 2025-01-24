@@ -21,6 +21,25 @@ public class UserCreateDto {
     // Nuevo campo para asociar el UserSystem
     private Long userSystemId;
 
+    // Constructor con todos los parámetros
+    public UserCreateDto(String surname, String name, String email, String phone, LocalDate dateOfBirth, Gender gender,
+                         Location location, Boolean children, Integer numberOfChildren, List<ChildCreateDto> childrenList,
+                         UserType userType, String userSystemId) {
+        this.surname = surname;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.location = location;
+        this.children = children;
+        this.numberOfChildren = numberOfChildren;
+        this.childrenList = childrenList;
+        this.userType = userType;
+        this.userSystemId = Long.valueOf(userSystemId);
+    }
+
+
     public String getSurname() {
         return surname;
     }
