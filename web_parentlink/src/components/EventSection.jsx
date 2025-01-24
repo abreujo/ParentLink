@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/EventSection.css";
-import Filters from "./FiltersEvent"
+import Filters from "./FiltersEvent";
 
 import EventList from "./EventsList";
 import events from "../data/events.json";
@@ -10,7 +10,11 @@ const EventSection = ({ isHomeLogin }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
-  const [filters, setFilters] = useState({})
+  const [filters, setFilters] = useState({});
+
+  const handleCreateSubmit = () => {
+    setShowForm(false);
+  };
 
   // Opciones para los menús desplegables
   const [showForm, setShowForm] = useState(false); // Estado para controlar el pop-up del formulario
@@ -37,20 +41,19 @@ const EventSection = ({ isHomeLogin }) => {
     }));
   };
 
-  
   return (
     <section className="event-section">
-      <div className="filters">
-        <Filters onFilterChange={handleFilterChange} />
-      </div>
       <div>
-        {isHomeLogin && <h1 className="h1Events">Eventos destacados</h1>}
+        {isHomeLogin && <h1 className="h1Events">últimos Eventos</h1>}
+        <button className="filter-button" onClick={toggleForm}>
+          Crea tu evento
+        </button>{" "}
         <EventList eventLimit={isHomeLogin ? 4 : undefined} filters={filters} />
       </div>
       {showForm && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <CreateEventForm />
+            <CreateEventForm onFormSuccess={handleCreateSubmit} º />
             <button
               className="close-form-button"
               onClick={() => setShowForm(false)}
