@@ -4,18 +4,22 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parentlink.model.UserSystem;
 import com.parentlink.repository.UserSystemRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.util.List;
 
 @Component
-public class UserDataInitializer {
+public class UserSystemDataInitializer {
 
     @Autowired
     private UserSystemRepository userSystemRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder; // Inyectar PasswordEncoder
 
     @PostConstruct
     public void loadUserData() {
@@ -28,14 +32,19 @@ public class UserDataInitializer {
         try {
             // Leer el archivo JSON desde resources
             ObjectMapper objectMapper = new ObjectMapper();
-            InputStream inputStream = getClass().getResourceAsStream("/userdata.json");
+            InputStream inputStream = getClass().getResourceAsStream("/usersystemdata.json");
 
             if (inputStream == null) {
-                throw new RuntimeException("Archivo userdata.json no encontrado en resources.");
+                throw new RuntimeException("Archivo usersystemdata.json no encontrado en resources.");
             }
 
             // Mapear el contenido JSON a una lista de objetos UserSystem
             List<UserSystem> users = objectMapper.readValue(inputStream, new TypeReference<List<UserSystem>>() {});
+
+            // Codificar las contraseñas antes de guardarlas
+            for (UserSystem user : users) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
 
             // Guardar los datos en la base de datos
             userSystemRepository.saveAll(users);

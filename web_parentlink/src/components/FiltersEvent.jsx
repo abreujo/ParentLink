@@ -117,7 +117,7 @@ const Filters = ({ onFilterChange }) => {
             </button>
           </div>
         ))}
-      </div>      
+      </div>
     </div>
   );
 };

@@ -55,6 +55,15 @@ function RegistrationForm({ onClose }) {
 
       if (response.ok) {
         const result = await response.json();
+
+        //debugger
+        console.log(
+          JSON.stringify({
+            username: formData.username,
+            password: formData.password,
+          })
+        );
+
         setSuccessMessage("Usuario registrado con éxito");
         setErrorMessage("");
 
