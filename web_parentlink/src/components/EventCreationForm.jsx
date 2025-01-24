@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useAuth } from "../contex/AuthContext";
+import { useEffect } from "react";
 
-const CreateEventForm = () => {
+const CreateEventForm = ({ onFormSuccess }) => {
+  const { userId, token } = useAuth();
   // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     name: "",
@@ -9,6 +12,14 @@ const CreateEventForm = () => {
     ageBracket: "",
     date: "",
     postalCode: "",
+    userSystemId: null,
+  });
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      userSystemId: userId,
+    });
   });
 
   // Estado para mensajes de éxito o error
@@ -29,7 +40,12 @@ const CreateEventForm = () => {
     e.preventDefault();
 
     // Validaciones básicas
-    if (!formData.name || !formData.description || !formData.date || !formData.postalCode) {
+    if (
+      !formData.name ||
+      !formData.description ||
+      !formData.date ||
+      !formData.postalCode
+    ) {
       setErrorMessage("Por favor, complete todos los campos obligatorios.");
       setSuccessMessage("");
       return;
@@ -40,12 +56,14 @@ const CreateEventForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
-    
+
       if (response.ok) {
         setSuccessMessage("¡Evento creado con éxito!");
+        onFormSuccess();
         setErrorMessage("");
         setFormData({
           name: "",
@@ -57,7 +75,10 @@ const CreateEventForm = () => {
         });
       } else {
         const errorData = await response.json(); // Intentar leer la respuesta del servidor
-        setErrorMessage(errorData.message || `Error: ${response.status} - ${response.statusText}`);
+        setErrorMessage(
+          errorData.message ||
+            `Error: ${response.status} - ${response.statusText}`
+        );
         setSuccessMessage("");
       }
     } catch (error) {
