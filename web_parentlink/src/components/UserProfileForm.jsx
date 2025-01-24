@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/UserProfileForm.css";
+import { useAuth } from "../contex/AuthContext"; // Importa el contexto
+import fetchWithAuth from "../utils/fetchWithAuth";
 
 const UserProfileForm = () => {
   const navigate = useNavigate();
+  const { userId, token } = useAuth(); // Obtén userId y token del contexto
+
   const [formData, setFormData] = useState({
     surname: "",
     name: "",
-    password: "", // Пароль повернуто
     email: "",
     phone: "",
     dateOfBirth: "",
     gender: "",
-    location: { postalCode: "", name: "", country: "" },
+    location: { postalCode: "" },
     children: false,
-    numberOfChildren: 0,
+    userSystemId: null,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Asigna el userId al campo userSystemId cuando esté disponible
+  useEffect(() => {
+    if (userId) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        userSystemId: userId,
+      }));
+    }
+  }, [userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,14 +62,29 @@ const UserProfileForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //Debugger
+    console.log(JSON.stringify(formData));
+
     try {
-      //Debugger
-      console.log(JSON.stringify(formData));
-      const response = await fetch("http://localhost:8081/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      if (!token) {
+        throw new Error(
+          "Token no disponible. Por favor, inicia sesión nuevamente."
+        );
+      }
+
+      //Debuger
+      console.log("Token:" + token);
+
+      const response = await fetchWithAuth(
+        "http://localhost:8081/api/users/without-children", // URL de tu API
+        token, // Pasa el token como argumento
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }, // Headers adicionales
+          body: JSON.stringify(formData), // Convierte formData a JSON
+        }
+      );
 
       if (response.ok) {
         navigate("/me");
@@ -70,6 +98,7 @@ const UserProfileForm = () => {
       }
     } catch (error) {
       setErrorMessage("Error al conectarse con el servidor.");
+      console.log("Probando el envio de datos para registro del usuario");
     }
   };
 
@@ -99,17 +128,6 @@ const UserProfileForm = () => {
             value={formData.name}
             onChange={handleChange}
             required
-          />
-        </div>
-
-        <div className="profile-form-group">
-          <label htmlFor="password">Contraseña (opcional):</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
           />
         </div>
 
@@ -166,64 +184,12 @@ const UserProfileForm = () => {
         </div>
 
         <div className="profile-form-group">
-          <label>¿Tiene hijos?</label>
-          <select
-            name="children"
-            value={formData.children}
-            onChange={handleChildrenChange}
-            required
-          >
-            <option value="false">No</option>
-            <option value="true">Sí</option>
-          </select>
-        </div>
-
-        {formData.children && (
-          <div className="profile-form-group">
-            <label htmlFor="numberOfChildren">Número de hijos:</label>
-            <input
-              type="number"
-              id="numberOfChildren"
-              name="numberOfChildren"
-              min="1"
-              value={formData.numberOfChildren}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        )}
-
-        <div className="profile-form-group">
           <label htmlFor="postalCode">Código Postal:</label>
           <input
             type="text"
             id="postalCode"
             name="postalCode"
             value={formData.location.postalCode}
-            onChange={handleLocationChange}
-            required
-          />
-        </div>
-
-        <div className="profile-form-group">
-          <label htmlFor="nameLocation">Ciudad:</label>
-          <input
-            type="text"
-            id="nameLocation"
-            name="name"
-            value={formData.location.name}
-            onChange={handleLocationChange}
-            required
-          />
-        </div>
-
-        <div className="profile-form-group">
-          <label htmlFor="country">País:</label>
-          <input
-            type="text"
-            id="country"
-            name="country"
-            value={formData.location.country}
             onChange={handleLocationChange}
             required
           />

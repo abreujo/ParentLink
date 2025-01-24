@@ -65,7 +65,7 @@ public class User {
     @Enumerated(EnumType.STRING)  // Esto asegura que se almacene como un String (INDIVIDUO o FAMILIA)
     private UserType userType;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserSystem userSystem;
 
     // Constructor vacío

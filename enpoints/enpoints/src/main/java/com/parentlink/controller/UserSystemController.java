@@ -76,6 +76,20 @@ public class UserSystemController {
         String token = jwtUtil.generateToken(loginRequest.getUsername());
         return ResponseEntity.ok(new AuthResponse("success", "Autenticación exitosa", token, userId));
     }
+
+    // Endpoint para obtener UserSystem por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserSystemById(@PathVariable Long id) {
+        try {
+            // Llama al servicio para obtener el UserSystem por ID
+            UserSystem userSystem = userSystemService.getUserSystemById(id);
+            return ResponseEntity.ok(userSystem);
+        } catch (Exception e) {
+            // Devuelve un error si no se encuentra el UserSystem
+            return ResponseEntity.status(404).body(new ErrorResponseDto("UserSystem not found with id: " + id));
+        }
+    }
+
 }
 
 /*

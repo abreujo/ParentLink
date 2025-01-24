@@ -56,4 +56,10 @@ public class UserSystemService {
                 .orElseThrow(() -> new UserNotFoundException("Usuario con nombre de usuario '" + username + "' no encontrado"));
         //Lanza una excepcion personalizada para un mejor manejo de errores en el controlador
     }
+
+    // Metodo para obtener un UserSystem por su ID
+    public UserSystem getUserSystemById(Long id) {
+        Optional<UserSystem> userSystem = userSystemRepository.findById(id);
+        return userSystem.orElseThrow(() -> new RuntimeException("UserSystem not found with id: " + id));
+    }
 }

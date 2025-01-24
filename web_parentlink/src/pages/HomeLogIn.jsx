@@ -3,9 +3,12 @@ import MenuLogin from "../components/MenuLogin"; // Importa MenuLogin
 import Sidebar from "../components/Sidebar"; // Importa Sidebar
 import EventSection from "../components/EventSection";
 import WelcomeMessage from "../components/WelcomeMessage";
+import { useAuth } from "../contex/AuthContext";
 
 const HomeLogIn = () => {
-  const [userName, setUserName] = useState("Carlos");
+  const { username } = useAuth();
+
+  console.log("UserName...:   " + username);
 
   return (
     <div>
@@ -14,12 +17,12 @@ const HomeLogIn = () => {
 
       <div style={{ display: "flex" }}>
         {/* Sidebar a la izquierda */}
-        <Sidebar username={userName} />
+        <Sidebar username={username} />
 
         {/* Contenido principal */}
         <div>
           {/* Mostrar el mensaje de bienvenida */}
-          <WelcomeMessage username={userName} />
+          <WelcomeMessage username={username} />
           {/* Mostrar la sección de eventos */}
           <EventSection isHomeLogin={true} eventLimit={5} />{" "}
         </div>
