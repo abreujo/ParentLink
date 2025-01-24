@@ -68,7 +68,7 @@ function RegistrationForm({ onClose }) {
         //Se limpian las variables
         //setFormData({ username: "", password: "", confirmPassword: "" });
 
-        //navigate("/me/edit");
+        navigate("/me/edit");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al registrar usuario");
