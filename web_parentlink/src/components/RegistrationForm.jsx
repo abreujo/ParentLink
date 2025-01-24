@@ -10,9 +10,7 @@ function RegistrationForm({ onClose }) {
     password: "",
     confirmPassword: "",
   });
-  /*Variables para el manejo de entorno*/
-  const { login } = useAuth(); // Contexto para hacer login
-  const { userId } = useAuth(); //Contexto para guardar el Id del User System
+  const { performLogin } = useAuth();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -57,15 +55,20 @@ function RegistrationForm({ onClose }) {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("User successfully registered:", result);
-
-        //envio hacer login y guardo las variables de contexto.
-
         setSuccessMessage("Usuario registrado con éxito");
         setErrorMessage("");
-        setFormData({ username: "", password: "", confirmPassword: "" });
 
-        //navigate("/me/edit");
+        //Despues de hacer el registro del UserSystem se realiza el login para poder registrar el User
+        await performLogin(
+          formData.username,
+          formData.password,
+          setErrorMessage
+        );
+
+        //Se limpian las variables
+        //setFormData({ username: "", password: "", confirmPassword: "" });
+
+        navigate("/me/edit");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al registrar usuario");

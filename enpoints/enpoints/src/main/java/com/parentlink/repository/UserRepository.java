@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Pero podemos agregar consultas personalizadas como findByEmail() si es necesario.
      */
     User findByEmail(String email);
+
 }

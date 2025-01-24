@@ -22,7 +22,7 @@ const HomePage = () => {
       {/* Menu */}
       <Menu />
       {/* Header */}
-      <Header /> {/* Añadido aquí */}
+      {/* <Header /> Añadido aquí */}
       {/* Hero Section */}
       <HeroSection />
       {/* Description Section */}

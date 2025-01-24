@@ -169,6 +169,47 @@ public class UserService {
         return user.getChildrenList();
     }
 
+    //Creacion de un User sin hijos
+    public User createUserWithoutChildren(UserCreateDto userCreateDto) {
+        // Crear una instancia de User
+        User user = new User();
+        user.setSurname(userCreateDto.getSurname());
+        user.setName(userCreateDto.getName());
+        user.setEmail(userCreateDto.getEmail());
+        user.setPhone(userCreateDto.getPhone());
+        user.setDateOfBirth(userCreateDto.getDateOfBirth());
+        user.setGender(userCreateDto.getGender());
+        user.setLocation(userCreateDto.getLocation());
+
+        // Configurar que el usuario no tiene hijos
+        user.setChildren(false);
+        user.setNumberOfChildren(null);
+        user.setChildrenList(new ArrayList<>()); // Lista vacía para evitar nulos
+
+        // Validar que el campo UserSystem esté presente
+        if (userCreateDto.getUserSystemId() == null) {
+            throw new IllegalArgumentException("UserSystem ID must not be null");
+        }
+
+        // Buscar el UserSystem por ID
+        UserSystem userSystem = userSystemRepository.findById(userCreateDto.getUserSystemId())
+                .orElseThrow(() -> new IllegalArgumentException("UserSystem not found"));
+
+        // Verificar si ya está asociado a un User
+        if (userSystem.getUser() != null) {
+            throw new IllegalStateException("This UserSystem is already linked to another User");
+        }
+
+        // Asignar el UserSystem al User
+        user.setUserSystem(userSystem);
+        userSystem.setUser(user);
+
+        // Validar el usuario antes de guardar
+        validateUser(user);
+
+        // Guardar y retornar el usuario
+        return userRepository.save(user);
+    }
 
 
 }
