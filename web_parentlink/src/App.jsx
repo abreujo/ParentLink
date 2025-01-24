@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu"; // Menú inicial
-import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
 import HomePage from "./pages/HomePage"; // Asegúrate de que el path sea correcto
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./components/FooterFrame";
