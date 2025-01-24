@@ -13,5 +13,5 @@ public interface LocationRepository extends JpaRepository<Location, String> {
      * @param postalCode El código postal de la ubicación.
      * @return Un Optional que contiene la ubicación si existe.
      */
-    Optional<Location> findByPostalCode(String postalCode);
+    Location findByPostalCode(String postalCode);
 }
