@@ -77,14 +77,16 @@ export default function ComoFunciona() {
 
   return (
     <>
-      <Menu />
       <div className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">Como funciona ParentLink</h1>
           <p className="hero-description">
-            La plataforma ideal para compartir el cuidado de tus hijos con otras familias. ¡Fácil, segura y confiable!
+            La plataforma ideal para compartir el cuidado de tus hijos con otras
+            familias. ¡Fácil, segura y confiable!
           </p>
-          <button className="hero-button" onClick={openModal}>Descubre Más</button>
+          <button className="hero-button" onClick={openModal}>
+            Descubre Más
+          </button>
         </div>
         <div className="hero-image-container">
           <img src={heroImage} alt="Hero" className="hero-image" />
@@ -109,9 +111,12 @@ export default function ComoFunciona() {
         <div className="cta-content">
           <h2 className="cta-title">¿Listo para empezar?</h2>
           <p className="cta-description">
-            Regístrate ahora y únete a miles de familias que ya confían en ParentLink.
+            Regístrate ahora y únete a miles de familias que ya confían en
+            ParentLink.
           </p>
-          <button className="cta-button" onClick={handleOpenRegisterForm}>Regístrate Ahora</button>
+          <button className="cta-button" onClick={handleOpenRegisterForm}>
+            Regístrate Ahora
+          </button>
         </div>
         <div className="cta-image-container">
           <img src={ctaImage} alt="CTA" className="cta-image" />

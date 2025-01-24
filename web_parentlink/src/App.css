@@ -8,9 +8,9 @@ paleta de colores de la web:
 #4f1751->tono lila más oscuro para hoover y click
 */
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 

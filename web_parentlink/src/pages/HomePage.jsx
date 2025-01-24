@@ -19,8 +19,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage" style={backgroundStyle}>
-      {/* Menu */}
-      <Menu />
       {/* Header */}
       {/* <Header /> Añadido aquí */}
       {/* Hero Section */}

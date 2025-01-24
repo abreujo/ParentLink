@@ -1,41 +1,122 @@
+/* DescriptionSection.css */
+
+/* Загальний стиль секції */
 .description-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 20px;
-  color: black;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #E5D9F2, #CDC1FF);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 1200px;
+  color: #333;
+  overflow: hidden;
 }
 
+/* Текстова частина */
 .text-content {
   flex: 1;
-  padding: 20px;
+  max-width: 600px;
+  padding-right: 2rem;
+  animation: fadeInLeft 1.5s ease-in-out;
 }
 
 .text-content p {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #4f1751;
 }
 
 .register-button {
-  background-color: #7d2181; /* Lila oscuro (botones) */
-  color: white;
-  padding: 10px 20px;
+  background-color: #7d2181;
+  color: #fff;
+  padding: 0.8rem 2rem;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 8px;
   font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .register-button:hover {
-  background-color: #5c1861;
+  background-color: #4b0081;
+  transform: scale(1.05);
 }
 
+/* Зображення */
 .image-content {
   flex: 1;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInRight 1.5s ease-in-out;
 }
 
 .image-content img {
   max-width: 100%;
-  border-radius: 10px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Анімації */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .description-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .text-content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .image-content img {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-content p {
+    font-size: 1rem;
+  }
+
+  .register-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .image-content img {
+    max-width: 100%;
+  }
 }
