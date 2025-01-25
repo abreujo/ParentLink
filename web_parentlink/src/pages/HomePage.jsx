@@ -26,7 +26,7 @@ const HomePage = () => {
       {/* Description Section */}
       <DescriptionSection />
       {/* Event Section */}
-      <EventSection isHomeLogin={true} eventLimit={5} />
+      <EventSection isHomeLogin={false} isUserLoggedIn={false} eventLimit={5} />
       {/* Carrusel Section */}
       <CarruselSection />
       <PublicidadSection />
