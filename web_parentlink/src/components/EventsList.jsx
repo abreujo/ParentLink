@@ -126,38 +126,42 @@ const EventList = ({ eventLimit, filters = [] }) => {
             onClick={() => handleCardClick(index)}
           >
             <div className="card-inner">
-              <div className="card-front">
-                <img
-                  src={`https://picsum.photos/id/${event.id + 10}/300/200`}
-                  alt={event.name}
-                />
-                <div className="event-description">
-                  <h3>{event.name}</h3>
-                  <p>Haga clic para ver más</p>
-                </div>
-              </div>
-              <div className="card-back">
-                <h3>{event.name}</h3>
-                <p>{event.description}</p>
-                <ul>
-                  <li>
-                    Ubicación: {event.location.name}, {event.location.country}
-                  </li>
-                  <li>Código Postal: {event.location.postalCode}</li>
-                  <li>Rango de Edad: {event.ageBracket}</li>
-                  <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
-                </ul>
-                <button
-                  className="join-button"
-                  onClick={(e) => {
-                    e.stopPropagation(); // Evitar que el click rote la tarjeta
-                    handleJoinEvent(event.id);
-                  }}
-                >
-                  Participar
-                </button>
-              </div>
-            </div>
+            <div className="card-front">
+  <img
+    src={`https://picsum.photos/id/${event.id + 10}/300/200`}
+    alt={event.name}
+  />
+  <div className="event-details-front">
+    <h3>{event.name}</h3>
+    <div className="details-lines">
+      <span>{event.location.name} - {new Date(event.date).toLocaleDateString()}</span>
+      <span>Organizaro por:  {event.userSystem.username}</span>
+      <span>Ver detalles</span>
+    </div>
+  </div>
+</div>
+  <div className="card-back">
+    <h3>{event.name}</h3>
+    <p>{event.description}</p>
+    <ul>
+      <li>
+        Ubicación: {event.location.name}, {event.location.country}
+      </li>
+      <li>Código Postal: {event.location.postalCode}</li>
+      <li>Rango de Edad: {event.ageBracket}</li>
+      <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
+    </ul>
+    <button
+      className="join-button"
+      onClick={(e) => {
+        e.stopPropagation(); // Evitar que el click rote la tarjeta
+        handleJoinEvent(event.id);
+      }}
+    >
+      Participar
+    </button>
+  </div>
+</div>
           </div>
         ))}
       </div>

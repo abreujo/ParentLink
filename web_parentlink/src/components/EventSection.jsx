@@ -47,10 +47,12 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   return (
     <section className="event-section">
       <div>
-        {isHomeLogin && <h1 className="h1Events">Últimos Eventos</h1>}
-        {/* El botón solo aparece si estamos en la página de inicio (HomeLogin) y el usuario está logueado */}
+        <h1 className="h1Events">
+          {isHomeLogin ? "Tus Eventos" : "Últimos Eventos"}
+        </h1>
+        {/* El botón solo aparece si estamos en HomeLogin y el usuario está logueado */}
         {isHomeLogin && isUserLoggedIn && (
-          <button className="filter-button" onClick={toggleForm}>
+          <button className="create-button" onClick={toggleForm}>
             Crea tu evento
           </button>
         )}
