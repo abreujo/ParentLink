@@ -13,11 +13,13 @@ import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import EventPage from "./pages/EventPage";
 import UserProfileForm from "./components/UserProfileForm";
 import SobreNosotros from "./pages/SobreNosotros";
+import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
 
 function App() {
   return (
     <>
-      <Menu />
+      <Menu></Menu>
+
       <ScrollToTop />
 
       <Routes>
