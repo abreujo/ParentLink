@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import MenuLogin from "../components/MenuLogin"; // Importa MenuLogin
 import Sidebar from "../components/Sidebar"; // Importa Sidebar
 import EventSection from "../components/EventSection";
 import WelcomeMessage from "../components/WelcomeMessage";
@@ -13,8 +12,6 @@ const HomeLogIn = () => {
 
   return (
     <div>
-      {/* Mostrar MenuLogin como estaba antes */}
-
       <div style={{ display: "flex" }}>
         {/* Sidebar a la izquierda */}
         <Sidebar username={username} />
