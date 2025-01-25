@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
-  const [childrenList, setChildrenList] = useState([]); // Estado para los hijos
   const { userId, token } = useAuth();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const CardUser = () => {
         );
         const data = await response.json();
         setUserData(data);
-        setChildrenList(data.user.childrenList || []); // Actualiza el estado de los hijos
         // Debugger
         console.log("data as JSON:", JSON.stringify(data, null, 2));
       } catch (error) {
@@ -29,10 +27,6 @@ const CardUser = () => {
 
     fetchData();
   }, [userId, token]);
-
-  const handleAddChild = (newChild) => {
-    setChildrenList((prevChildren) => [...prevChildren, newChild]); // Agregar un nuevo hijo
-  };
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -63,7 +57,17 @@ const CardUser = () => {
   }
 
   // Datos del usuario si existen
-  const { id, name, surname, email, phone, location, age, gender } = user;
+  const {
+    id,
+    name,
+    surname,
+    email,
+    phone,
+    location,
+    age,
+    gender,
+    childrenList,
+  } = user;
 
   return (
     <div className="user-card">
@@ -111,19 +115,6 @@ const CardUser = () => {
               </ul>
             </div>
           )}
-          {/* Botón para agregar un hijo */}
-          <button
-            onClick={() =>
-              handleAddChild({
-                id: Date.now(), // Generar un id único
-                name: "Nuevo Hijo",
-                age: 5,
-                gender: "MALE",
-              })
-            }
-          >
-            Agregar hijo
-          </button>
         </div>
       </div>
     </div>
