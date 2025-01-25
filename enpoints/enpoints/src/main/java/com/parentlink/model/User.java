@@ -54,7 +54,7 @@ public class User {
     private Integer numberOfChildren;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Size(min = 1, message = "Children list must contain at least one child when children is true")
+    //@Size(min = 1, message = "Children list must contain at least one child when children is true")
     private List<Child> childrenList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -22,7 +22,7 @@
     "location": {
       "postalCode": "28001"
     },
-    "children": true,
+    "children": false,
     "userSystemId": 2
   },
   {
@@ -35,7 +35,7 @@
     "location": {
       "postalCode": "08001"
     },
-    "children": true,
+    "children": false,
     "userSystemId": 3
   },
   {
@@ -61,7 +61,7 @@
     "location": {
       "postalCode": "50004"
     },
-    "children": true,
+    "children": false,
     "userSystemId": 5
   },
   {
@@ -87,7 +87,7 @@
     "location": {
       "postalCode": "46004"
     },
-    "children": true,
+    "children": false,
     "userSystemId": 7
   },
   {
@@ -113,7 +113,7 @@
     "location": {
       "postalCode": "38001"
     },
-    "children": true,
+    "children": false,
     "userSystemId": 9
   },
   {
@@ -126,7 +126,7 @@
     "location": {
       "postalCode": "26002"
     },
-    "children": true,
+    "children": false,
     "userSystemId": 10
   }
 ]
