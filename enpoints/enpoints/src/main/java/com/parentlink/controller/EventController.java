@@ -42,6 +42,16 @@ public class EventController {
         }
     }
 
+    @GetMapping("/{id}/participants")
+    public ResponseEntity<Integer> getEventParticipants(@PathVariable Long id) {
+        try {
+            int participantCount = eventService.countParticipantsByEventId(id);
+            return ResponseEntity.ok(participantCount);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();  // Evento no encontrado
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> createEvent(@RequestBody EventCreateDTO eventCreateDTO) {
 

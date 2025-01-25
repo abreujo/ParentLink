@@ -13,38 +13,65 @@ const EventList = ({ eventLimit, filters = [] }) => {
 
   //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
-    const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+  const token = localStorage.getItem("jwtToken");
 
-    const fetchEvents = async () => {
-      let url = "http://localhost:8081/api/events"; // URL base
-      const urlSearchParams = new URLSearchParams();
+  const fetchEvents = async () => {
+    let url = "http://localhost:8081/api/events";
+    const urlSearchParams = new URLSearchParams();
 
-      if (locationName) urlSearchParams.append("locationName", locationName);
+    if (locationName) urlSearchParams.append("locationName", locationName);
+    if (Edad) urlSearchParams.append("age", Edad);
 
-      if (Edad) urlSearchParams.append("age", Edad);
+    if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
 
-      if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error al obtener los eventos");
-        }
-        const data = await response.json();
-        setEvents(data);
-      } catch (err) {
-        setError(err.message);
+      if (!response.ok) {
+        throw new Error("Error al obtener los eventos");
       }
-    };
 
-    if (token) fetchEvents();
-  }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
+      const data = await response.json();
+
+      // Ahora obtenemos los participantes para cada evento
+      const eventsWithParticipants = await Promise.all(
+        data.map(async (event) => {
+          const participantsResponse = await fetch(
+            `http://localhost:8081/api/events/${event.id}/participants`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const participantsData = await participantsResponse.json();
+// Si el número es un string, conviértelo a número
+const participantCount = Number(participantsData) || 0;  // 0 como valor por defecto si la conversión falla
+event.participantCount = participantCount;
+console.log(event);
+
+          return event;
+        })
+      );
+
+      setEvents(eventsWithParticipants);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  if (token) fetchEvents();
+}, [filters]);
+// Depende de locationName para cambiar cuando se seleccione una ciudad
 
   const handleCardClick = (index) => {
     if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
@@ -135,8 +162,9 @@ const EventList = ({ eventLimit, filters = [] }) => {
     <h3>{event.name}</h3>
     <div className="details-lines">
       <span>{event.location.name} - {new Date(event.date).toLocaleDateString()}</span>
-      <span>Organizaro por:  {event.userSystem.username}</span>
-      <span>Ver detalles</span>
+      <span>Organizado por:  {event.userSystem.username}</span>
+      <span>{event.participantCount ? event.participantCount : 0} participantes</span>
+      <p>Clic para más detalles</p>
     </div>
   </div>
 </div>
