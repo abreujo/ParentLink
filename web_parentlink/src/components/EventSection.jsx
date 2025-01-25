@@ -4,7 +4,6 @@ import Filters from "./FiltersEvent";
 import EventList from "./EventsList";
 import events from "../data/events.json";
 import CreateEventForm from "./EventCreationForm";
-import { useAuth } from "../contex/AuthContext";
 
 const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
@@ -12,10 +11,13 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   const [flippedCards, setFlippedCards] = useState({});
   const [filters, setFilters] = useState({});
   const [showForm, setShowForm] = useState(false);
-  const { isUserLoggedIn } = useAuth();
+  //const { isUserLoggedIn } = useAuth();
 
   // Estado para controlar si hay eventos creados
   const [hasEvents, setHasEvents] = useState(false);
+
+  // Obtener el token de localStorage para verificar si el usuario está logueado
+  isUserLoggedIn = localStorage.getItem("jwtToken") !== null;
 
   useEffect(() => {
     // Verifica si hay eventos en la fuente de datos
@@ -46,8 +48,8 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
     <section className="event-section">
       <div>
         {isHomeLogin && <h1 className="h1Events">Últimos Eventos</h1>}
-        {/* Botón visible solo si el usuario está registrado */}
-        {isUserLoggedIn && (
+        {/* El botón solo aparece si estamos en la página de inicio (HomeLogin) y el usuario está logueado */}
+        {isHomeLogin && isUserLoggedIn && (
           <button className="filter-button" onClick={toggleForm}>
             Crea tu evento
           </button>
