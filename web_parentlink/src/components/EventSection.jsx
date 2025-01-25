@@ -5,7 +5,7 @@ import EventList from "./EventsList";
 import events from "../data/events.json";
 import CreateEventForm from "./EventCreationForm";
 
-const EventSection = ({ isHomeLogin }) => {
+const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   const [selectedOption, setSelectedOption] = useState("parent");
   const [selectedTag, setSelectedTag] = useState("");
   const [flippedCards, setFlippedCards] = useState({});
@@ -17,7 +17,7 @@ const EventSection = ({ isHomeLogin }) => {
   const [hasEvents, setHasEvents] = useState(false);
 
   // Obtener el token de localStorage para verificar si el usuario está logueado
-  const isUserLoggedIn = localStorage.getItem("jwtToken") !== null;
+  isUserLoggedIn = localStorage.getItem("jwtToken") !== null;
 
   useEffect(() => {
     // Verifica si hay eventos en la fuente de datos
