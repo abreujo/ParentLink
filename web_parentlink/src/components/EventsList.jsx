@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
+import { useAuth } from "../contex/AuthContext";
 
 const EventList = ({ eventLimit, filters = [] }) => {
   const [events, setEvents] = useState([]);
@@ -10,6 +11,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
   const { locationName, Edad } = filters;
+
+  const { userSystem } = useAuth(); // Aquí usamos el hook del contexto
 
   //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
@@ -89,7 +92,10 @@ console.log(event);
       return;
     }
 
-    const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
+    console.log(userSystem);
+    const userId = userSystem?.user?.id;
+    //const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
+    console.log(userId);
 
     const participationData = {
       user: { id: userId },
@@ -108,6 +114,7 @@ console.log(event);
         },
         body: JSON.stringify(participationData),
       });
+      debugger
 
       if (!response.ok) {
         const errorText = await response.text();
