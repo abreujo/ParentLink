@@ -23,6 +23,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("jwtToken", newToken);
     localStorage.setItem("userId", newUserId);
     localStorage.setItem("username", newUsername); // Guardar el username
+
+    //Debugger
+    console.log(
+      "Login" +
+        "jwtToken..: " +
+        newToken +
+        " UserId..: " +
+        newUserId +
+        " UserName..: " +
+        newUsername
+    );
   };
 
   // Función para cerrar sesión
@@ -37,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("username");
 
     // Redirigir al login (opcional)
-    //navigate("/login");
+    navigate("/");
   };
 
   // Función para realizar el login desde cualquier parte
@@ -57,6 +68,18 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         login(data.token, data.userId, username); // Guardar el token, ID y username en el contexto
+        //Debugger
+        console.log(
+          "performLogin" +
+            "jwtToken..: " +
+            data.token +
+            " UserId..: " +
+            data.userId +
+            " UserName..: " +
+            username
+        );
+        console.log(data);
+
         navigate("/me"); // Navegar al dashboard o página principal
       } else {
         const errorData = await response.json();
@@ -64,6 +87,7 @@ export const AuthProvider = ({ children }) => {
         logout(); // Asegurarse de que no haya datos residuales
       }
     } catch (error) {
+      //Debugger
       console.error("Error while sending data:", error);
       setErrorMessage("Error en el servidor");
       logout();
