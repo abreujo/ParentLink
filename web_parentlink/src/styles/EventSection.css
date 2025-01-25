@@ -1,7 +1,16 @@
 /* Estilos originales */
 .event-section {
-  padding: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 30px;
+  padding: 3rem 1rem;
+  padding-left: 3rem;
+  background: linear-gradient(135deg, #a294f9, #e5d9f2);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
 }
 
 .filters,
@@ -97,8 +106,7 @@
   align-items: center;
   justify-content: center;
 }
-
-.card-front img {
+*/ .card-front img {
   width: 100%;
   height: 60%;
   object-fit: cover;
@@ -223,6 +231,9 @@
   }
 }
 .h1Events {
-  color: #7d2181;
-  padding: 25px;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 40px;
 }
