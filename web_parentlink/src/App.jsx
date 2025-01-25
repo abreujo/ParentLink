@@ -14,6 +14,7 @@ import EventPage from "./pages/EventPage";
 import UserProfileForm from "./components/UserProfileForm";
 import SobreNosotros from "./pages/SobreNosotros";
 import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
+import ChildRegistrationForm from "./components/ChildRegistrationForm";
 
 function App() {
   return (
@@ -42,6 +43,9 @@ function App() {
 
       {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
       <FooterFrame />
+
+      {/* prueba de registro de children */}
+      <ChildRegistrationForm />
     </>
   );
 }
