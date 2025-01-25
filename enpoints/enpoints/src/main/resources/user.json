@@ -1,0 +1,132 @@
+[
+  {
+    "surname": "Abreu",
+    "name": "Gylmer",
+    "email": "gylmer.abreu@gmail.com",
+    "phone": "613290849",
+    "dateOfBirth": "1981-06-20",
+    "gender": "MALE",
+    "location": {
+      "postalCode": "29014"
+    },
+    "children": false,
+    "userSystemId": 1
+  },
+  {
+    "surname": "Lopez",
+    "name": "Maria",
+    "email": "maria.lopez@gmail.com",
+    "phone": "622334556",
+    "dateOfBirth": "1990-04-15",
+    "gender": "FEMALE",
+    "location": {
+      "postalCode": "28001"
+    },
+    "children": false,
+    "userSystemId": 2
+  },
+  {
+    "surname": "Garcia",
+    "name": "Juan",
+    "email": "juan.garcia@gmail.com",
+    "phone": "612445678",
+    "dateOfBirth": "1985-09-10",
+    "gender": "MALE",
+    "location": {
+      "postalCode": "08001"
+    },
+    "children": false,
+    "userSystemId": 3
+  },
+  {
+    "surname": "Martinez",
+    "name": "Ana",
+    "email": "ana.martinez@gmail.com",
+    "phone": "615556789",
+    "dateOfBirth": "1995-02-28",
+    "gender": "FEMALE",
+    "location": {
+      "postalCode": "41003"
+    },
+    "children": false,
+    "userSystemId": 4
+  },
+  {
+    "surname": "Hernandez",
+    "name": "Luis",
+    "email": "luis.hernandez@gmail.com",
+    "phone": "610667890",
+    "dateOfBirth": "1988-12-05",
+    "gender": "MALE",
+    "location": {
+      "postalCode": "50004"
+    },
+    "children": false,
+    "userSystemId": 5
+  },
+  {
+    "surname": "Smith",
+    "name": "John",
+    "email": "john.smith@gmail.com",
+    "phone": "654223344",
+    "dateOfBirth": "1992-07-08",
+    "gender": "MALE",
+    "location": {
+      "postalCode": "03004"
+    },
+    "children": false,
+    "userSystemId": 6
+  },
+  {
+    "surname": "Johnson",
+    "name": "Emily",
+    "email": "emily.johnson@gmail.com",
+    "phone": "645556677",
+    "dateOfBirth": "1989-11-22",
+    "gender": "FEMALE",
+    "location": {
+      "postalCode": "46004"
+    },
+    "children": false,
+    "userSystemId": 7
+  },
+  {
+    "surname": "Kumar",
+    "name": "Raj",
+    "email": "raj.kumar@gmail.com",
+    "phone": "700112233",
+    "dateOfBirth": "1983-03-15",
+    "gender": "MALE",
+    "location": {
+      "postalCode": "07001"
+    },
+    "children": false,
+    "userSystemId": 8
+  },
+  {
+    "surname": "Lee",
+    "name": "Ming",
+    "email": "ming.lee@gmail.com",
+    "phone": "912345678",
+    "dateOfBirth": "1990-09-25",
+    "gender": "MALE",
+    "location": {
+      "postalCode": "38001"
+    },
+    "children": false,
+    "userSystemId": 9
+  },
+  {
+    "surname": "Garcia",
+    "name": "Laura",
+    "email": "laura.garcia@gmail.com",
+    "phone": "677889900",
+    "dateOfBirth": "1987-12-30",
+    "gender": "FEMALE",
+    "location": {
+      "postalCode": "26002"
+    },
+    "children": false,
+    "userSystemId": 10
+  }
+]

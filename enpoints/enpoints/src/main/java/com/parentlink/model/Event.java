@@ -28,7 +28,7 @@ public class Event {
     private String ageBracket;
 
     @NotNull(message = "The event date is required")
-    @FutureOrPresent(message = "The event date must be in the present or future")
+    //@FutureOrPresent(message = "The event date must be in the present or future")
     private LocalDateTime date;
 
     @ManyToOne

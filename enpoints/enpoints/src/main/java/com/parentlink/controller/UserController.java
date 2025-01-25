@@ -1,17 +1,25 @@
 package com.parentlink.controller;
 
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parentlink.dto.UserCreateDto;
-import com.parentlink.model.Child;
-import com.parentlink.model.User;
-import com.parentlink.model.UserType;
+import com.parentlink.model.*;
 import com.parentlink.service.UserService;
+import io.jsonwebtoken.io.IOException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.InputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -126,6 +134,179 @@ public class UserController {
     public ResponseEntity<User> createUserWithoutChildren(@RequestBody UserCreateDto userCreateDto) {
         User user = userService.createUserWithoutChildren(userCreateDto);
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/initial")
+    public String createUserDataInitializer() {
+        List<UserCreateDto> users = Arrays.asList(
+                new UserCreateDto(
+                        "Abreu",
+                        "Gylmer",
+                        "gylmer.abreu@gmail.com",
+                        "613290849",
+                        LocalDate.of(1981, 6, 20),
+                        Gender.MALE,
+                        new Location("29014", null),
+                        false,
+                        1,
+                        null,
+                        UserType.INDIVIDUO,
+                        "1"
+                ),
+                new UserCreateDto(
+                        "Lopez",
+                        "Maria",
+                        "maria.lopez@gmail.com",
+                        "622334556",
+                        LocalDate.of(1990, 4, 15),
+                        Gender.FEMALE,
+                        new Location("28001", null),
+                        true,
+                        2,
+                        null,
+                        UserType.INDIVIDUO,
+                        "2"
+                ),
+                new UserCreateDto(
+                        "Garcia",
+                        "Juan",
+                        "juan.garcia@gmail.com",
+                        "612445678",
+                        LocalDate.of(1985, 9, 10),
+                        Gender.MALE,
+                        new Location("08001", null),
+                        true,
+                        3,
+                        null,
+                        UserType.INDIVIDUO,
+                        "3"
+                ),
+                new UserCreateDto(
+                        "Martinez",
+                        "Ana",
+                        "ana.martinez@gmail.com",
+                        "615556789",
+                        LocalDate.of(1995, 2, 28),
+                        Gender.FEMALE,
+                        new Location("41003", null),
+                        false,
+                        4,
+                        null,
+                        UserType.INDIVIDUO,
+                        "4"
+                ),
+                new UserCreateDto(
+                        "Hernandez",
+                        "Luis",
+                        "luis.hernandez@gmail.com",
+                        "610667890",
+                        LocalDate.of(1988, 12, 5),
+                        Gender.MALE,
+                        new Location("50004", null),
+                        true,
+                        5,
+                        null,
+                        UserType.INDIVIDUO,
+                        "5"
+                ),
+                new UserCreateDto(
+                        "Smith",
+                        "John",
+                        "john.smith@gmail.com",
+                        "654223344",
+                        LocalDate.of(1992, 7, 8),
+                        Gender.MALE,
+                        new Location("03004", null),
+                        false,
+                        6,
+                        null,
+                        UserType.INDIVIDUO,
+                        "6"
+                ),
+                new UserCreateDto(
+                        "Johnson",
+                        "Emily",
+                        "emily.johnson@gmail.com",
+                        "645556677",
+                        LocalDate.of(1989, 11, 22),
+                        Gender.FEMALE,
+                        new Location("46004", null),
+                        true,
+                        7,
+                        null,
+                        UserType.INDIVIDUO,
+                        "7"
+                ),
+                new UserCreateDto(
+                        "Kumar",
+                        "Raj",
+                        "raj.kumar@gmail.com",
+                        "700112233",
+                        LocalDate.of(1983, 3, 15),
+                        Gender.MALE,
+                        new Location("07001", null),
+                        false,
+                        8,
+                        null,
+                        UserType.INDIVIDUO,
+                        "8"
+                ),
+                new UserCreateDto(
+                        "Lee",
+                        "Ming",
+                        "ming.lee@gmail.com",
+                        "912345678",
+                        LocalDate.of(1990, 9, 25),
+                        Gender.MALE,
+                        new Location("38001", null),
+                        true,
+                        9,
+                        null,
+                        UserType.INDIVIDUO,
+                        "9"
+                ),
+                new UserCreateDto(
+                        "Garcia",
+                        "Laura",
+                        "laura.garcia@gmail.com",
+                        "677889900",
+                        LocalDate.of(1987, 12, 30),
+                        Gender.FEMALE,
+                        new Location("26002", null),
+                        true,
+                        10,
+                        null,
+                        UserType.INDIVIDUO,
+                        "10"
+                )
+        );
+        // Recorrer la lista de usuarios y procesarlos uno a uno
+        for (UserCreateDto userDto : users) {
+            User user = userService.createUserWithoutChildren(userDto);
+            System.out.println("Usuario creado: " + user);
+        }
+
+        return "h";
+
+/*CODE TO UPLOAD A SINGLE TEST USER
+        UserCreateDto user1 = new UserCreateDto(
+                "Pérez",
+                "Carlos",
+                "carlos.perez@example.com",
+                "+34987654321",
+                LocalDate.of(1985, 5, 20),
+                Gender.MALE,
+                new Location("29014", null),
+                true,
+                0,
+                null,
+                UserType.INDIVIDUO,
+                "1" // ID de UserSystem asociado (debe ser válido)
+        );
+
+        User user = userService.createUserWithoutChildren(user1);
+        return ResponseEntity.ok(user);
+  */
     }
 
 }

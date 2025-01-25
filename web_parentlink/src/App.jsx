@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu"; // Menú inicial
-import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
 import HomePage from "./pages/HomePage"; // Asegúrate de que el path sea correcto
 import AboutPage from "./pages/AboutPage";
 import FooterFrame from "./components/FooterFrame";
@@ -14,11 +13,13 @@ import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import EventPage from "./pages/EventPage";
 import UserProfileForm from "./components/UserProfileForm";
 import SobreNosotros from "./pages/SobreNosotros";
+import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
 
 function App() {
   return (
     <>
-      <MenuLogin></MenuLogin>
+      <Menu></Menu>
+
       <ScrollToTop />
 
       <Routes>
@@ -29,20 +30,9 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/ods" element={<Ods />} />
         <Route path="/comofunciona" element={<ComoFunciona />} />
-          <Route path="/sobrenosotros" element={<SobreNosotros/>} />
-        <Route path="/menu-login" element={<MenuLogin />} />
+        <Route path="/sobrenosotros" element={<SobreNosotros />} />
         <Route path="/me" element={<HomeLogIn />} />
         <Route path="/me/edit" element={<UserProfileForm />} />
-        {/* Ruta para el menú de usuarios registrados */}
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <MenuLogin />
-              <div>Contenido del Dashboard</div>
-            </>
-          }
-        />
         {/* Nueva ruta para HomeLogIn */}
         <Route path="/home-login" element={<HomeLogIn />} />{" "}
         {/* Nueva ruta para HomeLogIn */}

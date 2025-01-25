@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar"; // Importa Sidebar
 import EventSection from "../components/EventSection";
 import WelcomeMessage from "../components/WelcomeMessage";
 import { useAuth } from "../contex/AuthContext";
+import Menu from "../components/Menu";
 
 const HomeLogIn = () => {
   const { username } = useAuth();
@@ -13,7 +14,6 @@ const HomeLogIn = () => {
   return (
     <div>
       {/* Mostrar MenuLogin como estaba antes */}
-      <MenuLogin />
 
       <div style={{ display: "flex" }}>
         {/* Sidebar a la izquierda */}

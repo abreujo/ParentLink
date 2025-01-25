@@ -1,5 +1,4 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
 import logo from "../assets/images/logoparentlinkdefinitivo.png";
@@ -30,18 +29,18 @@ const MenuLogin = () => {
       </div>
 
       <div className="menu-right">
-        <Link className="menu-link" to="/sobre-nosotros">
+        <NavLink className="menu-link" to="/sobre-nosotros">
           Sobre Nosotros
-        </Link>
-        <Link className="menu-link" to="/como-funciona">
+        </NavLink>
+        <NavLink className="menu-link" to="/como-funciona">
           ¿Cómo Funciona?
-        </Link>
-        <Link className="menu-highlight-link" to="/">
+        </NavLink>
+        <NavLink className="menu-link" to="/">
           Home
-        </Link>
-        <Link className="menu-highlight-link" to="/eventos">
+        </NavLink>
+        <NavLink className="menu-link" to="/eventos">
           Eventos
-        </Link>
+        </NavLink>
         <button className="menu-button logout" onClick={handleLogout}>
           Cerrar Sesión
         </button>

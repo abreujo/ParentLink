@@ -11,6 +11,7 @@ const EventSection = ({ isHomeLogin }) => {
   const [flippedCards, setFlippedCards] = useState({});
   const [filters, setFilters] = useState({});
   const [showForm, setShowForm] = useState(false);
+  //const { isUserLoggedIn } = useAuth();
 
   // Estado para controlar si hay eventos creados
   const [hasEvents, setHasEvents] = useState(false);

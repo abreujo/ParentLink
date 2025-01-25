@@ -69,7 +69,6 @@ function LoginForm({ onClose }) {
   return (
     <div className="registration-form-container">
       <form className="registration-form" onSubmit={handleSubmit}>
-        {/* Close button */}
         <button className="close-button" type="button" onClick={onClose}>
           ✖
         </button>
