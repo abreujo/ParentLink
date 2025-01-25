@@ -1,58 +1,13 @@
-/* Menu.css */
-
-/* Contenedor principal */
-/* .menu {
-  display: flex;
-  justify-content: space-between;
-  /* Separar logo y letras a la izquierda, y resto a la derecha */
-  align-items: center;
-  padding: 20px;s
-  width: 100%;
-  /* Asegura que ocupe todo el ancho de la pantalla */
-  background-color: #fcf8f8;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  /* Fijar el menú en la parte superior */
-  top: 0;
-  left: 0;
-  z-index: 10;
-  /* Asegura que el menú esté encima de los demás componentes */
-  flex-wrap: wrap;
-  /* Permite que los elementos se envuelvan si no caben */
-  box-sizing: border-box;
-  /* Asegura que los bordes y el relleno no aumenten el ancho total */
-} */
-
-body {
-  padding-top: 60px;
-  /* Ajustar para que no se solape con el menú fijo */
-}
-
-/* Contenedor de logo y letras */
 .menu-logo-container {
   display: flex;
   align-items: center;
 }
 
-/* .menu-logo {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-} */
-
-/* .letras {
-  max-height: 44px;
-  height: auto;
-} */
-
-/* Contenedor de enlaces y botones a la derecha */
 .menu-right {
   display: flex;
   align-items: center;
   gap: 30px;
-  /* Espacio entre los elementos a la derecha */
   margin-left: auto;
-  /* Empuja el contenido de la derecha */
 }
 
 .menu-links {
@@ -60,21 +15,13 @@ body {
   gap: 30px;
 }
 
-/* .menu-link {
-  text-decoration: none;
-  color: black;
-  font-size: 16px;
-  font-weight: 500;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  /* transition: color 0.9s ease, text-decoration 0.9s ease; */
-} */
-
 .menu-link:hover {
   transform: scale(1.1);
   text-decoration: underline;
   color: #4b0081;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-  transition: transform 0.9s ease-in-out, background-color 0.9s ease-in-out, color 0.9s ease-in-out;
+  transition: transform 0.9s ease-in-out, background-color 0.9s ease-in-out,
+    color 0.9s ease-in-out;
 }
 
 .menu-buttons {
@@ -82,7 +29,6 @@ body {
   gap: 15px;
 }
 
-/* Ajuste de botones */
 .btn-register,
 .btn-login {
   padding: 10px 20px;
@@ -102,7 +48,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -116,24 +61,19 @@ body {
   z-index: 1000;
 }
 
-/* Ajustes responsive para pantallas pequeñas */
 @media (max-width: 768px) {
   .menu {
     flex-direction: column;
-    /* Hace que los elementos del menú se apilen en lugar de alinearse en una fila */
     align-items: center;
   }
 
   .menu-right {
     width: 100%;
-    /* Asegura que los elementos se ajusten en una fila */
     justify-content: space-between;
   }
 
   .menu-buttons {
     width: 100%;
-    /* Los botones ocuparán todo el ancho */
     justify-content: center;
-    /* Centra los botones */
   }
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/MenuLogin.css";
 import letras from "../assets/images/letrasparentlink.png";
