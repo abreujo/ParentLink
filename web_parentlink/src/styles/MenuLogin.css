@@ -2,12 +2,11 @@
 
 /* Загальний стиль меню */
 .menu {
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #A294F9, #E5D9F2);
+  background: linear-gradient(135deg, #a294f9, #e5d9f2);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   position: sticky;
@@ -37,6 +36,7 @@
 .letras {
   max-height: 44px;
   height: auto;
+  margin-right: 15px;
 }
 
 /* Права частина меню */
@@ -145,6 +145,10 @@
   .menu-button {
     padding: 0.4rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .menu-links {
+    flex-direction: column;
   }
 }
 

@@ -25,9 +25,6 @@ public class User {
     @Size(max = 100, message = "Name cannot exceed 100 characters")
     private String name;
 
-    /*@Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;*/
-
     @NotBlank(message = "Email is required and cannot be blank")
     @Email(message = "Email should be valid")
     private String email;
@@ -52,10 +49,12 @@ public class User {
     @NotNull(message = "Children flag is required")
     private Boolean children;
 
-    @Min(value = 1, message = "Number of children must be greater than 0 for family users")
-    private Integer numberOfChildren;  // Número de hijos
+    @Min(value = 1, message = "Number of children must be at least 1 when children is true")
+    //@Null(message = "Number of children must be null when children is false")
+    private Integer numberOfChildren;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Size(min = 1, message = "Children list must contain at least one child when children is true")
     private List<Child> childrenList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -214,4 +213,14 @@ public class User {
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
+
+    @AssertTrue(message = "Number of children must be null or greater than 0 if the user has children")
+    private boolean isValidNumberOfChildren() {
+        if (Boolean.TRUE.equals(children)) {
+            return numberOfChildren != null && numberOfChildren > 0;
+        } else {
+            return numberOfChildren == null; // Aseguramos que sea nulo cuando no hay hijos
+        }
+    }
+
 }
