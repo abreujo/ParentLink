@@ -11,18 +11,21 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(
     localStorage.getItem("username") || null
   );
+  const [idUser, setIdUser] = useState(localStorage.getItem("idUser") || null);
   const navigate = useNavigate();
 
   // Función para iniciar sesión
-  const login = (newToken, newUserId, newUsername) => {
+  const login = (newToken, newUserId, newUsername, newidUser) => {
     setToken(newToken);
     setUserId(newUserId);
     setUsername(newUsername);
+    setIdUser(newidUser);
 
     // Guardar en localStorage
     localStorage.setItem("jwtToken", newToken);
     localStorage.setItem("userId", newUserId);
     localStorage.setItem("username", newUsername); // Guardar el username
+    localStorage.setItem("idUser", newidUser); // Guardar el username
 
     //Debugger
     console.log(
@@ -41,11 +44,13 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setUserId(null);
     setUsername(null);
+    setIdUser(null); // Limpiar idUser
 
     // Eliminar del localStorage
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
+    localStorage.removeItem("idUser");
 
     // Redirigir al login (opcional)
     navigate("/");
@@ -69,6 +74,8 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         login(data.token, data.userId, username); // Guardar el token, ID y username en el contexto
         //Debugger
+        console.log("Se envia hacer login con el username..:  " + username);
+        console.log("Data en PerformLogin..: " + JSON.stringify(data));
         console.log(
           "performLogin" +
             "jwtToken..: " +
@@ -78,7 +85,6 @@ export const AuthProvider = ({ children }) => {
             " UserName..: " +
             username
         );
-        console.log(data);
 
         navigate("/me"); // Navegar al dashboard o página principal
       } else {
@@ -94,9 +100,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Nueva función para actualizar idUser
+  const updateIdUser = (newIdUser) => {
+    setIdUser(newIdUser); // Actualizar el estado
+    localStorage.setItem("idUser", newIdUser); // Guardar en localStorage
+    console.log("idUser actualizado en AuthContext..:  ", newIdUser);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ token, userId, username, login, logout, performLogin }}
+      value={{
+        token,
+        userId,
+        username,
+        idUser,
+        login,
+        logout,
+        performLogin,
+        updateIdUser,
+      }}
     >
       {children}
     </AuthContext.Provider>
