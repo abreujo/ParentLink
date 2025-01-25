@@ -57,7 +57,17 @@ const CardUser = () => {
   }
 
   // Datos del usuario si existen
-  const { id, name, surname, email, phone, location, age, gender } = user;
+  const {
+    id,
+    name,
+    surname,
+    email,
+    phone,
+    location,
+    age,
+    gender,
+    childrenList,
+  } = user;
 
   return (
     <div className="user-card">
@@ -93,6 +103,18 @@ const CardUser = () => {
           <p>
             <strong>Registrar hijos</strong>
           </p>
+          {childrenList && childrenList.length > 0 && (
+            <div>
+              <h4>Hijos:</h4>
+              <ul>
+                {childrenList.map((child) => (
+                  <li key={child.id}>
+                    {child.name} - {child.age} años ({child.gender})
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
