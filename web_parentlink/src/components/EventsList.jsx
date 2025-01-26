@@ -214,17 +214,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
                       </p>
                       {/* <li>Código Postal: {event.location.postalCode}</li> */}
                       <p>Para niños de {event.ageBracket} años</p>
-                      <p
-  className={
-    event.userSystem.user.id === idUser
-      ? "highlighted-organizer"
-      : ""
-  }
->
-  {event.userSystem.user.id === idUser
-    ? `** EVENTO PROPIO **`
-    : `Organizado por: ${event.userSystem.username}`}
-</p>
+                      <span>{event.participantCount || 0} participantes</span>
+                      
 
                     <button
                       className={`join-button ${
@@ -238,6 +229,17 @@ const EventList = ({ eventLimit, filters = [] }) => {
                     >
                       Participar
                     </button>
+                    <p
+  className={
+    event.userSystem.user.id === idUser
+      ? "highlighted-organizer"
+      : ""
+  }
+>
+  {event.userSystem.user.id === idUser
+    ? `** EVENTO PROPIO **`
+    : `Organizado por: ${event.userSystem.username}`}
+</p>
                   </div>
                 </div>
               </div>
