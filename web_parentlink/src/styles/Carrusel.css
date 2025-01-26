@@ -1,114 +1,195 @@
-/* Contenedor principal del carrusel */
+/* Загальний стиль каруселі */
 .carrusel-container {
-  padding: 40px 20px;
+  background: linear-gradient(135deg, #e5d9f2, #a294f9);
+  color: #4b0081;
+  padding: 2rem;
   text-align: center;
-  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 2rem auto;
   overflow: hidden;
 }
 
 .carrusel-container h2 {
-  color: #63278f;
-  font-size: 24px;
-  margin-bottom: 30px;
-  font-size: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
-/* Carrusel */
-.carrusel {
+/* Обгортка каруселі */
+.carrusel-wrapper {
+  position: relative;
   display: flex;
-  gap: 20px;
-  overflow-x: hidden; /* Evita que las tarjetas se desborden */
-  scroll-behavior: smooth;
-  padding: 20px 0;
-}
-
-/* Modificación en las tarjetas del carrusel */
-.carrusel-card {
-  display: flex;
-  flex-direction: column; /* Coloca la imagen arriba y el texto abajo */
-  flex: 0 0 30%; /* Cada tarjeta ocupa un 30% del ancho */
-  height: 300px;
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+}
+
+/* Вміст каруселі */
+.carrusel {
+  padding: 0rem;
+  padding-right: 0rem;
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 1.5rem;
+  overflow-x: hidden;
+  padding: 2rem;
+}
+
+/* Карточки */
+.carrusel-card {
+  width: 300px; /* Фіксована ширина картки */
+  height: 400px; /* Фіксована висота картки */
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .carrusel-card img {
   width: 100%;
   height: 200px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .carrusel-card p {
-  padding: 15px;
-  font-size: 14px;
-  color: #333;
-  margin-top: auto; /* Esto empuja el texto hacia la parte inferior de la tarjeta */
-  text-align: left; /* Opcional: Alinea el texto a la izquierda si prefieres */
-}
-
-.carrusel-link {
-  display: inline-block;
-  margin: 10px 0;
-  text-decoration: none;
-  color: #7d2181;
-  font-weight: bold;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.carrusel-link:hover {
+  font-size: 1rem;
   color: #4b0081;
-  transform: scale(1.1);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
 }
 
-/* Botones de navegación */
-/* Botones de navegación */
+.carrusel-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.carrusel-card:hover img {
+  transform: scale(1);
+}
+
+.carrusel-card .carrusel-link {
+  display: inline-block;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #7d2181, #4b0081);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.carrusel-card .carrusel-link:hover {
+  background: linear-gradient(135deg, #4b0081, #7d2181);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопки навігації */
 .carrusel-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #7d2181; /* Color morado */
-  color: white;
   border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  background: linear-gradient(135deg, #a294f9, #7d2181);
+  font-size: 0rem;
+  color: #fff;
   cursor: pointer;
-  font-size: 24px;
-  line-height: 50px;
-  text-align: center;
+  padding: 1.2rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  /* transition: transform 0.3s ease, background 0.3s ease; */
   z-index: 10;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Efecto flotante con sombra */
-  transition: all 0.3s ease;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Flecha de los botones */
+.carrusel-nav:focus {
+  outline: none;
+}
+
+.carrusel-nav:hover {
+  /* transform: scale(1.15); */
+  background: linear-gradient(135deg, #7d2181, #a294f9);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
 .carrusel-nav.prev {
-  left: 10px;
+  left: 1rem;
 }
 
 .carrusel-nav.next {
-  right: 10px;
+  right: 1rem;
 }
 
-/* Efecto flotante al pasar el mouse */
-.carrusel-nav:hover {
-  background-color: #4b0081; /* Color morado más oscuro */
-  transform: translateY(-50%) scale(1.1); /* Escalado para dar un efecto de aumento */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Aumenta la sombra cuando se pasa el mouse */
-}
-
-/* Estilo para el icono de flecha */
-.carrusel-nav:before {
-  content: ">";
-  font-size: 24px;
-  color: white;
+.carrusel-nav:after {
+  content: "";
   display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: solid #fff;
+  border-width: 0 4px 4px 0;
 }
 
-/* Efecto cuando se hace hover en el botón */
-.carrusel-nav.prev:before {
-  content: "<";
+.carrusel-nav.prev:after {
+  transform: rotate(135deg);
+}
+
+.carrusel-nav.next:after {
+  transform: rotate(-45deg);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .carrusel {
+    gap: 1.5 rem;
+  }
+
+  .carrusel-card {
+    flex: 0 0 45%; /* Показувати 2 картки */
+    width: 250px;
+    height: 350px;
+  }
+
+  .carrusel-nav.prev {
+    left: 0.5rem;
+  }
+
+  .carrusel-nav.next {
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrusel {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .carrusel-card {
+    flex: 0 0 100%; /* Показувати 1 картку */
+    width: 100%;
+    height: 300px;
+  }
+
+  .carrusel-nav {
+    font-size: 0rem;
+    padding: 0.7rem;
+  }
 }
