@@ -162,7 +162,7 @@ const EventList = ({ eventLimit, filters = [] }) => {
   {event.userSystem.user.id === idUser ? `*** EVENTO PROPIO ***` : `Organizado por: ${event.userSystem.username}`}
 </span>
                     <span>{event.participantCount || 0} participantes</span>
-                    <p>Clic para más detalles</p>
+                    <p>Clic para detalles</p>
                   </div>
                 </div>
               </div>
@@ -178,14 +178,15 @@ const EventList = ({ eventLimit, filters = [] }) => {
                   <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
                 </ul>
                 <button
-                  className="join-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleJoinEvent(event.id);
-                  }}
-                >
-                  Participar
-                </button>
+  className={`join-button ${event.userSystem.user.id === idUser ? "disabled" : ""}`}
+  disabled={event.userSystem.user.id === idUser}
+  onClick={(e) => {
+    e.stopPropagation();
+    handleJoinEvent(event.id);
+  }}
+>
+  Participar
+</button>
               </div>
             </div>
           </div>
