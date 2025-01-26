@@ -2,6 +2,7 @@ package com.parentlink.service;
 
 import com.parentlink.model.Event;
 import com.parentlink.repository.EventRepository;
+import com.parentlink.repository.ParticipateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,15 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private ParticipateRepository participateRepository;
+
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
+    }
+
+    public int countParticipantsByEventId(Long eventId) {
+        return participateRepository.countByEventId(eventId);
     }
 
     public Optional<Event> getEventById(Long id) {
