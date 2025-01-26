@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
   const { userId, token, idUser, updateIdUser } = useAuth();
+  const navigate = useNavigate();
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +19,7 @@ const CardUser = () => {
           token
         );
         const data = await response.json();
+
         setUserData(data);
         // Debugger
         console.log(
@@ -27,7 +30,10 @@ const CardUser = () => {
           "identificardo de usuario de Tabla Usuario a guardar en variable de entorno..: " +
             data.user.id
         );
-        updateIdUser(data.user.id);
+
+        if (data.user) {
+          updateIdUser(data.user.id);
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -35,6 +41,22 @@ const CardUser = () => {
 
     fetchData();
   }, [userId, token]);
+
+  const toggleForm = () => {
+    navigate("/me/edit");
+  };
+
+  const childForm = () => {
+    navigate("/me/child");
+  };
+
+  const childForm = () => {
+    setIsFormVisible(true); // Mostrar el formulario al hacer clic en "Registrar Hijo"
+  };
+
+  const closeForm = () => {
+    setIsFormVisible(false); // Cerrar el formulario
+  };
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -58,6 +80,9 @@ const CardUser = () => {
               <strong>Información:</strong> Aun no ha completado el registro de
               sus datos.
             </p>
+            <button className="complet-perfil-button" onClick={toggleForm}>
+              Completar Perfil
+            </button>
           </div>
         </div>
       </div>
@@ -108,9 +133,9 @@ const CardUser = () => {
           </p>
         </div>
         <div className="card-footer">
-          <p>
-            <strong>Registrar hijos</strong>
-          </p>
+          <button className="reg-child-button" onClick={childForm}>
+            Registrar Hijo
+          </button>
           {childrenList && childrenList.length > 0 && (
             <div>
               <h4>Hijos:</h4>

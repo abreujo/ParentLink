@@ -1,3 +1,16 @@
+.reg-child-button,
+.complet-perfil-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7d2181;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 .user-card {
   display: flex;
   justify-content: center;
