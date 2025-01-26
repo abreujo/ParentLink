@@ -60,7 +60,11 @@ const CreateEventForm = ({ onFormSuccess }) => {
         },
         body: JSON.stringify(formData),
       });
-
+      //Debugger
+      console.log(
+        "Envio de Datos para Creacion de Eventos..:  " +
+          JSON.stringify(formData)
+      );
       if (response.ok) {
         setSuccessMessage("¡Evento creado con éxito!");
         onFormSuccess();
@@ -91,7 +95,7 @@ const CreateEventForm = ({ onFormSuccess }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Event Name:</label>
+        <label>Nombre del Evento:</label>
         <input
           type="text"
           name="name"
@@ -103,7 +107,7 @@ const CreateEventForm = ({ onFormSuccess }) => {
       </div>
 
       <div>
-        <label>Description:</label>
+        <label>Descripcion del Evento:</label>
         <textarea
           name="description"
           value={formData.description}
@@ -114,7 +118,7 @@ const CreateEventForm = ({ onFormSuccess }) => {
       </div>
 
       <div>
-        <label>Image URL:</label>
+        <label>Imagen URL:</label>
         <input
           type="url"
           name="image"
@@ -124,14 +128,14 @@ const CreateEventForm = ({ onFormSuccess }) => {
       </div>
 
       <div>
-        <label>Age Bracket:</label>
+        <label>Rango de Edad de Hijos para el Evento:</label>
         <select
           name="ageBracket"
           value={formData.ageBracket}
           onChange={handleChange}
           required
         >
-          <option value="">Select an age group</option>
+          <option value="">Seleccione el Rango</option>
           <option value="0-3">0-3</option>
           <option value="4-6">4-6</option>
           <option value="6-8">6-8</option>
@@ -142,7 +146,7 @@ const CreateEventForm = ({ onFormSuccess }) => {
       </div>
 
       <div>
-        <label>Event Date:</label>
+        <label>Fecha del Evento:</label>
         <input
           type="datetime-local"
           name="date"
@@ -153,7 +157,7 @@ const CreateEventForm = ({ onFormSuccess }) => {
       </div>
 
       <div>
-        <label>Postal Code:</label>
+        <label>Codigo Postal:</label>
         <input
           type="text"
           name="postalCode"
@@ -167,7 +171,7 @@ const CreateEventForm = ({ onFormSuccess }) => {
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
 
-      <button type="submit">Create Event</button>
+      <button type="submit">Crear Evento</button>
     </form>
   );
 };
