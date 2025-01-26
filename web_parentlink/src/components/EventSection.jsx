@@ -56,7 +56,7 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
         {/* El botón solo aparece si estamos en HomeLogin y el usuario está logueado */}
         {isHomeLogin && isUserLoggedIn && (
           <button className="create-button" onClick={toggleForm}>
-            Crea tu evento
+            CREA TUS PROPIOS EVENTOS
           </button>
         )}
         {/* SE AGREGA PARA VALIDAR ERRORES DE JAVA SCRIP */}

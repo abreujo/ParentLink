@@ -18,6 +18,8 @@
   font-size: 1.55rem; /* 1 rem = 16px, así que 1.25rem = 20px */
   padding: 1rem 2rem;
 }
+
+/* Botón CREA TUS PROPIOS EVENTOS */
 .create-button {
   background-color: #7d2181;
   color: #fff;
@@ -112,7 +114,6 @@
 }
 
 .event-card.flipped {
-  transform: scale(1.5); /* Escala la tarjeta */
   position: fixed; /* Hace que se superponga en la pantalla */
   top: 50%; /* Centra verticalmente */
   left: 50%; /* Centra horizontalmente */
@@ -331,5 +332,5 @@
 }
 .h1Events {
   color: #7d2181;
-  padding: 25px;
+  padding: 0px;
 }
