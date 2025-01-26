@@ -53,7 +53,9 @@ const EventList = ({ eventLimit, filters = [] }) => {
       );
 
       // Filtrar datos inválidos
-      const validEvents = data.filter((event) => event && event.id);
+      const validEvents = data
+  .filter((event) => event && event.id)
+  .sort((a, b) => new Date(a.date) - new Date(b.date));
 
       //Debugger
       console.log(
@@ -206,18 +208,24 @@ const EventList = ({ eventLimit, filters = [] }) => {
                   </div>
                   <div className="event-details">
                     <h3>{event.name}</h3>
-                    <p>{event.description}</p>
-                    <ul>
-                      <li>
-                        Ubicación: {event.location.name},{" "}
-                        {event.location.country}
-                      </li>
-                      <li>Código Postal: {event.location.postalCode}</li>
-                      <li>Rango de Edad: {event.ageBracket}</li>
-                      <li>
-                        Fecha: {new Date(event.date).toLocaleDateString()}
-                      </li>
-                    </ul>
+                    <p>{event.description}</p>                    
+                      <p>
+                      El {new Date(event.date).toLocaleDateString()} en {event.location.name},{" "}
+                      </p>
+                      {/* <li>Código Postal: {event.location.postalCode}</li> */}
+                      <p>Para niños de {event.ageBracket} años</p>
+                      <p
+  className={
+    event.userSystem.user.id === idUser
+      ? "highlighted-organizer"
+      : ""
+  }
+>
+  {event.userSystem.user.id === idUser
+    ? `** EVENTO PROPIO **`
+    : `Organizado por: ${event.userSystem.username}`}
+</p>
+
                     <button
                       className={`join-button ${
                         event.userSystem.user.id === idUser ? "disabled" : ""
