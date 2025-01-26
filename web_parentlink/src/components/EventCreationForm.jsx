@@ -16,11 +16,11 @@ const CreateEventForm = ({ onFormSuccess }) => {
   });
 
   useEffect(() => {
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       userSystemId: userId,
-    });
-  });
+    }));
+  }, [userId]); // Ejecuta el efecto solo cuando `userId` cambia.
 
   // Estado para mensajes de éxito o error
   const [errorMessage, setErrorMessage] = useState("");

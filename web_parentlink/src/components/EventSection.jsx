@@ -4,11 +4,12 @@ import Filters from "./FiltersEvent";
 import EventList from "./EventsList";
 import events from "../data/events.json";
 import CreateEventForm from "./EventCreationForm";
+import ErrorBoundary from "./ErrorBoundary";
 
 const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
-  const [selectedOption, setSelectedOption] = useState("parent");
-  const [selectedTag, setSelectedTag] = useState("");
-  const [flippedCards, setFlippedCards] = useState({});
+  //const [selectedOption, setSelectedOption] = useState("parent");
+  //const [selectedTag, setSelectedTag] = useState("");
+  //const [flippedCards, setFlippedCards] = useState({});
   const [filters, setFilters] = useState({});
   const [showForm, setShowForm] = useState(false);
   //const { isUserLoggedIn } = useAuth();
@@ -40,8 +41,10 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   };
 
   if (!hasEvents) {
-    // Si no hay eventos, no muestra nada
-    return null;
+    // Si no hay eventos, no muestra eventos pero indica que no hay eventos para mostrar
+    <section className="event-section">
+      <h2>No hay eventos disponibles en este momento.</h2>
+    </section>;
   }
 
   return (
@@ -56,7 +59,13 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
             Crea tu evento
           </button>
         )}
-        <EventList eventLimit={isHomeLogin ? 4 : undefined} filters={filters} />
+        {/* SE AGREGA PARA VALIDAR ERRORES DE JAVA SCRIP */}
+        <ErrorBoundary>
+          <EventList
+            eventLimit={isHomeLogin ? 4 : undefined}
+            filters={filters}
+          />
+        </ErrorBoundary>
       </div>
       {showForm && (
         <div className="modal-overlay">
