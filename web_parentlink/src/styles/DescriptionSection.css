@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, #E5D9F2, #CDC1FF);
+  background: linear-gradient(135deg, #e5d9f2, #cdc1ff);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   margin: 2rem auto;
@@ -46,7 +46,9 @@
   background-color: #4b0081;
   transform: scale(1.05);
 }
-
+.register-button:focus {
+  outline: none;
+}
 /* Зображення */
 .image-content {
   flex: 1;
