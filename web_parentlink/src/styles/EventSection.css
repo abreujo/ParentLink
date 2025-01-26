@@ -187,6 +187,41 @@
   padding: 20px;
 }
 
+/* Estilo para el card-back duplicado */
+.card-back {
+  width: 200%; /* Duplicar el tamaño de la tarjeta */
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+/* Contenedor que divide la tarjeta en dos columnas */
+.card-back-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Contenedor de la imagen */
+.image-container {
+  width: 50%; /* La imagen ocupa el 50% */
+  height: 100%;
+  overflow: hidden;
+}
+
+.large-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Detalles del evento a la derecha */
+.event-details {
+  width: 50%; /* Los detalles ocupan el otro 50% */
+  padding: 20px;
+  background-color: white;
+}
+
 /* Estilo para el contenedor del dropdown */
 .tag-container {
   position: relative;
