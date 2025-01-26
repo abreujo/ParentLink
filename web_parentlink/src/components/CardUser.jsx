@@ -4,6 +4,7 @@ import { useAuth } from "../contex/AuthContext";
 import "../styles/CardUser.css";
 import userIcon from "../assets/images/userIcon.png";
 import { useNavigate } from "react-router-dom";
+import ChildRegistrationFormNew from "./ChildResitrationFormNew";
 
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
@@ -11,34 +12,34 @@ const CardUser = () => {
   const navigate = useNavigate();
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchWithAuth(
-          `http://localhost:8081/api/usersystem/${userId}`,
-          token
-        );
-        const data = await response.json();
+  const fetchData = async () => {
+    try {
+      const response = await fetchWithAuth(
+        `http://localhost:8081/api/usersystem/${userId}`,
+        token
+      );
+      const data = await response.json();
 
-        setUserData(data);
-        // Debugger
-        console.log(
-          "CardUser buscar datos de usuario:",
-          JSON.stringify(data, null, 2)
-        );
-        console.log(
-          "identificardo de usuario de Tabla Usuario a guardar en variable de entorno..: " +
-            data.user.id
-        );
+      setUserData(data);
+      // Debugger
+      console.log(
+        "CardUser buscar datos de usuario:",
+        JSON.stringify(data, null, 2)
+      );
+      console.log(
+        "identificardo de usuario de Tabla Usuario a guardar en variable de entorno..: " +
+          data.user.id
+      );
 
-        if (data.user) {
-          updateIdUser(data.user.id);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+      if (data.user) {
+        updateIdUser(data.user.id);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [userId, token]);
 
@@ -46,8 +47,9 @@ const CardUser = () => {
     navigate("/me/edit");
   };
 
-  const childForm = () => {
-    navigate("/me/child");
+  const onChildRegistered = () => {
+    // Función que se llama después de registrar un hijo
+    fetchData(); // Volver a obtener los datos del usuario, incluidos los hijos
   };
 
   const childForm = () => {
@@ -150,6 +152,12 @@ const CardUser = () => {
           )}
         </div>
       </div>
+      {isFormVisible && (
+        <ChildRegistrationFormNew
+          onClose={closeForm}
+          onChildRegistered={onChildRegistered}
+        />
+      )}
     </div>
   );
 };
