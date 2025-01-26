@@ -35,8 +35,8 @@ const UserDetails = () => {
     fetchUserData();
   }, [token]);
 
-  // Aquí, añadimos un console.log para verificar el estado
-  console.log("Estado userData:", userData);
+  // Debuger
+  console.log("UserDetail..:" + userData);
 
   if (isLoading) {
     return <div>Cargando datos...</div>;

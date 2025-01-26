@@ -127,6 +127,16 @@
   border-radius: 15px; /* Ajusta el valor para más o menos redondeo */
 }
 
+
+
+.details-lines {
+  display: flex;
+  flex-direction: column; /* Asegura que las líneas estén una debajo de otra */
+  gap: 0; /* Elimina cualquier espacio entre los elementos */
+  line-height: 1; /* Ajusta la altura de línea si es necesario */
+}
+
+
 .card-back {
   background-color: #f0f0f0;
   transform: rotateY(180deg);

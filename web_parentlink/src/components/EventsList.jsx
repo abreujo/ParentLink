@@ -9,40 +9,70 @@ const EventList = ({ eventLimit, filters = [], onCardClick }) => {
 
   const { locationName, Edad } = filters;
 
-  //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
+  // Token y idUser almacenados localmente
+  const token = localStorage.getItem("jwtToken");
+  const idUser = Number(localStorage.getItem("idUser"));
 
-    const fetchEvents = async () => {
-      let url = "http://localhost:8081/api/events"; // URL base
+  if (!idUser) {
+    console.error("Error: idUser no definido o no válido.");
+  }
+
+  // Función para obtener eventos
+  const fetchEvents = async () => {
+    try {
+      let url = "http://localhost:8081/api/events";
       const urlSearchParams = new URLSearchParams();
 
       if (locationName) urlSearchParams.append("locationName", locationName);
-
       if (Edad) urlSearchParams.append("age", Edad);
 
       if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
 
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error al obtener los eventos");
-        }
-        const data = await response.json();
-        setEvents(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    if (token) fetchEvents();
-  }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
+      if (!response.ok) {
+        throw new Error("Error al obtener los eventos");
+      }
+
+      const data = await response.json();
+
+      // Agregar participantes a cada evento
+      const eventsWithParticipants = await Promise.all(
+        data.map(async (event) => {
+          const participantsResponse = await fetch(
+            `http://localhost:8081/api/events/${event.id}/participants`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const participantsData = await participantsResponse.json();
+          event.participantCount = Number(participantsData) || 0; // Valor por defecto 0
+          return event;
+        })
+      );
+
+      setEvents(eventsWithParticipants);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (token && idUser) {
+      fetchEvents();
+    }
+  }, [filters]);
 
   const handleCardClick = (event) => {
     // Ahora solo abrirás el modal o realizarás la acción que deseas
@@ -61,19 +91,16 @@ const EventList = ({ eventLimit, filters = [], onCardClick }) => {
     const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
 
     const participationData = {
-      user: { id: userId },
+      user: { id: idUser },
       event: { id: eventId },
     };
 
     try {
-      //INSCRIPCION DE UN PARTICIPANTE EN UN EVENTO
-      const token = localStorage.getItem("jwtToken"); // Recuperar el token almacenado
-      if (!token) return;
       const response = await fetch("http://localhost:8081/api/participations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(participationData),
       });
@@ -93,17 +120,14 @@ const EventList = ({ eventLimit, filters = [], onCardClick }) => {
   };
 
   const handleClickOutside = (event) => {
-    // Si el clic fue fuera del contenedor de eventos, se cierran todas las tarjetas giradas
     if (eventListRef.current && !eventListRef.current.contains(event.target)) {
-      setFlippedCards({}); // Cierra todas las tarjetas
-      setIsCardClicked(false); // Permite que otras tarjetas sean clicadas nuevamente
+      setFlippedCards({});
+      setIsCardClicked(false);
     }
   };
 
-  // Limitar los eventos si se pasa un límite
   const eventsToRender = eventLimit ? events.slice(0, eventLimit) : events;
 
-  // Añadir el listener para clics fuera del contenedor de eventos
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -127,9 +151,17 @@ const EventList = ({ eventLimit, filters = [], onCardClick }) => {
                   src={`https://picsum.photos/id/${event.id + 10}/300/200`}
                   alt={event.name}
                 />
-                <div className="event-description">
+                <div className="event-details-front">
                   <h3>{event.name}</h3>
-                  <p>Haga clic para ver más</p>
+                  <div className="details-lines">
+                    <span>
+                      {event.location.name} -{" "}
+                      {new Date(event.date).toLocaleDateString()}
+                    </span>
+                    <span>Organizado por: {event.userSystem.username}</span>
+                    <span>{event.participantCount || 0} participantes</span>
+                    <p>Clic para más detalles</p>
+                  </div>
                 </div>
               </div>
               <div className="card-back">
@@ -147,8 +179,7 @@ const EventList = ({ eventLimit, filters = [], onCardClick }) => {
                   className="join-button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log("Participando en el evento..."); // Evitar que el click rote la tarjeta
-                    onJoinEvent(event.id);
+                    handleJoinEvent(event.id);
                   }}
                 >
                   Participar

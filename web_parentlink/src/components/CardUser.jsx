@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
-  const { userId, token } = useAuth();
+  const { userId, token, idUser, updateIdUser } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +19,15 @@ const CardUser = () => {
         const data = await response.json();
         setUserData(data);
         // Debugger
-        console.log("data as JSON:", JSON.stringify(data, null, 2));
+        console.log(
+          "CardUser buscar datos de usuario:",
+          JSON.stringify(data, null, 2)
+        );
+        console.log(
+          "identificardo de usuario de Tabla Usuario a guardar en variable de entorno..: " +
+            data.user.id
+        );
+        updateIdUser(data.user.id);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -57,7 +65,17 @@ const CardUser = () => {
   }
 
   // Datos del usuario si existen
-  const { id, name, surname, email, phone, location, age, gender } = user;
+  const {
+    id,
+    name,
+    surname,
+    email,
+    phone,
+    location,
+    age,
+    gender,
+    childrenList,
+  } = user;
 
   return (
     <div className="user-card">
@@ -93,6 +111,18 @@ const CardUser = () => {
           <p>
             <strong>Registrar hijos</strong>
           </p>
+          {childrenList && childrenList.length > 0 && (
+            <div>
+              <h4>Hijos:</h4>
+              <ul>
+                {childrenList.map((child) => (
+                  <li key={child.id}>
+                    {child.name} - {child.age} años ({child.gender})
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

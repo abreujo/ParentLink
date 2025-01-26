@@ -31,6 +31,9 @@ public class Event {
     //@FutureOrPresent(message = "The event date must be in the present or future")
     private LocalDateTime date;
 
+    @Transient // No se almacena en la BD
+    private int participantCount;
+
     @ManyToOne
     @JoinColumn(name = "postalCode", referencedColumnName = "postalCode", nullable = false)
     @NotNull(message = "The event location is required")
@@ -128,5 +131,13 @@ public class Event {
 
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
+    }
+
+    public int getParticipantCount() {
+        return participantCount;
+    }
+
+    public void setParticipantCount(int participantCount) {
+        this.participantCount = participantCount;
     }
 }

@@ -10,6 +10,7 @@ public class ChildCreateDto {
     private Gender gender;
     private String name;
     private User user;
+    private Long userId;
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
@@ -41,5 +42,13 @@ public class ChildCreateDto {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getUserId() {
+        return userId; // Este getter es necesario para acceder a userId
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId; // Este setter es necesario para asignar userId
     }
 }
