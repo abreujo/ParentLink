@@ -30,6 +30,9 @@ const EventList = ({ eventLimit, filters = [] }) => {
 
       if (urlSearchParams.size) url = `${url}?${urlSearchParams.toString()}`;
 
+      //Debugger
+      console.log("url para traer eventos en EventsList" + url);
+
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -44,9 +47,23 @@ const EventList = ({ eventLimit, filters = [] }) => {
 
       const data = await response.json();
 
-      // Agregar participantes a cada evento
+      //Debugger
+      console.log(
+        "EventList Fecth a Eventos resultado..: " + JSON.stringify(data)
+      );
+
+      // Filtrar datos inválidos
+      const validEvents = data.filter((event) => event && event.id);
+
+      //Debugger
+      console.log(
+        "EventList Fecth a Eventos resultado con Filtro a Eventos Validos..: " +
+          JSON.stringify(data)
+      );
+
+      // Agregar participantes a cada evento VALIDO
       const eventsWithParticipants = await Promise.all(
-        data.map(async (event) => {
+        validEvents.map(async (event) => {
           const participantsResponse = await fetch(
             `http://localhost:8081/api/events/${event.id}/participants`,
             {
@@ -67,6 +84,11 @@ const EventList = ({ eventLimit, filters = [] }) => {
       setEvents(eventsWithParticipants);
     } catch (err) {
       setError(err.message);
+      //Debbuger
+      console.log(
+        "Entra en el Error cuando intenta agregar cantidad de participantes" +
+          err.message
+      );
     }
   };
 
@@ -134,8 +156,6 @@ const EventList = ({ eventLimit, filters = [] }) => {
     };
   }, []);
 
-  
-
   return (
     <div ref={eventListRef}>
       {error && <p>Error: {error}</p>}
@@ -156,48 +176,62 @@ const EventList = ({ eventLimit, filters = [] }) => {
                   <h3>{event.name}</h3>
                   <div className="details-lines">
                     <span>
-                      {event.location.name} - {new Date(event.date).toLocaleDateString()}
+                      {event.location.name} -{" "}
+                      {new Date(event.date).toLocaleDateString()}
                     </span>
-                    <span className={event.userSystem.user.id === idUser ? "highlighted-organizer" : ""}>
-  {event.userSystem.user.id === idUser ? `*** EVENTO PROPIO ***` : `Organizado por: ${event.userSystem.username}`}
-</span>
+                    <span
+                      className={
+                        event.userSystem.user.id === idUser
+                          ? "highlighted-organizer"
+                          : ""
+                      }
+                    >
+                      {event.userSystem.user.id === idUser
+                        ? `*** EVENTO PROPIO ***`
+                        : `Organizado por: ${event.userSystem.username}`}
+                    </span>
                     <span>{event.participantCount || 0} participantes</span>
                     <p>Clic para detalles</p>
                   </div>
                 </div>
               </div>
               <div className="card-back">
-              <div className="card-back-content">
-    <div className="image-container">
-      <img
-        src={`https://picsum.photos/id/${event.id + 10}/600/600`} // Imagen grande
-        alt={event.name}
-        className="large-image"
-      />
-    </div>
-    <div className="event-details">
-      <h3>{event.name}</h3>
-      <p>{event.description}</p>
-      <ul>
-        <li>
-          Ubicación: {event.location.name}, {event.location.country}
-        </li>
-        <li>Código Postal: {event.location.postalCode}</li>
-        <li>Rango de Edad: {event.ageBracket}</li>
-        <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
-      </ul>
-      <button
-        className={`join-button ${event.userSystem.user.id === idUser ? "disabled" : ""}`}
-        disabled={event.userSystem.user.id === idUser}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleJoinEvent(event.id);
-        }}
-      >
-        Participar
-      </button>
-    </div>
-  </div>
+                <div className="card-back-content">
+                  <div className="image-container">
+                    <img
+                      src={`https://picsum.photos/id/${event.id + 10}/600/600`} // Imagen grande
+                      alt={event.name}
+                      className="large-image"
+                    />
+                  </div>
+                  <div className="event-details">
+                    <h3>{event.name}</h3>
+                    <p>{event.description}</p>
+                    <ul>
+                      <li>
+                        Ubicación: {event.location.name},{" "}
+                        {event.location.country}
+                      </li>
+                      <li>Código Postal: {event.location.postalCode}</li>
+                      <li>Rango de Edad: {event.ageBracket}</li>
+                      <li>
+                        Fecha: {new Date(event.date).toLocaleDateString()}
+                      </li>
+                    </ul>
+                    <button
+                      className={`join-button ${
+                        event.userSystem.user.id === idUser ? "disabled" : ""
+                      }`}
+                      disabled={event.userSystem.user.id === idUser}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleJoinEvent(event.id);
+                      }}
+                    >
+                      Participar
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
