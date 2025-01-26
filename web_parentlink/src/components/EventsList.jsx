@@ -134,6 +134,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
     };
   }, []);
 
+  
+
   return (
     <div ref={eventListRef}>
       {error && <p>Error: {error}</p>}
@@ -156,7 +158,9 @@ const EventList = ({ eventLimit, filters = [] }) => {
                     <span>
                       {event.location.name} - {new Date(event.date).toLocaleDateString()}
                     </span>
-                    <span>Organizado por: {event.userSystem.username}</span>
+                    <span className={event.userSystem.user.id === idUser ? "highlighted-organizer" : ""}>
+  {event.userSystem.user.id === idUser ? `*** EVENTO PROPIO ***` : `Organizado por: ${event.userSystem.username}`}
+</span>
                     <span>{event.participantCount || 0} participantes</span>
                     <p>Clic para más detalles</p>
                   </div>
