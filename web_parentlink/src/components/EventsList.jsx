@@ -12,7 +12,7 @@ const EventList = ({ eventLimit, filters = [] }) => {
 
   const { locationName, Edad } = filters;
 
-  const { userSystem } = useAuth(); // Aquí usamos el hook del contexto
+  //const { userSystem } = useAuth(); // Aquí usamos el hook del contexto
 
   //INCORPORACION DE JWT PARA EN ENVIO DEL TOKEN
   useEffect(() => {
@@ -92,10 +92,10 @@ console.log(event);
       return;
     }
 
-    console.log(userSystem);
-    const userId = userSystem?.user?.id;
-    //const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
-    console.log(userId);
+    //console.log(userSystem);
+    //const userId = userSystem?.user?.id;
+    const userId = 1; // Supón que este ID proviene del estado global o contexto de autenticación
+    //console.log(userId);
 
     const participationData = {
       user: { id: userId },
@@ -114,7 +114,7 @@ console.log(event);
         },
         body: JSON.stringify(participationData),
       });
-      debugger
+      //debugger
 
       if (!response.ok) {
         const errorText = await response.text();
