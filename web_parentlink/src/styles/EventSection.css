@@ -101,10 +101,6 @@
   transition: transform 0.6s;
 }
 
-.event-card.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-
 .card-front,
 .card-back {
   position: absolute;
@@ -251,4 +247,57 @@
 .h1Events {
   color: #7d2181;
   padding: 25px;
+}
+/* Overlay para el modal - cubre toda la página */
+.card-modal-overlay {
+  position: fixed; /* Hace que el modal se quede fijo en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex;
+  justify-content: center; /* Centra el modal horizontalmente */
+  align-items: center; /* Centra el modal verticalmente */
+  z-index: 1000; /* Asegura que el modal se vea por encima de otros elementos */
+}
+
+/* Contenido del modal */
+.card-modal-content {
+  background-color: #e5d9f2;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+
+/* Estilo para los botones */
+.close-form-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.close-form-button:hover {
+  background-color: #d32f2f;
+}
+
+.join-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.join-button:hover {
+  background-color: #388e3c;
 }

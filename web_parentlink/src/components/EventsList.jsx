@@ -2,11 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit, filters = [] }) => {
+const EventList = ({ eventLimit, filters = [], onCardClick }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
-  const [flippedCards, setFlippedCards] = useState({}); // Estado para manejar el giro de tarjetas
-  const [isCardClicked, setIsCardClicked] = useState(false); // Estado para manejar si una tarjeta está clicada
   const eventListRef = useRef(null); // Ref para el contenedor de eventos
 
   const { locationName, Edad } = filters;
@@ -46,19 +44,17 @@ const EventList = ({ eventLimit, filters = [] }) => {
     if (token) fetchEvents();
   }, [filters]); // Depende de locationName para cambiar cuando se seleccione una ciudad
 
-  const handleCardClick = (index) => {
-    if (isCardClicked) return; // No hacer nada si una tarjeta ya está clicada
-    setFlippedCards((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-    setIsCardClicked(true); // Marcar que una tarjeta fue clicada
+  const handleCardClick = (event) => {
+    // Ahora solo abrirás el modal o realizarás la acción que deseas
+    setSelectedEvent(event); // Seleccionar el evento
+    setIsCardModalOpen(true); // Mostrar el modal
   };
 
   const handleJoinEvent = async (eventId) => {
+    console.log("Botón Participar clicado", eventId); // Verifica si el evento se está recibiendo correctamente
+
     const userConfirmed = window.confirm("Confirma tu asistencia");
     if (!userConfirmed) {
-      console.log("El usuario canceló la inscripción.");
       return;
     }
 
@@ -122,8 +118,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
         {eventsToRender.map((event, index) => (
           <div
             key={index}
-            className={`event-card ${flippedCards[index] ? "flipped" : ""}`}
-            onClick={() => handleCardClick(index)}
+            className="event-card"
+            onClick={() => onCardClick(event)} // Llamamos a la función pasada desde EventSection
           >
             <div className="card-inner">
               <div className="card-front">
@@ -150,8 +146,9 @@ const EventList = ({ eventLimit, filters = [] }) => {
                 <button
                   className="join-button"
                   onClick={(e) => {
-                    e.stopPropagation(); // Evitar que el click rote la tarjeta
-                    handleJoinEvent(event.id);
+                    e.stopPropagation();
+                    console.log("Participando en el evento..."); // Evitar que el click rote la tarjeta
+                    onJoinEvent(event.id);
                   }}
                 >
                   Participar
