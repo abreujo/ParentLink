@@ -134,6 +134,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
     };
   }, []);
 
+  
+
   return (
     <div ref={eventListRef}>
       {error && <p>Error: {error}</p>}
@@ -156,32 +158,46 @@ const EventList = ({ eventLimit, filters = [] }) => {
                     <span>
                       {event.location.name} - {new Date(event.date).toLocaleDateString()}
                     </span>
-                    <span>Organizado por: {event.userSystem.username}</span>
+                    <span className={event.userSystem.user.id === idUser ? "highlighted-organizer" : ""}>
+  {event.userSystem.user.id === idUser ? `*** EVENTO PROPIO ***` : `Organizado por: ${event.userSystem.username}`}
+</span>
                     <span>{event.participantCount || 0} participantes</span>
-                    <p>Clic para más detalles</p>
+                    <p>Clic para detalles</p>
                   </div>
                 </div>
               </div>
               <div className="card-back">
-                <h3>{event.name}</h3>
-                <p>{event.description}</p>
-                <ul>
-                  <li>
-                    Ubicación: {event.location.name}, {event.location.country}
-                  </li>
-                  <li>Código Postal: {event.location.postalCode}</li>
-                  <li>Rango de Edad: {event.ageBracket}</li>
-                  <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
-                </ul>
-                <button
-                  className="join-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleJoinEvent(event.id);
-                  }}
-                >
-                  Participar
-                </button>
+              <div className="card-back-content">
+    <div className="image-container">
+      <img
+        src={`https://picsum.photos/id/${event.id + 10}/600/600`} // Imagen grande
+        alt={event.name}
+        className="large-image"
+      />
+    </div>
+    <div className="event-details">
+      <h3>{event.name}</h3>
+      <p>{event.description}</p>
+      <ul>
+        <li>
+          Ubicación: {event.location.name}, {event.location.country}
+        </li>
+        <li>Código Postal: {event.location.postalCode}</li>
+        <li>Rango de Edad: {event.ageBracket}</li>
+        <li>Fecha: {new Date(event.date).toLocaleDateString()}</li>
+      </ul>
+      <button
+        className={`join-button ${event.userSystem.user.id === idUser ? "disabled" : ""}`}
+        disabled={event.userSystem.user.id === idUser}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleJoinEvent(event.id);
+        }}
+      >
+        Participar
+      </button>
+    </div>
+  </div>
               </div>
             </div>
           </div>

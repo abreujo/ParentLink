@@ -44,6 +44,36 @@
   background-color: #3a0066; /* Color más oscuro al hacer clic */
 }
 
+/* Estilo específico para el botón PARTICIPAR */
+.join-button {
+  background-color: #7d2181; /* El mismo color que los otros botones */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px; /* Redondeado, similar al de otros botones */
+  cursor: pointer;
+  font-size: 16px; /* Tamaño de fuente estándar */
+  transition: background-color 0.3s ease; /* Transición suave para hover */
+}
+
+/* Estilo cuando el botón PARTICIPAR es deshabilitado */
+.join-button.disabled {
+  background-color: #dcdcdc; /* Color gris cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
+  pointer-events: none; /* Desactiva cualquier interacción con el botón */
+}
+
+/* Estilo al hacer clic en el botón PARTICIPAR */
+.join-button:active {
+  background-color: #3a0066; /* Color más oscuro al hacer clic */
+}
+
+/* Eliminamos el hover cuando el botón está deshabilitado */
+.join-button.disabled:hover {
+  background-color: #dcdcdc; /* Mantiene el mismo color deshabilitado */
+  /* No se añade ningún otro efecto en hover */
+}
+
 .filter-button {
   background-color: #a294f9; /* Color predeterminado */
   color: white; /* Color del texto */
@@ -131,7 +161,13 @@
   border-radius: 15px; /* Ajusta el valor para más o menos redondeo */
 }
 
-
+.highlighted-organizer {
+  background-color: #ffe4b5; /* Cambia este color al que prefieras */
+  padding: 0.2rem 0.4rem; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  font-weight: bold; /* Para destacar el texto */
+  color: #333; /* Color del texto para buen contraste */
+}
 
 .details-lines {
   display: flex;
@@ -149,6 +185,41 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+
+/* Estilo para el card-back duplicado */
+.card-back {
+  width: 200%; /* Duplicar el tamaño de la tarjeta */
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+/* Contenedor que divide la tarjeta en dos columnas */
+.card-back-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Contenedor de la imagen */
+.image-container {
+  width: 50%; /* La imagen ocupa el 50% */
+  height: 100%;
+  overflow: hidden;
+}
+
+.large-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Detalles del evento a la derecha */
+.event-details {
+  width: 50%; /* Los detalles ocupan el otro 50% */
+  padding: 20px;
+  background-color: white;
 }
 
 /* Estilo para el contenedor del dropdown */
