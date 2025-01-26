@@ -5,7 +5,6 @@ import imagen2 from "../assets/images/opinion2.jpg";
 import imagen3 from "../assets/images/opinion3.jpg";
 
 const Carrusel = () => {
-  // Estado para llevar el control del índice de la imagen visible
   const [index, setIndex] = useState(0);
 
   const testimonios = [
@@ -35,17 +34,16 @@ const Carrusel = () => {
     },
   ];
 
-  // Función para ir al siguiente testimonio
+  // Функція для переходу до наступного тестимоніалу
   const nextTestimonio = () => {
-    setIndex((prevIndex) => (prevIndex + 1) % (testimonios.length - 2)); // Asegura que se muestren siempre 3 testimonios
+    setIndex((prevIndex) => (prevIndex + 1) % testimonios.length);
   };
 
-  // Función para ir al testimonio anterior
+  // Функція для переходу до попереднього тестимоніалу
   const prevTestimonio = () => {
     setIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + testimonios.length - 2) % (testimonios.length - 2)
-    ); // Asegura que se muestren siempre 3 testimonios
+      (prevIndex) => (prevIndex - 1 + testimonios.length) % testimonios.length
+    );
   };
 
   return (
@@ -53,21 +51,28 @@ const Carrusel = () => {
       <h2>
         Miles de familias forman parte de nuestra comunidad <br /> ¡Únete!
       </h2>
-      <div className="carrusel">
-        {/* Mostrar 3 testimonios a la vez */}
-        {testimonios.slice(index, index + 3).map((testimonio) => (
-          <div key={testimonio.id} className="carrusel-card">
-            <img src={testimonio.imagen} alt={`Testimonio ${testimonio.id}`} />
-            <p>{testimonio.texto}</p>
-            <a href="#leer-mas" className="carrusel-link">
-              Leer más
-            </a>
-          </div>
-        ))}
+      <div className="carrusel-wrapper">
+        <button onClick={prevTestimonio} className="carrusel-nav prev">
+          &#8249;
+        </button>
+        <div className="carrusel">
+          {testimonios.slice(index, index + 3).map((testimonio) => (
+            <div key={testimonio.id} className="carrusel-card">
+              <img
+                src={testimonio.imagen}
+                alt={`Testimonio ${testimonio.id}`}
+              />
+              <p>{testimonio.texto}</p>
+              <a href="#leer-mas" className="carrusel-link">
+                Leer más
+              </a>
+            </div>
+          ))}
+        </div>
+        <button onClick={nextTestimonio} className="carrusel-nav next">
+          &#8250;
+        </button>
       </div>
-      {/* Botones de navegación */}
-      <button onClick={prevTestimonio} className="carrusel-nav prev"></button>
-      <button onClick={nextTestimonio} className="carrusel-nav next"></button>
     </div>
   );
 };
