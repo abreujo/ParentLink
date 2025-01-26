@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../contex/AuthContext";
 
-const ChildRegistrationFormNew = ({ onClose }) => {
+const ChildRegistrationFormNew = ({ onClose, onChildRegistered }) => {
   const { token, idUser } = useAuth(); // Usa el token y userId desde el contexto
   const [formData, setFormData] = useState({
     userId: idUser || "", // Default to userId from context
@@ -57,7 +57,7 @@ const ChildRegistrationFormNew = ({ onClose }) => {
         );
       }
 
-      setSuccessMessage("Child registered successfully!"); // Usar setSuccessMessage
+      setSuccessMessage("Se Registro el hijo satisfactoriamente!"); // Usar setSuccessMessage
       //Debugger
       console.log("Registro satisfactorio");
 
@@ -67,6 +67,16 @@ const ChildRegistrationFormNew = ({ onClose }) => {
         gender: "",
         name: "",
       });
+
+      // Llamamos a la función onChildRegistered para actualizar la lista de hijos en CardUser
+      if (onChildRegistered) {
+        onChildRegistered(); // Actualizar la información de los hijos en CardUser
+      }
+
+      // Cerramos el formulario
+      if (onClose) {
+        onClose();
+      }
       //await refreshUserData(); //FUNCION PARA RENDERIZAR CARUSER
     } catch (err) {
       setErrorMessage(err.message || "An error occurred. Please try again."); // Usar setErrorMessage

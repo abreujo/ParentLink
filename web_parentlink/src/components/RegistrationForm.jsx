@@ -76,7 +76,10 @@ function RegistrationForm({ onClose }) {
 
         //Se limpian las variables
         //setFormData({ username: "", password: "", confirmPassword: "" });
-
+        // Cerramos el formulario
+        if (onClose) {
+          onClose();
+        }
         navigate("/me/edit");
       } else {
         const errorData = await response.json();
