@@ -59,6 +59,7 @@
 .menu-link.active {
   color: #7d2181;
   transform: scale(1.1);
+  text-decoration: none;
 }
 
 .menu-highlight-link {
@@ -170,4 +171,10 @@
 .btn-login:hover {
   background-color: #4b0081;
   transform: scale(1.05);
+}
+.btn-register:focus {
+  outline: none;
+}
+.btn-login:focus {
+  outline: none;
 }
