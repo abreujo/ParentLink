@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/DescriptionSection.css";
 import imagen1 from "../assets/images/fotofamilia.jpg";
-import dibujo1 from "../assets/images/landingPage.png";
+import RegistrationForm from "../components/RegistrationForm";
 
 const DescriptionSection = () => {
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const handleOpenRegisterForm = () => {
+    setShowRegisterForm(true);
+  };
+
+  const handleCloseRegisterForm = () => {
+    setShowRegisterForm(false);
+  };
+
   return (
     <section className="description-section">
       <div className="text-content">
@@ -12,7 +22,9 @@ const DescriptionSection = () => {
           todo tipo y con hijos a su cargo pueden crear comunidades e
           interactuar entre ellas.
         </p>
-        <button className="register-button">Regístrate gratis</button>
+        <button className="register-button" onClick={handleOpenRegisterForm}>
+          Regístrate gratis
+        </button>
       </div>
       <div className="image-content">
         <img
@@ -20,6 +32,14 @@ const DescriptionSection = () => {
           alt="Family"
         />
       </div>
+
+      {showRegisterForm && (
+        <div className="modal-overlay">
+          <div className="modal-content2">
+            <RegistrationForm onClose={handleCloseRegisterForm} />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
