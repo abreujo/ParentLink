@@ -28,38 +28,6 @@ function LoginForm({ onClose }) {
 
     e.preventDefault();
     await performLogin(formData.username, formData.password, setErrorMessage);
-
-    /*     try {
-      const response = await fetch(
-        "http://localhost:8081/api/usersystem/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: formData.username,
-            password: formData.password,
-          }),
-        }
-      );
-
-      console.log({ response });
-
-      if (response.ok) {
-        const data = await response.json();
-        login(data.token); // Guardar el token en el contexto
-        navigate("/me");
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.message || "Error al iniciar sesión");
-        logout();
-      }
-    } catch (error) {
-      console.error("Error while sending data:", error);
-      setErrorMessage("Error en el servidor");
-      logout();
-    } */
   };
 
   const togglePasswordVisibility = () => {
