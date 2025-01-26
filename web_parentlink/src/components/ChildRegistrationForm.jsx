@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../contex/AuthContext";
 
 const ChildRegistrationForm = () => {
-  const { token, idUser } = useAuth(); // Use the token and userId from context
+  const { token, idUser, refreshUserData } = useAuth(); // Use the token and userId from context
   const [formData, setFormData] = useState({
     userId: idUser || "", // Default to userId from context
     dateOfBirth: "",
@@ -54,6 +54,7 @@ const ChildRegistrationForm = () => {
         gender: "",
         name: "",
       });
+      await refreshUserData();
     } catch (err) {
       setError(err.message || "An error occurred. Please try again.");
       //Debugger

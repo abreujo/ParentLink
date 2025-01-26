@@ -107,6 +107,24 @@ export const AuthProvider = ({ children }) => {
     console.log("idUser actualizado en AuthContext..:  ", newIdUser);
   };
 
+  //Funcion para renderizar automarico la tarjeta de usuario
+  const refreshUserData = async () => {
+    //Debugger
+    console.log("Auth Contex - refresUserData..:  " + updatedUserData);
+    try {
+      const response = await fetchWithAuth(
+        `http://localhost:8081/api/usersystem/${userId}`,
+        token
+      );
+      const updatedUserData = await response.json();
+      setUserData(updatedUserData); // Actualiza el estado global
+      //Debugger
+      console.log("Auth Contex - refresUserData..:  " + updatedUserData);
+    } catch (error) {
+      console.error("Error refreshing user data:", error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -118,6 +136,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         performLogin,
         updateIdUser,
+        refreshUserData,
       }}
     >
       {children}
