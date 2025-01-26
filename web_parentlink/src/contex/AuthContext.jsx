@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Funcion para renderizar automarico la tarjeta de usuario
-  const refreshUserData = async () => {
+  /* const refreshUserData = async () => {
     //Debugger
     console.log("Auth Contex - refresUserData..:  " + updatedUserData);
     try {
@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Error refreshing user data:", error);
     }
-  };
+  }; */
 
   return (
     <AuthContext.Provider
@@ -136,7 +136,6 @@ export const AuthProvider = ({ children }) => {
         logout,
         performLogin,
         updateIdUser,
-        refreshUserData,
       }}
     >
       {children}

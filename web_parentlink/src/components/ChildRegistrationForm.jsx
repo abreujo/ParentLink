@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../contex/AuthContext";
 
 const ChildRegistrationForm = () => {
-  const { token, idUser, refreshUserData } = useAuth(); // Use the token and userId from context
+  const { token, idUser /* , refreshUserData */ } = useAuth(); // Use the token and userId from context
   const [formData, setFormData] = useState({
     userId: idUser || "", // Default to userId from context
     dateOfBirth: "",
@@ -10,7 +10,9 @@ const ChildRegistrationForm = () => {
     name: "",
   });
 
+  //Debugger
   console.log("ChildRegistrationFrom Variable entorno idUser.: " + idUser);
+  console.log("informacion de formData..:  " + JSON.stringify(formData));
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -37,11 +39,17 @@ const ChildRegistrationForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      console.log(JSON.stringify(formData));
+      //Debugger
+      console.log(
+        "Datos enviados para el registro de Children..:  " +
+          JSON.stringify(formData)
+      );
       if (!response.ok) {
         throw new Error("Failed to register child");
         //Debugger
-        console.log("Fallo en Registro");
+        console.log(
+          "Fallo en Registro datos enviados..: " + JSON.stringify(formData)
+        );
       }
 
       setSuccess("Child registered successfully!");
@@ -54,7 +62,7 @@ const ChildRegistrationForm = () => {
         gender: "",
         name: "",
       });
-      await refreshUserData();
+      //await refreshUserData(); //FUNCION PARA RENDERIZAR CARUSER
     } catch (err) {
       setError(err.message || "An error occurred. Please try again.");
       //Debugger
