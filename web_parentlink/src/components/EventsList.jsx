@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
 
-const EventList = ({ eventLimit, filters = [] }) => {
+const EventList = ({ eventLimit, filters = [], refresh }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const [flippedCards, setFlippedCards] = useState({});
@@ -54,8 +54,8 @@ const EventList = ({ eventLimit, filters = [] }) => {
 
       // Filtrar datos inválidos
       const validEvents = data
-  .filter((event) => event && event.id)
-  .sort((a, b) => new Date(a.date) - new Date(b.date));
+        .filter((event) => event && event.id)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
 
       //Debugger
       console.log(
@@ -98,7 +98,7 @@ const EventList = ({ eventLimit, filters = [] }) => {
     if (token && idUser) {
       fetchEvents();
     }
-  }, [filters]);
+  }, [filters, token, idUser, refresh]);
 
   const handleCardClick = (index) => {
     if (isCardClicked) return;

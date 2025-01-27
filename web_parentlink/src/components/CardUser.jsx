@@ -4,37 +4,87 @@ import { useAuth } from "../contex/AuthContext";
 import "../styles/CardUser.css";
 import userIcon from "../assets/images/userIcon.png";
 import { useNavigate } from "react-router-dom";
+import ChildRegistrationFormNew from "./ChildResitrationFormNew";
 
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
   const { userId, token, idUser, updateIdUser } = useAuth();
+  const navigate = useNavigate();
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetchWithAuth(
+        `http://localhost:8081/api/usersystem/${userId}`,
+        token
+      );
+      const data = await response.json();
+
+      setUserData(data);
+      // Debugger
+      console.log(
+        "CardUser buscar datos de usuario:",
+        JSON.stringify(data, null, 2)
+      );
+      console.log(
+        "identificardo de usuario de Tabla Usuario a guardar en variable de entorno..: " +
+          data.user.id
+      );
+
+      if (data.user) {
+        updateIdUser(data.user.id);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchWithAuth(
-          `http://localhost:8081/api/usersystem/${userId}`,
-          token
-        );
-        const data = await response.json();
-        setUserData(data);
-        // Debugger
-        console.log(
-          "CardUser buscar datos de usuario:",
-          JSON.stringify(data, null, 2)
-        );
-        console.log(
-          "identificardo de usuario de Tabla Usuario a guardar en variable de entorno..: " +
-            data.user.id
-        );
-        updateIdUser(data.user.id);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     fetchData();
   }, [userId, token]);
+
+  const toggleForm = () => {
+    navigate("/me/edit");
+  };
+
+  const onChildRegistered = () => {
+    // Función que se llama después de registrar un hijo
+    fetchData(); // Volver a obtener los datos del usuario, incluidos los hijos
+  };
+
+  const childForm = () => {
+    setIsFormVisible(true); // Mostrar el formulario al hacer clic en "Registrar Hijo"
+    //Debbuger
+    console.log("Se envia a mostrar el Formulario de Registro de un hijo");
+  };
+
+  const closeForm = () => {
+    setIsFormVisible(false); // Cerrar el formulario
+  };
+
+  const deleteChild = async (childId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8081/api/children/${childId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        //Debbuger
+        console.log(`Hijo con ID ${childId} eliminado.`);
+        fetchData(); // Actualiza los datos del usuario para reflejar la eliminación
+      } else {
+        console.error("Error al eliminar al hijo:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al realizar la solicitud de eliminación:", error);
+    }
+  };
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -58,6 +108,9 @@ const CardUser = () => {
               <strong>Información:</strong> Aun no ha completado el registro de
               sus datos.
             </p>
+            <button className="complet-perfil-button" onClick={toggleForm}>
+              Completar Perfil
+            </button>
           </div>
         </div>
       </div>
@@ -107,17 +160,27 @@ const CardUser = () => {
             {location.postalCode})
           </p>
         </div>
-        <div className="card-footer">
-          <p>
-            <strong>Registrar hijos</strong>
-          </p>
+        <div className="card-children-footer">
+          <button className="reg-child-button" onClick={childForm}>
+            Registrar Hijo
+          </button>
           {childrenList && childrenList.length > 0 && (
             <div>
               <h4>Hijos:</h4>
-              <ul>
+              <ul className="children-list">
                 {childrenList.map((child) => (
-                  <li key={child.id}>
-                    {child.name} - {child.age} años ({child.gender})
+                  <li key={child.id} className="child-item">
+                    <span className="child-icon">👶</span>
+                    <span className="child-info">
+                      <strong>{child.name}</strong> - {child.age} años (
+                      {child.gender})
+                    </span>
+                    <button
+                      className="cardUser-delete-child"
+                      onClick={() => deleteChild(child.id)}
+                    >
+                      x
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -125,6 +188,12 @@ const CardUser = () => {
           )}
         </div>
       </div>
+      {isFormVisible && (
+        <ChildRegistrationFormNew
+          onClose={closeForm}
+          onChildRegistered={onChildRegistered}
+        />
+      )}
     </div>
   );
 };

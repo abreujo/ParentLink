@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Імпорт useNavigate
+import { useNavigate } from "react-router-dom";
 import "../styles/RegistrationForm.css";
 import { useAuth } from "../contex/AuthContext";
 
 function RegistrationForm({ onClose }) {
-  const navigate = useNavigate(); // Ініціалізація useNavigate
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -76,7 +76,10 @@ function RegistrationForm({ onClose }) {
 
         //Se limpian las variables
         //setFormData({ username: "", password: "", confirmPassword: "" });
-
+        // Cerramos el formulario
+        if (onClose) {
+          onClose();
+        }
         navigate("/me/edit");
       } else {
         const errorData = await response.json();

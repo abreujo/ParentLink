@@ -1,3 +1,38 @@
+.reg-child-button,
+.complet-perfil-button {
+  display: block;
+  margin: 10px auto;
+  background-color: #7d2181;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cardUser-delete-child {
+  margin-left: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.cardUser-delete-child:hover {
+  background-color: #c0392b;
+}
+
+.reg-child-button:hover {
+  background-color: #5e1763;
+  transform: scale(1.05);
+}
+
 .user-card {
   display: flex;
   justify-content: center;
@@ -23,10 +58,37 @@
   padding: 15px;
 }
 
-.card-footer {
-  background-color: #f1f1f1;
+.card-children-footer {
+  background-color: rgba(243, 203, 105, 0.3);
   padding: 10px;
-  text-align: center;
+  text-align: left;
+  border-top: 2px solid #7d2181;
+}
+
+.children-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.child-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.child-info {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.child-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #7d2181;
 }
 
 .card h3 {

@@ -28,6 +28,10 @@ function LoginForm({ onClose }) {
 
     e.preventDefault();
     await performLogin(formData.username, formData.password, setErrorMessage);
+    // Cerramos el formulario
+    if (onClose) {
+      onClose();
+    }
   };
 
   const togglePasswordVisibility = () => {

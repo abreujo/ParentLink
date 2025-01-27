@@ -13,8 +13,7 @@ import HomeLogIn from "./pages/HomeLogIn"; // Importamos el nuevo componente
 import EventPage from "./pages/EventPage";
 import UserProfileForm from "./components/UserProfileForm";
 import SobreNosotros from "./pages/SobreNosotros";
-import MenuLogin from "./components/MenuLogin"; // Menú para usuarios registrados
-import ChildRegistrationForm from "./components/ChildRegistrationForm";
+import ChildRegistrationNewForm from "./components/ChildResitrationFormNew";
 
 function App() {
   return (
@@ -34,6 +33,7 @@ function App() {
         <Route path="/sobrenosotros" element={<SobreNosotros />} />
         <Route path="/me" element={<HomeLogIn />} />
         <Route path="/me/edit" element={<UserProfileForm />} />
+        <Route path="/me/child" element={<ChildRegistrationNewForm />} />
         {/* Nueva ruta para HomeLogIn */}
         <Route path="/home-login" element={<HomeLogIn />} />{" "}
         {/* Nueva ruta para HomeLogIn */}
@@ -43,9 +43,6 @@ function App() {
 
       {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
       <FooterFrame />
-
-      {/* prueba de registro de children */}
-      <ChildRegistrationForm />
     </>
   );
 }
