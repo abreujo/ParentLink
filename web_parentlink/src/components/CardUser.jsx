@@ -110,7 +110,7 @@ const CardUser = () => {
       if (response.ok) {
         console.log("Usuario eliminado correctamente.");
         // Redirigir al usuario a la página de inicio o de registro
-        alert("Usuario eliminado correctamente.");
+        alert("Se ha dado Baja correctamente de ParentLink.");
         logout();
         navigate("/");
       } else {
