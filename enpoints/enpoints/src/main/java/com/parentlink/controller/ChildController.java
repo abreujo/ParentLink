@@ -7,10 +7,7 @@ import com.parentlink.repository.ChildRepository;
 import com.parentlink.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/children")
@@ -38,6 +35,20 @@ public class ChildController {
             // Guardar en la base de datos
             Child savedChild = childRepository.save(child);
             return ResponseEntity.ok(savedChild);
+        }
+
+        //Endpoint para eliminar un hijo
+        @DeleteMapping("/{id}")
+            public ResponseEntity<Void> deleteChild(@PathVariable Long id) {
+            // Buscar el hijo por ID
+             Child child = childRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Child not found"));
+
+            // Eliminar el hijo
+            childRepository.delete(child);
+
+            // Retornar una respuesta vacía con estado 204 (No Content)
+            return ResponseEntity.noContent().build();
         }
     }
 

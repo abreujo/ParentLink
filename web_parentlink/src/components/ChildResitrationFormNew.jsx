@@ -89,7 +89,7 @@ const ChildRegistrationFormNew = ({ onClose, onChildRegistered }) => {
   };
 
   return (
-    <div className="registration-form-container">
+    <div className="registration-formChil-container">
       <form className="registration-form" onSubmit={handleSubmit}>
         <button className="close-button" type="button" onClick={onClose}>
           ✖
