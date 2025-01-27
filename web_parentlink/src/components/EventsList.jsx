@@ -208,24 +208,14 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                   </div>
                   <div className="event-details">
                     <h3>{event.name}</h3>
-                    <p>{event.description}</p>
-                    <p>
-                      El {new Date(event.date).toLocaleDateString()} en{" "}
-                      {event.location.name},{" "}
-                    </p>
-                    {/* <li>Código Postal: {event.location.postalCode}</li> */}
-                    <p>Para niños de {event.ageBracket} años</p>
-                    <p
-                      className={
-                        event.userSystem.user.id === idUser
-                          ? "highlighted-organizer"
-                          : ""
-                      }
-                    >
-                      {event.userSystem.user.id === idUser
-                        ? `** EVENTO PROPIO **`
-                        : `Organizado por: ${event.userSystem.username}`}
-                    </p>
+                    <p>{event.description}</p>                    
+                      <p>
+                      El {new Date(event.date).toLocaleDateString()} en {event.location.name},{" "}
+                      </p>
+                      {/* <li>Código Postal: {event.location.postalCode}</li> */}
+                      <p>Para niños de {event.ageBracket} años</p>
+                      <span>{event.participantCount || 0} participantes</span>
+                      
 
                     <button
                       className={`join-button ${
@@ -239,6 +229,17 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                     >
                       Participar
                     </button>
+                    <p
+  className={
+    event.userSystem.user.id === idUser
+      ? "highlighted-organizer"
+      : ""
+  }
+>
+  {event.userSystem.user.id === idUser
+    ? `** EVENTO PROPIO **`
+    : `Organizado por: ${event.userSystem.username}`}
+</p>
                   </div>
                 </div>
               </div>
