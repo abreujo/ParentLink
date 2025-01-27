@@ -41,7 +41,6 @@
 
 .card {
   width: 300px;
-  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -54,8 +53,8 @@
   text-align: center;
 }
 
-.card-body {
-  padding: 15px;
+.card-user-body {
+  padding: 1px;
 }
 
 .card-children-footer {
@@ -102,4 +101,27 @@
 
 .card strong {
   font-weight: bold;
+}
+
+.delete-account-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-account-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+.delete-account-button .button-subtext {
+  display: block; /* Hace que "ParentLink" aparezca en una nueva línea */
+  font-size: 12px; /* Tamaño más pequeño para la segunda línea */
+  font-weight: normal;
+  margin-top: 4px; /* Espacio entre las líneas */
 }

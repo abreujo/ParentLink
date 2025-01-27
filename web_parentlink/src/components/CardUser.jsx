@@ -8,7 +8,7 @@ import ChildRegistrationFormNew from "./ChildResitrationFormNew";
 
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
-  const { userId, token, idUser, updateIdUser } = useAuth();
+  const { userId, token, idUser, updateIdUser, logout } = useAuth();
   const navigate = useNavigate();
   const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -62,6 +62,7 @@ const CardUser = () => {
     setIsFormVisible(false); // Cerrar el formulario
   };
 
+  //Funcion para eliminar un hijo
   const deleteChild = async (childId) => {
     try {
       const response = await fetch(
@@ -86,6 +87,41 @@ const CardUser = () => {
     }
   };
 
+  const deleteUser = async () => {
+    if (
+      !window.confirm(
+        "¿Estás seguro de que deseas darte de baja? Esta acción no se puede deshacer."
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:8081/api/users/${idUser}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("Usuario eliminado correctamente.");
+        // Redirigir al usuario a la página de inicio o de registro
+        alert("Usuario eliminado correctamente.");
+        logout();
+        navigate("/");
+      } else {
+        alert("No se pudo eliminar el usuario. Por favor, inténtalo de nuevo.");
+        console.error("Error al eliminar el usuario:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al realizar la solicitud de eliminación:", error);
+    }
+  };
+
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -103,7 +139,7 @@ const CardUser = () => {
           <div className="card-header">
             <h3>{username}</h3>
           </div>
-          <div className="card-body">
+          <div className="card-user-body">
             <p>
               <strong>Información:</strong> Aun no ha completado el registro de
               sus datos.
@@ -187,6 +223,9 @@ const CardUser = () => {
             </div>
           )}
         </div>
+        <button className="delete-account-button" onClick={deleteUser}>
+          Darse de Baja <span className="button-subtext">ParentLink</span>
+        </button>{" "}
       </div>
       {isFormVisible && (
         <ChildRegistrationFormNew

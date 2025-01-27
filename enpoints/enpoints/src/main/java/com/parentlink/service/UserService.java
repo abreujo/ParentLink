@@ -9,6 +9,7 @@ import com.parentlink.model.UserType;
 import com.parentlink.repository.UserRepository;
 import com.parentlink.repository.ChildRepository;
 import com.parentlink.repository.UserSystemRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -123,11 +125,18 @@ public class UserService {
     }
 
     public boolean deleteUser(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            // Asegúrate de que se eliminen las dependencias
+            userRepository.delete(user);
+
+            // Si tienes más lógica específica, puedes agregarla aquí
             return true;
         } else {
-            return false;
+            throw new EntityNotFoundException("Usuer no encontrado: " + id);
         }
     }
 
