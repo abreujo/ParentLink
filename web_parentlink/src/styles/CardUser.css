@@ -1,14 +1,36 @@
 .reg-child-button,
 .complet-perfil-button {
-  padding: 10px 20px;
+  display: block;
+  margin: 10px auto;
+  background-color: #7d2181;
+  color: white;
   border: none;
   border-radius: 5px;
   font-size: 14px;
-  font-weight: bold;
+  padding: 10px 20px;
   cursor: pointer;
-  background-color: #7d2181;
-  color: white;
   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cardUser-delete-child {
+  margin-left: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.cardUser-delete-child:hover {
+  background-color: #c0392b;
+}
+
+.reg-child-button:hover {
+  background-color: #5e1763;
+  transform: scale(1.05);
 }
 
 .user-card {
@@ -19,7 +41,6 @@
 
 .card {
   width: 300px;
-  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -32,14 +53,41 @@
   text-align: center;
 }
 
-.card-body {
-  padding: 15px;
+.card-user-body {
+  padding: 1px;
 }
 
-.card-footer {
-  background-color: #f1f1f1;
+.card-children-footer {
+  background-color: rgba(243, 203, 105, 0.1);
   padding: 10px;
-  text-align: center;
+  text-align: left;
+  border-top: 2px solid #7d2181;
+}
+
+.children-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.child-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.child-info {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.child-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #7d2181;
 }
 
 .card h3 {
@@ -53,4 +101,84 @@
 
 .card strong {
   font-weight: bold;
+}
+
+.delete-account-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-account-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+.delete-account-button .button-subtext {
+  display: block; /* Hace que "ParentLink" aparezca en una nueva línea */
+  font-size: 12px; /* Tamaño más pequeño para la segunda línea */
+  font-weight: normal;
+  margin-top: 4px; /* Espacio entre las líneas */
+}
+
+.ReactModal__Overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ReactModal__Content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: auto;
+}
+/* Estilo para el overlay (fondo oscuro) */
+.react-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+  z-index: 1000; /* Asegura que el modal esté encima de otros elementos */
+}
+
+/* Estilo para el contenido del modal */
+.react-modal-content {
+  position: absolute;
+  top: 20%; /* Posición vertical */
+  left: 50%; /* Centrado horizontal */
+  transform: translateX(
+    -50%
+  ); /* Asegura que el modal esté completamente centrado */
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px; /* Ajusta el tamaño del modal */
+  background-color: #fff; /* Color de fondo del modal */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el modal */
+}
+
+/* Estilo para el contenedor de los botones dentro del modal */
+.react-modal-content .button-container {
+  display: flex;
+  justify-content: space-between; /* Distribuye los botones a los extremos */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo para los botones dentro del modal */
+.react-modal-content .modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.react-modal-content .modal-button:first-child {
+  background-color: #ff4d4d; /* Botón de "Cancelar" con fondo rojo */
+  color: white;
+}
+
+.react-modal-content .modal-button:last-child {
+  background-color: #4caf50; /* Botón de "Sí, darme de baja" con fondo verde */
+  color: white;
 }

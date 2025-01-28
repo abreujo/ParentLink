@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contex/AuthContext";
+import { toast } from "react-toastify";
 
 function LoginForm({ onClose }) {
   const { performLogin } = useAuth();
@@ -27,7 +28,10 @@ function LoginForm({ onClose }) {
     }
 
     e.preventDefault();
+    toast.success("Identificacion satisfactoria!");
+
     await performLogin(formData.username, formData.password, setErrorMessage);
+
     // Cerramos el formulario
     if (onClose) {
       onClose();

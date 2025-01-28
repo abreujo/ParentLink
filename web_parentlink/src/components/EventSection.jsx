@@ -17,6 +17,12 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   // Estado para controlar si hay eventos creados
   const [hasEvents, setHasEvents] = useState(false);
 
+  const [refreshEvents, setRefreshEvents] = useState(false);
+
+  const handleEventCreated = () => {
+    setRefreshEvents((prev) => !prev); // Cambiar el estado para forzar el refresco
+  };
+
   // Obtener el token de localStorage para verificar si el usuario está logueado
   isUserLoggedIn = localStorage.getItem("jwtToken") !== null;
 
@@ -62,15 +68,16 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
         {/* SE AGREGA PARA VALIDAR ERRORES DE JAVA SCRIP */}
         <ErrorBoundary>
           <EventList
-            eventLimit={isHomeLogin ? 4 : undefined}
+            eventLimit={isHomeLogin ? 10000 : undefined}
             filters={filters}
+            refresh={refreshEvents}
           />
         </ErrorBoundary>
       </div>
       {showForm && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <CreateEventForm onFormSuccess={handleCreateSubmit} />
+            <CreateEventForm onFormSuccess={handleEventCreated} />
             <button
               className="close-form-button"
               onClick={() => setShowForm(false)}

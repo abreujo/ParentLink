@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Crear el contexto
 const AuthContext = createContext();
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("userId", newUserId);
     localStorage.setItem("username", newUsername); // Guardar el username
     localStorage.setItem("idUser", newidUser); // Guardar el username
+    toast.success("Inicio de sesion exitoso!");
 
     //Debugger
     console.log(
@@ -53,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("idUser");
 
     // Redirigir al login (opcional)
+    toast.success("Cierre de session exitoso!");
     navigate("/");
   };
 
