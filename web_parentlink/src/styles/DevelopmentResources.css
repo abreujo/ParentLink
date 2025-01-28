@@ -35,14 +35,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   font-size: 18px;
   text-align: center;
 }
 
 .resource-logo {
-  width: 50px; /* Aumentar tamaño de los iconos */
-  height: 50px; /* Aumentar tamaño de los iconos */
+  width: auto;
+  height: 50px;
   margin-right: 15px;
   transition: transform 0.3s ease;
 }
