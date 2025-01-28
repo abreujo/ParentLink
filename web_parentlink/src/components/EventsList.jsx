@@ -64,7 +64,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
       );
 
       // Agregar participantes a cada evento VALIDO
-      const eventsWithParticipants = await Promise.all(
+      let eventsWithParticipants = await Promise.all(
         validEvents.map(async (event) => {
           const participantsResponse = await fetch(
             `http://localhost:8081/api/events/${event.id}/participants`,
@@ -82,6 +82,9 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
           return event;
         })
       );
+
+      if (eventLimit)
+        eventsWithParticipants = eventsWithParticipants.slice(0, eventLimit)
 
       setEvents(eventsWithParticipants);
     } catch (err) {
@@ -110,8 +113,19 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
   };
 
   // Abre el modal de confirmación de asistencia
-  const openModal = (eventId) => {
-    setSelectedEventId(eventId); // Guarda el ID del evento seleccionado
+   const openModal = (eventId) => {
+    // Cerrar todas las tarjetas volteadas
+    setFlippedCards({});
+    setIsCardClicked(false);
+  
+    // Realizar scroll al modal
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  
+    // Abrir el modal y guardar el evento seleccionado
+    setSelectedEventId(eventId);
     setIsModalOpen(true);
   };
 
@@ -121,12 +135,12 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
     setSelectedEventId(null); // Resetea el ID cuando se cierra el modal
   };
 
-  const handleJoinEvent = async () => {
+  /*const handleJoinEvent = async () => {
     if (!selectedEventId) return; // Si no hay evento seleccionado, no hacer nada
 
     const participationData = {
       user: { id: idUser },
-      event: { id: eventId },
+      event: { id: selectedEventId },
     };
 
     try {
@@ -152,7 +166,44 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
       toast.error("No se pudo completar la inscripción. " + error.message);
     }
     closeModal(); // Cierra el modal después de la acción
+  };*/
+
+  const handleJoinEvent = async () => {
+    if (!selectedEventId) return; // Si no hay evento seleccionado, no hacer nada
+  
+    const participationData = {
+      user: { id: idUser },
+      event: { id: selectedEventId },
+    };
+  
+    try {
+      const response = await fetch("http://localhost:8081/api/participations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(participationData),
+      });
+  
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Error al registrar la participación");
+      }
+  
+      const result = await response.json();
+      toast.success("Te has inscrito al evento correctamente.");
+      console.log("Participación creada:", result);
+  
+      // Recarga la lista de eventos para reflejar el cambio en participantes
+      await fetchEvents();
+    } catch (error) {
+      console.error("Error al inscribirse:", error.message);
+      toast.error("No se pudo completar la inscripción. " + error.message);
+    }
+    closeModal(); // Cierra el modal después de la acción
   };
+  
 
   const handleClickOutside = (event) => {
     if (eventListRef.current && !eventListRef.current.contains(event.target)) {
@@ -233,6 +284,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                       className={`join-button ${
                         event.userSystem.user.id === idUser ? "disabled" : ""
                       }`}
+                      style={{ marginTop: "20px" }} // Aquí defines el margen superior
                       disabled={event.userSystem.user.id === idUser}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -241,7 +293,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                     >
                       Participar
                     </button>
-                    <p
+                    <span
                       className={
                         event.userSystem.user.id === idUser
                           ? "highlighted-organizer"
@@ -251,7 +303,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                       {event.userSystem.user.id === idUser
                         ? `** EVENTO PROPIO **`
                         : `Organizado por: ${event.userSystem.username}`}
-                    </p>
+                    </span>
                   </div>
                 </div>
               </div>

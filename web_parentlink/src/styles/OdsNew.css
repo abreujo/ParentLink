@@ -1,0 +1,195 @@
+/* Загальний стиль каруселі */
+.ods-container {
+  background: linear-gradient(135deg, #e5d9f2, #a294f9);
+  color: #4b0081;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  overflow: hidden;
+}
+
+.ods-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Обгортка каруселі */
+.ods-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Вміст каруселі */
+.ods {
+  padding: 0rem;
+  padding-right: 0rem;
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 1.5rem;
+  overflow-x: hidden;
+  padding: 2rem;
+}
+
+/* Карточки */
+.ods-card {
+  width: 300px; /* Фіксована ширина картки */
+  height: 400px; /* Фіксована висота картки */
+  background-color: #fff;
+  /* padding: 1rem; */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ods-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.ods-card p {
+  font-size: 1rem;
+  color: #4b0081;
+  margin: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.ods-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.ods-card:hover img {
+  transform: scale(1);
+}
+
+.ods-card .ods-link {
+  display: inline-block;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #7d2181, #4b0081);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ods-card .ods-link:hover {
+  background: linear-gradient(135deg, #4b0081, #7d2181);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопки навігації */
+.ods-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: linear-gradient(135deg, #a294f9, #7d2181);
+  font-size: 0rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 1.2rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  /* transition: transform 0.3s ease, background 0.3s ease; */
+  z-index: 10;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ods-nav:focus {
+  outline: none;
+}
+
+.ods-nav:hover {
+  /* transform: scale(1.15); */
+  background: linear-gradient(135deg, #7d2181, #a294f9);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ods-nav.prev {
+  left: 1rem;
+}
+
+.ods-nav.next {
+  right: 1rem;
+}
+
+.ods-nav:after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: solid #fff;
+  border-width: 0 4px 4px 0;
+}
+
+.ods-nav.prev:after {
+  transform: rotate(135deg);
+}
+
+.ods-nav.next:after {
+  transform: rotate(-45deg);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .ods {
+    gap: 1.5 rem;
+  }
+
+  .ods-card {
+    flex: 0 0 45%; /* Показувати 2 картки */
+    width: 250px;
+    height: 350px;
+  }
+
+  .ods-nav.prev {
+    left: 0.5rem;
+  }
+
+  .ods-nav.next {
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ods {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .ods-card {
+    flex: 0 0 100%; /* Показувати 1 картку */
+    width: 100%;
+    height: 300px;
+  }
+
+  .ods-nav {
+    font-size: 0rem;
+    padding: 0.7rem;
+  }
+}
