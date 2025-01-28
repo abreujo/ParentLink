@@ -121,7 +121,9 @@ const CardUser = () => {
         logout();
         navigate("/");
       } else {
-        alert("No se pudo eliminar el usuario. Por favor, inténtalo de nuevo.");
+        toast.success(
+          "No se pudo eliminar el usuario. Por favor, inténtalo de nuevo."
+        );
         console.error("Error al eliminar el usuario:", response.statusText);
       }
     } catch (error) {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/EventSection.css";
 import "../styles/ButtonParticipa.css";
+import { toast } from "react-toastify";
+import Modal from "react-modal";
 
 const EventList = ({ eventLimit, filters = [], refresh }) => {
   const [events, setEvents] = useState([]);
@@ -8,16 +10,14 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
   const [flippedCards, setFlippedCards] = useState({});
   const [isCardClicked, setIsCardClicked] = useState(false);
   const eventListRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
+  const [selectedEventId, setSelectedEventId] = useState(null); // Estado para almacenar el ID del evento seleccionado
 
   const { locationName, Edad } = filters;
 
   // Token y idUser almacenados localmente
   const token = localStorage.getItem("jwtToken");
   const idUser = Number(localStorage.getItem("idUser"));
-
-  if (!idUser) {
-    console.error("Error: idUser no definido o no válido.");
-  }
 
   // Función para obtener eventos
   const fetchEvents = async () => {
@@ -109,9 +109,20 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
     setIsCardClicked(true);
   };
 
-  const handleJoinEvent = async (eventId) => {
-    const userConfirmed = window.confirm("Confirma tu asistencia");
-    if (!userConfirmed) return;
+  // Abre el modal de confirmación de asistencia
+  const openModal = (eventId) => {
+    setSelectedEventId(eventId); // Guarda el ID del evento seleccionado
+    setIsModalOpen(true);
+  };
+
+  // Cierra el modal de confirmación de asistencia
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedEventId(null); // Resetea el ID cuando se cierra el modal
+  };
+
+  const handleJoinEvent = async () => {
+    if (!selectedEventId) return; // Si no hay evento seleccionado, no hacer nada
 
     const participationData = {
       user: { id: idUser },
@@ -134,12 +145,13 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
       }
 
       const result = await response.json();
-      alert("Te has inscrito al evento correctamente.");
+      toast.success("Te has inscrito al evento correctamente.");
       console.log("Participación creada:", result);
     } catch (error) {
       console.error("Error al inscribirse:", error.message);
-      alert("No se pudo completar la inscripción. " + error.message);
+      toast.error("No se pudo completar la inscripción. " + error.message);
     }
+    closeModal(); // Cierra el modal después de la acción
   };
 
   const handleClickOutside = (event) => {
@@ -208,14 +220,14 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                   </div>
                   <div className="event-details">
                     <h3>{event.name}</h3>
-                    <p>{event.description}</p>                    
-                      <p>
-                      El {new Date(event.date).toLocaleDateString()} en {event.location.name},{" "}
-                      </p>
-                      {/* <li>Código Postal: {event.location.postalCode}</li> */}
-                      <p>Para niños de {event.ageBracket} años</p>
-                      <span>{event.participantCount || 0} participantes</span>
-                      
+                    <p>{event.description}</p>
+                    <p>
+                      El {new Date(event.date).toLocaleDateString()} en{" "}
+                      {event.location.name},{" "}
+                    </p>
+                    {/* <li>Código Postal: {event.location.postalCode}</li> */}
+                    <p>Para niños de {event.ageBracket} años</p>
+                    <span>{event.participantCount || 0} participantes</span>
 
                     <button
                       className={`join-button ${
@@ -224,22 +236,22 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                       disabled={event.userSystem.user.id === idUser}
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleJoinEvent(event.id);
+                        openModal(event.id); // Abre el modal y pasa el ID del evento
                       }}
                     >
                       Participar
                     </button>
                     <p
-  className={
-    event.userSystem.user.id === idUser
-      ? "highlighted-organizer"
-      : ""
-  }
->
-  {event.userSystem.user.id === idUser
-    ? `** EVENTO PROPIO **`
-    : `Organizado por: ${event.userSystem.username}`}
-</p>
+                      className={
+                        event.userSystem.user.id === idUser
+                          ? "highlighted-organizer"
+                          : ""
+                      }
+                    >
+                      {event.userSystem.user.id === idUser
+                        ? `** EVENTO PROPIO **`
+                        : `Organizado por: ${event.userSystem.username}`}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -247,6 +259,27 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
           </div>
         ))}
       </div>
+      {/* Modal de confirmación */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirmar Participación"
+        overlayClassName="react-modal-overlay"
+        className="react-modal-content"
+      >
+        <h2>¿Estás seguro de que deseas participar?</h2>
+        <div className="button-container">
+          <button className="modal-button" onClick={closeModal}>
+            Cancelar
+          </button>
+          <button
+            className="modal-button"
+            onClick={handleJoinEvent} // Llamada a la función al hacer clic en "Sí"
+          >
+            Sí, participar
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
