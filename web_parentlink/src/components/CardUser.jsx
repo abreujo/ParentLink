@@ -94,6 +94,10 @@ const CardUser = () => {
 
   // Abre el modal de confirmación de baja
   const openModal = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Para un desplazamiento suave
+    });
     setIsModalOpen(true);
   };
 

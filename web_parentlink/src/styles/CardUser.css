@@ -146,7 +146,7 @@
 /* Estilo para el contenido del modal */
 .react-modal-content {
   position: absolute;
-  top: 20%; /* Posición vertical */
+  top: 50%; /* Posición vertical */
   left: 50%; /* Centrado horizontal */
   transform: translateX(
     -50%

@@ -26,6 +26,11 @@ const FooterFrame = () => {
             <li>
               <Link to="/Ods">Objetivos de Desarollo Sostenible</Link>
             </li>
+            <li>
+              <Link to="/DevelopmentResources">
+                Recursos para el desarrollo
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="footer-section">
