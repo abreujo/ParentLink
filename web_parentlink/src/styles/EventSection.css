@@ -180,7 +180,7 @@
 
 /* Estilo cuando la tarjeta está volteada */
 .event-card.flipped .card-back {
-  width: 320%; /* Aumenta el tamaño del card-back */
+  width: 300%; /* Aumenta el tamaño del card-back */
   display: flex;
   flex-direction: row;
   position: relative;
