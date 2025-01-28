@@ -64,7 +64,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
       );
 
       // Agregar participantes a cada evento VALIDO
-      const eventsWithParticipants = await Promise.all(
+      let eventsWithParticipants = await Promise.all(
         validEvents.map(async (event) => {
           const participantsResponse = await fetch(
             `http://localhost:8081/api/events/${event.id}/participants`,
@@ -82,6 +82,9 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
           return event;
         })
       );
+
+      if (eventLimit)
+        eventsWithParticipants = eventsWithParticipants.slice(0, eventLimit)
 
       setEvents(eventsWithParticipants);
     } catch (err) {
@@ -281,6 +284,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                       className={`join-button ${
                         event.userSystem.user.id === idUser ? "disabled" : ""
                       }`}
+                      style={{ marginTop: "20px" }} // Aquí defines el margen superior
                       disabled={event.userSystem.user.id === idUser}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -289,7 +293,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                     >
                       Participar
                     </button>
-                    <p
+                    <span
                       className={
                         event.userSystem.user.id === idUser
                           ? "highlighted-organizer"
@@ -299,7 +303,7 @@ const EventList = ({ eventLimit, filters = [], refresh }) => {
                       {event.userSystem.user.id === idUser
                         ? `** EVENTO PROPIO **`
                         : `Organizado por: ${event.userSystem.username}`}
-                    </p>
+                    </span>
                   </div>
                 </div>
               </div>
