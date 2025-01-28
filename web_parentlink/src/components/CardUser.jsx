@@ -5,12 +5,17 @@ import "../styles/CardUser.css";
 import userIcon from "../assets/images/userIcon.png";
 import { useNavigate } from "react-router-dom";
 import ChildRegistrationFormNew from "./ChildResitrationFormNew";
+import { toast } from "react-toastify";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root"); // Asegúrate de configurar el elemento raíz
 
 const CardUser = () => {
   const [userData, setUserData] = useState(null);
   const { userId, token, idUser, updateIdUser, logout } = useAuth();
   const navigate = useNavigate();
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
 
   const fetchData = async () => {
     try {
@@ -87,15 +92,17 @@ const CardUser = () => {
     }
   };
 
-  const deleteUser = async () => {
-    if (
-      !window.confirm(
-        "¿Estás seguro de que deseas darte de baja? Esta acción no se puede deshacer."
-      )
-    ) {
-      return;
-    }
+  // Abre el modal de confirmación de baja
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
+  // Cierra el modal de confirmación de baja
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const deleteUser = async () => {
     try {
       const response = await fetch(
         `http://localhost:8081/api/users/${idUser}`,
@@ -110,7 +117,7 @@ const CardUser = () => {
       if (response.ok) {
         console.log("Usuario eliminado correctamente.");
         // Redirigir al usuario a la página de inicio o de registro
-        alert("Se ha dado Baja correctamente de ParentLink.");
+        toast.success("Se ha dado Baja correctamente de ParentLink");
         logout();
         navigate("/");
       } else {
@@ -120,6 +127,7 @@ const CardUser = () => {
     } catch (error) {
       console.error("Error al realizar la solicitud de eliminación:", error);
     }
+    closeModal(); // Cierra el modal después de la acción
   };
 
   if (!userData) {
@@ -223,7 +231,7 @@ const CardUser = () => {
             </div>
           )}
         </div>
-        <button className="delete-account-button" onClick={deleteUser}>
+        <button className="delete-account-button" onClick={openModal}>
           Darse de Baja <span className="button-subtext">ParentLink</span>
         </button>{" "}
       </div>
@@ -233,6 +241,23 @@ const CardUser = () => {
           onChildRegistered={onChildRegistered}
         />
       )}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirmar Baja"
+        overlayClassName="react-modal-overlay" // Clase para el overlay
+        className="react-modal-content" // Clase para el contenido del modal
+      >
+        <h2>¿Estás seguro de que deseas darte de baja?</h2>
+        <div className="button-container">
+          <button className="modal-button" onClick={closeModal}>
+            Cancelar
+          </button>
+          <button className="modal-button" onClick={deleteUser}>
+            Sí, darme de baja
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

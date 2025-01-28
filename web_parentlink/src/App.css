@@ -17,6 +17,33 @@ paleta de colores de la web:
 .Ods-image {
   width: 100%;
 }
+
+/* Estilo del contenedor de las notificaciones */
+.custom-toast-container {
+  font-family: Arial, sans-serif; /* Cambia la fuente si lo deseas */
+}
+
+/* Estilo de cada notificación */
+.custom-toast {
+  background-color: #f3e5f5; /* Púrpura oscuro */
+  color: #8e24aa; /* Texto blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Cambiar el color de la barra de progreso */
+.custom-progress {
+  background-color: #8e24aa; /* Púrpura sólido */
+  background: linear-gradient(90deg, #8e24aa, #c158dc); /* Degradado púrpura */
+  height: 5px; /* Ajusta el grosor de la barra si lo deseas */
+  border-radius: 2px; /* Bordes redondeados */
+}
+
+.custom-toast .Toastify__toast-icon {
+  color: #8e24aa !important;
+}
+
 /* Aplica la fuente Patrick Hand y estilo a los títulos */
 
 /*

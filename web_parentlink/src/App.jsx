@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify"; // Importar ToastContainer
+import "react-toastify/dist/ReactToastify.css"; // Importar estilos de react-toastify
 import "./App.css";
 import Menu from "./components/Menu"; // Menú inicial
 import HomePage from "./pages/HomePage"; // Asegúrate de que el path sea correcto
@@ -40,6 +42,16 @@ function App() {
         <Route path="/eventos" element={<EventPage />} />{" "}
         {/* Ruta para EventPage */}
       </Routes>
+
+      {/* Contenedor de Toastify para las notificaciones globales */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        toastClassName="custom-toast"
+        className="custom-toast-container"
+        progressClassName="custom-progress"
+      />
 
       {/* SE LLAMA AL COMPONENTE DEL FOOTER PARA QUE SE PINTE AL PIE DE PAGINA */}
       <FooterFrame />
