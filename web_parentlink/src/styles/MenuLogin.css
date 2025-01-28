@@ -101,6 +101,10 @@
   background-color: #cc0000;
 }
 
+.logout:focus {
+  outline: none;
+}
+
 /* Modal styles */
 .modal-overlay {
   position: fixed;
