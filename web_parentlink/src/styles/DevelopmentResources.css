@@ -1,0 +1,57 @@
+.resources-container {
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.resources-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.resources-section {
+  margin-bottom: 30px;
+}
+
+.resources-subtitle {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.resources-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.resource-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.resource-logo {
+  width: auto;
+  height: 50px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.resource-logo:hover {
+  transform: scale(1.2); /* Efecto hover para iconos */
+}
+
+.resource-item span {
+  font-size: 18px;
+  color: #444;
+}
