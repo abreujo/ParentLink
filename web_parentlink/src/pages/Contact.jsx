@@ -10,29 +10,29 @@ import UserDetailsEntorno from "../components/UserDetailsEntorno";
 function Contact() {
   const cardsData = [
     {
-      name: "Pacco",
-      title: "Desarrollador Web",
-      email: "Pacco@example.com",
+      name: "Pacco Gago",
+      title: "LinkedIN: @paco-gago",
+      email: "pacco@example.com",
       phone: "+34 621 35 90 53",
       photo: pacco,
     },
     {
       name: "Myroslav Palko",
-      title: "Diseñador Gráfico",
-      email: "Myroslav@example.com",
+      title: "LinkedIN: @myroslav-palko",
+      email: "myropalko@gmail.com",
       phone: "+34 675 83 79 47",
       photo: myroslav,
     },
     {
-      name: "David",
-      title: "Marketing Digital",
-      email: "David@example.com",
+      name: "David Arrabal",
+      title: "LinkedIN: @davidarrabal",
+      email: "david.arrabal92@gmail.com",
       phone: "+34 672 30 88 27",
       photo: david,
     },
     {
       name: "Gylmer Johel",
-      title: "Desarrollador Web",
+      title: "LinkedIN: @joel-abreu",
       email: "johel.abreu@gmail.com",
       phone: "+34 613 290 849",
       photo: johel,
