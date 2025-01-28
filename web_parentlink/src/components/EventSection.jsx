@@ -68,7 +68,7 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
         {/* SE AGREGA PARA VALIDAR ERRORES DE JAVA SCRIP */}
         <ErrorBoundary>
           <EventList
-            eventLimit={isHomeLogin ? 10000 : undefined}
+            eventLimit={isHomeLogin ? undefined: 5}
             filters={filters}
             refresh={refreshEvents}
           />

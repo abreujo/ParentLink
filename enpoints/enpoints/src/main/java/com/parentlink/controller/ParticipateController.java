@@ -56,7 +56,7 @@ public class ParticipateController {
             return ResponseEntity.status(HttpStatus.CREATED).body(newParticipationDTO);
         } catch (RuntimeException e) {
             e.printStackTrace(); // Para verificar la excepción real en los logs
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: User is already registered for this event.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error de inscripción: Ya te has inscrito a este evento.");
         }
     }
 

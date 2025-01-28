@@ -28,8 +28,6 @@ function LoginForm({ onClose }) {
     }
 
     e.preventDefault();
-    toast.success("Identificacion satisfactoria!");
-
     await performLogin(formData.username, formData.password, setErrorMessage);
 
     // Cerramos el formulario
