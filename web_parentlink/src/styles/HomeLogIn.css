@@ -1,12 +1,14 @@
 /* Головний контейнер з Grid */
 .wrapper-sidebar {
-  display: grid !important;
-  grid-template-columns: 25% 70% !important; /* Sidebar 25%, EventSection 70% */
-  gap: 5% !important; /* Відступи між блоками */
+  display: flex !important;
+  flex-direction: row !important;
+  /* display: grid !important;
+  grid-template-columns: 20% 60% !important;  */
+  /* Sidebar 25%, EventSection 70% */
+  gap: 5% !important; /* Решта відсотків на відступи */
   width: 100vw !important;
   max-width: 100% !important;
-  padding: 1rem;
-  padding-top: 0rem;
+  padding: 2rem !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
   align-items: start !important;
@@ -32,15 +34,12 @@
 /* Адаптивність */
 @media (max-width: 1024px) {
   .wrapper-sidebar {
-    grid-template-columns: 1fr !important; /* Перехід у вертикальну колонку */
+    grid-template-columns: 1fr !important; /* Переходить у вертикальне розташування */
     gap: 2rem !important;
   }
 
   .side-div,
   .eve {
-    width: 90% !important; /* Залишаємо 5% відступів з обох сторін */
-    max-width: 90% !important;
-    margin: 0 auto !important; /* Вирівнюємо по центру */
+    width: 100% !important;
   }
 }
-і
