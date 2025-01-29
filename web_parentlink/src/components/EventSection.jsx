@@ -5,6 +5,7 @@ import EventList from "./EventsList";
 import events from "../data/events.json";
 import CreateEventForm from "./EventCreationForm";
 import ErrorBoundary from "./ErrorBoundary";
+import { useAuth } from "../contex/AuthContext";
 
 const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   //const [selectedOption, setSelectedOption] = useState("parent");
@@ -13,6 +14,17 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   const [filters, setFilters] = useState({});
   const [showForm, setShowForm] = useState(false);
   //const { isUserLoggedIn } = useAuth();
+  const { idUser } = useAuth();
+
+  //Debuger
+  console.log(
+    "EventSection isHomeLogin..= " +
+      isHomeLogin +
+      " isUserLoggedIn..= " +
+      isUserLoggedIn +
+      "  idUser..=  " +
+      idUser
+  );
 
   // Estado para controlar si hay eventos creados
   const [hasEvents, setHasEvents] = useState(false);
@@ -56,11 +68,13 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   return (
     <section className="event-section">
       <div>
-        <h1 className="h1Events">
-          {isHomeLogin ? "Tus Eventos" : "Últimos Eventos"}
-        </h1>
+        {(isHomeLogin || isUserLoggedIn) && (
+          <h1 className="h1Events">
+            {isHomeLogin ? "Tus Eventos" : "Últimos Eventos"}
+          </h1>
+        )}
         {/* El botón solo aparece si estamos en HomeLogin y el usuario está logueado */}
-        {isHomeLogin && isUserLoggedIn && (
+        {isHomeLogin && idUser !== undefined && (
           <button className="create-button" onClick={toggleForm}>
             CREA TUS PROPIOS EVENTOS
           </button>
@@ -68,7 +82,7 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
         {/* SE AGREGA PARA VALIDAR ERRORES DE JAVA SCRIP */}
         <ErrorBoundary>
           <EventList
-            eventLimit={isHomeLogin ? undefined: 5}
+            eventLimit={isHomeLogin ? undefined : 5}
             filters={filters}
             refresh={refreshEvents}
           />

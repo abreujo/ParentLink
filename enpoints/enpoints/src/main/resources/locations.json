@@ -7,8 +7,5 @@
   { "postalCode": "03002", "name": "Alicante", "country": "Spain" },
   { "postalCode": "46002", "name": "Valencia", "country": "Spain" },
   { "postalCode": "15003", "name": "A Coruña", "country": "Spain" },
-  { "postalCode": "20001", "name": "San Sebastián", "country": "Spain" },
-  { "postalCode": "41005", "name": "Sevilla", "country": "Spain" },
-  { "postalCode": "50006", "name": "Zaragoza", "country": "Spain" },
-  { "postalCode": "50007", "name": "Zaragoza", "country": "Spain" }
+  { "postalCode": "20001", "name": "San Sebastián", "country": "Spain" }
   ]
