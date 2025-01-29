@@ -14,6 +14,14 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   const [showForm, setShowForm] = useState(false);
   //const { isUserLoggedIn } = useAuth();
 
+  //Debuger
+  console.log(
+    "EventSection isHomeLogin..= " +
+      isHomeLogin +
+      " isUserLoggedIn..= " +
+      isUserLoggedIn
+  );
+
   // Estado para controlar si hay eventos creados
   const [hasEvents, setHasEvents] = useState(false);
 
@@ -56,9 +64,11 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
   return (
     <section className="event-section">
       <div>
-        <h1 className="h1Events">
-          {isHomeLogin ? "Tus Eventos" : "Últimos Eventos"}
-        </h1>
+        {(isHomeLogin || isUserLoggedIn) && (
+          <h1 className="h1Events">
+            {isHomeLogin ? "Tus Eventos" : "Últimos Eventos"}
+          </h1>
+        )}
         {/* El botón solo aparece si estamos en HomeLogin y el usuario está logueado */}
         {isHomeLogin && isUserLoggedIn && (
           <button className="create-button" onClick={toggleForm}>
@@ -68,7 +78,7 @@ const EventSection = ({ isHomeLogin, isUserLoggedIn }) => {
         {/* SE AGREGA PARA VALIDAR ERRORES DE JAVA SCRIP */}
         <ErrorBoundary>
           <EventList
-            eventLimit={isHomeLogin ? undefined: 5}
+            eventLimit={isHomeLogin ? undefined : 5}
             filters={filters}
             refresh={refreshEvents}
           />
