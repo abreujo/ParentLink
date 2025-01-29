@@ -1,352 +1,80 @@
-/* Estilos originales */
+/* Стилі для секції подій */
+
 .event-section {
-  padding: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
+  background: linear-gradient(135deg, #a294f9, #e5d9f2);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  margin: 2rem auto;
 }
 
-.filters,
-.tags {
-  margin: 20px 0;
+.h1Events {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
 }
 
-.filter-button,
-.tag {
-  margin: 5px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 1.55rem; /* 1 rem = 16px, así que 1.25rem = 20px */
-  padding: 1rem 2rem;
-}
-
-/* Botón CREA TUS PROPIOS EVENTOS */
 .create-button {
-  background-color: #7d2181;
-  color: #fff;
-  padding: 1rem 3rem; /* Aumentamos el padding para hacer el botón más grande */
+  background: linear-gradient(135deg, #7d2181, #4b0081);
+  color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 12px; /* Aumentamos el border-radius para bordes más redondeados */
-  font-size: 1.5rem; /* Aumentamos el tamaño de la fuente */
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease,
-    box-shadow 0.3s ease;
-  margin-bottom: 3rem; /* Ajusta el valor según lo que necesites */
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-bottom: 1.5rem;
 }
 
-/* Animación al pasar el cursor (hover) */
 .create-button:hover {
-  background-color: #4b0081;
-  transform: translateY(-5px); /* Mueve el botón hacia arriba */
+  background: linear-gradient(135deg, #4b0081, #7d2181);
+  transform: scale(1.05);
 }
 
-/* Animación cuando se hace clic (active) */
-.create-button:active {
-  transform: translateY(2px); /* Mueve el botón hacia abajo al hacer clic */
-  background-color: #3a0066; /* Color más oscuro al hacer clic */
-}
-
-/* Estilo específico para el botón PARTICIPAR */
-.join-button {
-  background-color: #7d2181; /* El mismo color que los otros botones */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px; /* Redondeado, similar al de otros botones */
-  cursor: pointer;
-  font-size: 16px; /* Tamaño de fuente estándar */
-  transition: background-color 0.3s ease; /* Transición suave para hover */
-}
-
-/* Estilo cuando el botón PARTICIPAR es deshabilitado */
-.join-button.disabled {
-  background-color: #dcdcdc; /* Color gris cuando está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
-  pointer-events: none; /* Desactiva cualquier interacción con el botón */
-}
-
-/* Estilo al hacer clic en el botón PARTICIPAR */
-.join-button:active {
-  background-color: #3a0066; /* Color más oscuro al hacer clic */
-}
-
-/* Eliminamos el hover cuando el botón está deshabilitado */
-.join-button.disabled:hover {
-  background-color: #dcdcdc; /* Mantiene el mismo color deshabilitado */
-  /* No se añade ningún otro efecto en hover */
-}
-
-.filter-button {
-  background-color: #a294f9; /* Color predeterminado */
-  color: white; /* Color del texto */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 3vw;
-  transition: background-color 0.3s ease; /* Transición suave para cambios */
-}
-
-.filter-button:hover {
-  background-color: #7d2181; /* Color al pasar el ratón */
-}
-
-.filter-button:active {
-  background-color: #4b0081; /* Color al hacer clic */
-}
-
-.event-cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 35px;
-  margin-bottom: 50px;
-}
-
-.event-card {
-  width: 200px;
-  height: 300px;
-  perspective: 1000px;
-  cursor: pointer;
-  transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease,
-    z-index 0.5s ease;
-  position: relative; /* Inicialmente relativa para el diseño estándar */
-}
-
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-}
-
-.event-card.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-}
-
-.card-front {
-  background-color: #e5d9f2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-front img {
-  width: 100%;
-  height: 60%;
-  object-fit: cover;
-  border-radius: 15px; /* Ajusta el valor para más o menos redondeo */
-}
-
-.highlighted-organizer {
-  background-color: #ffe4b5; /* Cambia este color al que prefieras */
-  padding: 0.2rem 0.4rem; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
-  font-weight: bold; /* Para destacar el texto */
-  color: #333; /* Color del texto para buen contraste */
-}
-
-.details-lines {
-  display: flex;
-  flex-direction: column; /* Asegura que las líneas estén una debajo de otra */
-  gap: 0; /* Elimina cualquier espacio entre los elementos */
-  line-height: 1; /* Ajusta la altura de línea si es necesario */
-}
-
-/* PARTE TRASERA DE LA TARJETA*/
-.event-card.flipped {
-  position: fixed; /* Hace que se superponga en la pantalla */
-  top: 50%; /* Centra verticalmente */
-  left: 76%; /* Centra horizontalmente DE MANERA MANUAL!! */
-  transform: translate(-50%, -50%) scale(1.7); /* Ajusta para centrar y escalar */
-  z-index: 999; /* Lleva la tarjeta al frente */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Añade un efecto de sombra */
-  background-color: white; /* Asegura que tenga un fondo */
-  transition: transform 0.5s ease, z-index 0.3s ease;
-}
-
-/* Estilo cuando la tarjeta está volteada */
-.event-card.flipped .card-back {
-  width: 300%; /* Aumenta el tamaño del card-back */
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
-.card-back {
-  background-color: #f0f0f0;
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* Estilo para el card-back duplicado */
-.card-back {
-  width: 200%; /* Duplicar el tamaño de la tarjeta */
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
-/* Contenedor que divide la tarjeta en dos columnas */
-.card-back-content {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-/* Contenedor de la imagen */
-.image-container {
-  width: 50%; /* La imagen ocupa el 50% */
-  height: 100%;
-  overflow: hidden;
-}
-
-.large-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Detalles del evento a la derecha (hacerlo más ancho cuando la tarjeta está volteada) */
-.event-details {
-  width: 75%; /* Aumenta el ancho de los detalles a un 75% */
-  padding: 20px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Asegúrate de que el texto no se distorsione y ocupe correctamente el espacio */
-.event-details p {
-  margin: 10px 0;
-}
-
-/* Estilo para el contenedor del dropdown */
-.tag-container {
-  position: relative;
-  display: inline-block;
-  margin: 5px;
-}
-
-/* Estilo de los botones de tag */
-.tag {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #7d2181;
-  color: #ffffff;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-.tag:hover {
-  background-color: #4b0081;
-}
-/* Cuando el tag está seleccionado */
-.tag.selected {
-  background-color: #4b0081;
-  color: white;
-}
-
-/* Estilo del dropdown */
-.dropdown-menu {
-  position: absolute;
-  top: 100%; /* Lo coloca justo debajo del botón */
-  left: 0;
-  background-color: #f0f0f0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 5px 0;
-  margin: 0;
-  border-radius: 5px;
-  width: 100%;
-  display: block; /* Asegura que el dropdown sea visible */
-  z-index: 10;
-}
-
-/* Estilo para cada opción dentro del dropdown */
-.dropdown-option {
-  padding: 8px 15px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-/* Hover sobre las opciones */
-.dropdown-option:hover {
-  background-color: #7d2181;
-  color: white;
-}
-
-/* --- Estilos adicionales para el modal (CreateEventForm) --- */
-
-/* Fondo oscuro detrás del modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
 }
 
-/* Contenedor del contenido del modal */
 .modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   max-width: 500px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
-  animation: fadeIn 0.3s ease-in-out; /* Efecto de entrada */
+  width: 100%;
+  text-align: center;
 }
 
-/* Botón para cerrar el modal */
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
+.close-form-button {
+  background: linear-gradient(135deg, #ff6b6b, #ff4b4b);
+  color: white;
+  padding: 0.5rem 1rem;
   border: none;
-  font-size: 18px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: 1rem;
 }
 
-/* Animación para el modal */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.h1Events {
-  color: #7d2181;
-  padding: 0px;
+.close-form-button:hover {
+  background: linear-gradient(135deg, #ff4b4b, #ff6b6b);
+  transform: scale(1.05);
 }

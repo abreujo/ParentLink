@@ -150,7 +150,7 @@ const CardUser = () => {
             <h3>{username}</h3>
           </div>
           <div className="card-user-body">
-            <p>
+            <p className="no-completado">
               <strong>Información:</strong> Aun no ha completado el registro de
               sus datos.
             </p>
@@ -183,10 +183,10 @@ const CardUser = () => {
         <img src={userIcon} alt="User Icon" className="user-icon" />
         {/* Nombre del usuario */}
         <div className="card-header">
-          <h3>
+          <h3 className="users-name">
             {name} {surname}
           </h3>
-          <p>{username}</p>
+          <p className="users-login">Usuario: {username}</p>
         </div>
         <div className="card-body">
           <p>
@@ -211,8 +211,8 @@ const CardUser = () => {
             Registrar Hijo
           </button>
           {childrenList && childrenList.length > 0 && (
-            <div>
-              <h4>Hijos:</h4>
+            <div className="hijo-box">
+              <h4 className="hijos">Hijos:</h4>
               <ul className="children-list">
                 {childrenList.map((child) => (
                   <li key={child.id} className="child-item">
@@ -252,10 +252,10 @@ const CardUser = () => {
       >
         <h2>¿Estás seguro de que deseas darte de baja?</h2>
         <div className="button-container">
-          <button className="modal-button" onClick={closeModal}>
+          <button className="modal-button3" onClick={closeModal}>
             Cancelar
           </button>
-          <button className="modal-button" onClick={deleteUser}>
+          <button className="modal-button3" onClick={deleteUser}>
             Sí, darme de baja
           </button>
         </div>

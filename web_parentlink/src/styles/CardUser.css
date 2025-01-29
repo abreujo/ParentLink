@@ -1,184 +1,202 @@
-.reg-child-button,
-.complet-perfil-button {
-  display: block;
-  margin: 10px auto;
-  background-color: #7d2181;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.cardUser-delete-child {
-  margin-left: 10px;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-.cardUser-delete-child:hover {
-  background-color: #c0392b;
-}
-
-.reg-child-button:hover {
-  background-color: #5e1763;
-  transform: scale(1.05);
-}
+/* Стилі для компонента CardUser */
 
 .user-card {
+  width: 100%;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffb796;
+  margin-bottom: 1rem;
 }
 
 .card {
-  width: 300px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  background: linear-gradient(135deg, #a294f9, #e5d9f2);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  max-width: 330px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 32%;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.8rem;
+}
 .card-header {
-  background-color: #a294f9;
-  color: white;
-  padding: 20px;
-  text-align: center;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 0.1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.5rem;
+}
+.card-header h3 {
+  font-size: 1.4rem;
+  color: #4b0081;
+  margin-bottom: 0.6rem;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.53);
 }
 
-.card-user-body {
-  padding: 1px;
+.card-header p {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 0.3rem;
+  font-style: italic;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.53);
+}
+.card-body {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 0.1rem;
+  margin-bottom: 0.5rem;
+}
+.card-body p {
+  font-size: 1rem;
+  color: #444;
+  margin: 0.4rem 0;
+  line-height: 1.4;
 }
 
-.card-children-footer {
-  background-color: rgba(243, 203, 105, 0.1);
-  padding: 10px;
-  text-align: left;
-  border-top: 2px solid #7d2181;
+.reg-child-button {
+  margin: 0.5rem;
+  background: linear-gradient(135deg, #7d2181, #4b0081);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.delete-account-button {
+  margin: 0.5rem;
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 3rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.reg-child-button:hover {
+  background: linear-gradient(135deg, #4b0081, #7d2181);
+  transform: scale(1.05);
+}
+.delete-account-button:hover {
+  background: #cc0000;
+  transform: translateY(3px);
+}
+
+.reg-child-button:focus,
+.delete-account-button:focus {
+  outline: none;
 }
 
 .children-list {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
-  margin: 0;
 }
 
 .child-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.child-info {
-  flex-grow: 1;
-  font-size: 16px;
-  color: #333;
+  background-color: #ffffff;
+  padding: 0.6rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  margin: 0.4rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .child-icon {
-  font-size: 24px;
-  margin-right: 10px;
-  color: #7d2181;
+  margin-right: 0.6rem;
+  font-size: 1.2rem;
+  color: #4b0081;
 }
 
-.card h3 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.card p {
-  margin: 8px 0;
-}
-
-.card strong {
+.child-info {
+  font-size: 0.9rem;
+  color: #333;
   font-weight: bold;
 }
 
-.delete-account-button {
-  background-color: #e74c3c;
-  color: white;
+.cardUser-delete-child {
+  background: linear-gradient(135deg, #ff6b6b, #ff4b4b);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background 1s ease, transform 1s ease;
+}
+
+.cardUser-delete-child:hover {
+  background: #cc0000;
+  transform: scale(1.3);
+}
+.cardUser-delete-child:focus {
+  outline: none;
+}
+
+.modal-button3 {
+  background: linear-gradient(135deg, #ff6868, #d95c5c);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  margin: 0.4rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.modal-button3:hover {
+  background: linear-gradient(135deg, #d95c5c, #ff6868);
+  transform: translateY(-3px);
+}
+
+.modal-button3:focus {
+  outline: none;
+  box-shadow: 0 0 4px 2px rgba(255, 104, 104, 0.7);
+}
+
+.hijos {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 1.3rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+.complet-perfil-button {
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  background-color: #7d2181;
+  color: white;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
-.delete-account-button:hover {
-  background-color: #c0392b;
+.complet-perfil-button:hover {
+  background-color: #4b0081;
   transform: scale(1.05);
 }
-.delete-account-button .button-subtext {
-  display: block; /* Hace que "ParentLink" aparezca en una nueva línea */
-  font-size: 12px; /* Tamaño más pequeño para la segunda línea */
-  font-weight: normal;
-  margin-top: 4px; /* Espacio entre las líneas */
-}
-
-.ReactModal__Overlay {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.ReactModal__Content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: auto;
-}
-/* Estilo para el overlay (fondo oscuro) */
-.react-modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
-  z-index: 1000; /* Asegura que el modal esté encima de otros elementos */
-}
-
-/* Estilo para el contenido del modal */
-.react-modal-content {
-  position: absolute;
-  top: 20%; /* Posición vertical */
-  left: 50%; /* Centrado horizontal */
-  transform: translateX(
-    -50%
-  ); /* Asegura que el modal esté completamente centrado */
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px; /* Ajusta el tamaño del modal */
-  background-color: #fff; /* Color de fondo del modal */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el modal */
-}
-
-/* Estilo para el contenedor de los botones dentro del modal */
-.react-modal-content .button-container {
-  display: flex;
-  justify-content: space-between; /* Distribuye los botones a los extremos */
-  gap: 10px; /* Espacio entre los botones */
-}
-
-/* Estilo para los botones dentro del modal */
-.react-modal-content .modal-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.react-modal-content .modal-button:first-child {
-  background-color: #ff4d4d; /* Botón de "Cancelar" con fondo rojo */
-  color: white;
-}
-
-.react-modal-content .modal-button:last-child {
-  background-color: #4caf50; /* Botón de "Sí, darme de baja" con fondo verde */
-  color: white;
+.no-completado {
+  text-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
 }
