@@ -9,7 +9,7 @@
   margin-left: 2rem;
   margin-right: 2rem;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, #A294F9, #E5D9F2);
+  background: linear-gradient(135deg, #a294f9, #e5d9f2);
   color: #fff;
   min-height: 60vh;
   border-radius: 15px;
@@ -40,7 +40,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.8;
   color: #fff;
 }
@@ -49,6 +49,7 @@
   position: relative;
   margin-bottom: 1rem;
   padding-left: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-list li::before {
@@ -75,7 +76,8 @@
   max-width: 400px;
   /* animation: float 3s ease-in-out infinite; */
   border-radius: 236px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px #ffb796;
+  /* background-color: #e5d9f2; */
 }
 
 /* Анімації */
@@ -92,7 +94,6 @@
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
