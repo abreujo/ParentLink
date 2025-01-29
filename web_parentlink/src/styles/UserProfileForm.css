@@ -1,5 +1,11 @@
 .user-profile-page {
-  background-color: #ffb796;
+  background: rgb(169, 250, 241);
+  background: radial-gradient(
+    circle,
+    rgba(169, 250, 241, 1) 0%,
+    rgba(131, 58, 180, 1) 50%,
+    rgba(254, 184, 148, 1) 100%
+  );
   padding: 2rem;
   display: flex;
   justify-content: center;
