@@ -93,7 +93,8 @@ export const AuthProvider = ({ children }) => {
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error al iniciar sesión");
-        logout(); // Asegurarse de que no haya datos residuales
+        toast.error("Error en los datos ingresados   " + errorData.message);
+        //logout(); // Asegurarse de que no haya datos residuales
       }
     } catch (error) {
       //Debugger

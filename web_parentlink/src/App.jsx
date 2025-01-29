@@ -16,6 +16,7 @@ import EventPage from "./pages/EventPage";
 import UserProfileForm from "./components/UserProfileForm";
 import SobreNosotros from "./pages/SobreNosotros";
 import ChildRegistrationNewForm from "./components/ChildResitrationFormNew";
+import DevelopmentResources from "./pages/DevelopmentResources";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
         <Route path="/" element={<HomePage />} /> {/* Ruta para HomePage */}
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/DevelopmentResources"
+          element={<DevelopmentResources />}
+        />
         <Route path="/services" element={<Services />} />
         <Route path="/ods" element={<Ods />} />
         <Route path="/comofunciona" element={<ComoFunciona />} />

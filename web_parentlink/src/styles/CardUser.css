@@ -197,7 +197,66 @@
   background-color: #4b0081;
   transform: scale(1.05);
 }
-.no-completado {
-  text-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
+.delete-account-button .button-subtext {
+  display: block; /* Hace que "ParentLink" aparezca en una nueva línea */
+  font-size: 12px; /* Tamaño más pequeño para la segunda línea */
+  font-weight: normal;
+  margin-top: 4px; /* Espacio entre las líneas */
+}
+
+.ReactModal__Overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ReactModal__Content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: auto;
+}
+/* Estilo para el overlay (fondo oscuro) */
+.react-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+  z-index: 1000; /* Asegura que el modal esté encima de otros elementos */
+}
+
+/* Estilo para el contenido del modal */
+.react-modal-content {
+  position: absolute;
+  top: 50%; /* Posición vertical */
+  left: 50%; /* Centrado horizontal */
+  transform: translateX(
+    -50%
+  ); /* Asegura que el modal esté completamente centrado */
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px; /* Ajusta el tamaño del modal */
+  background-color: #fff; /* Color de fondo del modal */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el modal */
+}
+
+/* Estilo para el contenedor de los botones dentro del modal */
+.react-modal-content .button-container {
+  display: flex;
+  justify-content: space-between; /* Distribuye los botones a los extremos */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo para los botones dentro del modal */
+.react-modal-content .modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.react-modal-content .modal-button:first-child {
+  background-color: #ff4d4d; /* Botón de "Cancelar" con fondo rojo */
+  color: white;
+}
+
+.react-modal-content .modal-button:last-child {
+  background-color: #4caf50; /* Botón de "Sí, darme de baja" con fondo verde */
+  color: white;
 }

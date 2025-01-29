@@ -32,7 +32,7 @@ function Contact() {
     },
     {
       name: "Gylmer Johel",
-      title: "LinkedIN: @joel-abreu",
+      title: "LinkedIN: @johel-abreu",
       email: "johel.abreu@gmail.com",
       phone: "+34 613 290 849",
       photo: johel,
