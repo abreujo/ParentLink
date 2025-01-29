@@ -14,16 +14,16 @@ const HomeLogIn = () => {
   return (
     <div>
       {/* Mostrar MenuLogin como estaba antes */}
+      <div className="welc">
+        <WelcomeMessage username={username} />
+      </div>
 
-      <div style={{ display: "flex" }}>
-        {/* Sidebar a la izquierda */}
-        <Sidebar username={username} />
-
-        {/* Contenido principal */}
-        <div>
-          {/* Mostrar el mensaje de bienvenida */}
-          <WelcomeMessage username={username} />
-          {/* Mostrar la sección de eventos */}
+      <div className="wrapper-sidebar">
+        <div className="side-div">
+          {/* Sidebar a la izquierda */}
+          <Sidebar username={username} />
+        </div>
+        <div className="eve">
           <EventSection isHomeLogin={true} eventLimit={5} />{" "}
         </div>
       </div>

@@ -1,11 +1,10 @@
 /* Стилі для компонента CardUser */
 
 .user-card {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
+  /* justify-content: center; */
+  /* align-items: center; */
   background-color: #ffb796;
   margin-bottom: 1rem;
 }
@@ -15,6 +14,7 @@
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   padding: 1rem;
+  margin-left: 1rem;
   max-width: 330px;
   width: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
